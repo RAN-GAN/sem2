@@ -1,4 +1,5 @@
 1.
+
 #include<iostream>
 using namespace std;
 struct node
@@ -71,6 +72,7 @@ print();
 
 EXPECTED OUTPUT:
 1 2 3 4 5
+
 PROGRAM
 #include<iostream>
 using namespace std;
@@ -108,8 +110,10 @@ createNode(n);
 }
 display();
 }
+
 -------------------------------------------------------------------------------------------------------------------------------------
 3.
+
 EXPECTED OUTPUT:
 1 2 3 4 5 6 7
 
@@ -153,11 +157,11 @@ display();
 4
 
 EXPECTED OUTPUT:
-
 1 Inserted in stack.
 2 Inserted in stack.
 3 Inserted in stack.
 The stack is Full, So we can't add the element.
+
 PROGRAM
 #include<iostream>
 using namespace std;
@@ -194,6 +198,7 @@ stack.push(num);
 }
 --------------------------------------------------------------------------------------------------------------------------------------
 5.
+
 EXPECTED OUTPUT:
 1 Inserted in stack.
 2 Inserted in stack
@@ -237,8 +242,8 @@ stack.push(num);
 }
 }
 --------------------------------------------------------------------------------------------------------------------------------------
- 
 6.
+
 ExPECTED OUTPUT:
 The Stack element's are: 5 4 3 2 1
 5 is removed in the stack.
@@ -302,6 +307,7 @@ display();
 }
 --------------------------------------------------------------------------------------------------------------------------------------
 7.
+
 EXPECTED OUTPUT:
 The Stack element's are: 55 44 33 22 11 
 55 is removed in the stack.
@@ -309,6 +315,7 @@ The Stack element's are: 55 44 33 22 11
 33 is removed in the stack.
 22 is removed in the stack.
 The final stack element's are: 11
+
 PROGRAM
 
 #include<iostream>
@@ -367,6 +374,7 @@ display();
 }
 --------------------------------------------------------------------------------------------------------------------------------------
 8.
+
 EXPECTED OUTPUT 1:
 True
  
@@ -427,12 +435,11 @@ cout << "False";
 }
 
 --------------------------------------------------------------------------------------------------------------------------------------
- 
-
-
 9.
+
 EXPECTED OUTPUT:
 Result: 5
+
 PROGRAM
 // editor2
 #include<iostream>
@@ -516,6 +523,7 @@ return 0;
  
 --------------------------------------------------------------------------------------------------------------------------------------
 10.
+
 EXPECTED OUTPUT:
 doc1 is inserted in the Queue. 
 doc2 is inserted in the Queue. 
@@ -526,9 +534,6 @@ doc1 dequeued from the queue.
 doc2 dequeued from the queue. 
 doc3 dequeued from the queue. 
 Final Queue elements are: doc4 doc5
- 
-
- 
 
 PROGRAM
 #include<iostream>
@@ -589,8 +594,8 @@ cout << arr[i] << " ";
 }
  
 --------------------------------------------------------------------------------------------------------------------------------------
-
 11.
+
 EXPECTED OUTPUT:
 10 is inserted in the Queue.
 20 is inserted in the Queue.
@@ -662,6 +667,7 @@ cout << arr[i] << " ";
 }
 -------------------------------------------------------------------------------------------------------------------------------------
 12.
+
 15 is inserted in the Queue.
 25 is inserted in the Queue.
 35 is inserted in the Queue.
@@ -669,6 +675,7 @@ cout << arr[i] << " ";
 55 is inserted in the Queue.
 65 is inserted in the Queue
  
+PROGRAM
 #include<iostream>
 using namespace std;
 class node;
@@ -700,10 +707,12 @@ enqueue(num);
 
 --------------------------------------------------------------------------------------------------------------------------------------
 13.
+
 Reservation for Hackers  has been added to the Queue.
 Reservation for Source code has been added to the Queue.
 Reservation for The social networker has been added to the Queue
 
+PROGRAM
 #include<iostream>
 using namespace std;
 class Node {
@@ -741,9 +750,11 @@ return 0;
 
 --------------------------------------------------------------------------------------------------------------------------------------
 14.
+
 EXPECTED OUTPUT:
 40 30 20 10
 
+PROGRAM
 #include<iostream>
 using namespace std;
 class node{
@@ -793,6 +804,7 @@ int main(){
 }
 -------------------------------------------------------------------------------------------------------------------------------------
 15.
+
 EXPECTED OUTPUT:
 Name: JobB, Priority: 2
 Name: JobA, Priority: 1
@@ -861,6 +873,7 @@ display();
 }
 --------------------------------------------------------------------------------------------------------------------------------------
 16.
+
 EXPECTED OUTPUT:
 Student with roll number 102 found.
 
@@ -912,10 +925,12 @@ using namespace std;
     }
 -------------------------------------------------------------------------------------------------------------------------------------
 17.
+
 EXPECTED OUTPUT:
 101 Programming
 102 Algorithm
 103 DataStructure
+
 PROGRAM:
 #include<iostream>
 using namespace std;
@@ -961,8 +976,10 @@ int main(){
 }
 --------------------------------------------------------------------------------------------------------------------------------------
 18.
+
 EXPECTED OUTPUT 1:
 Not Found
+
 PROGRAM:
 #include<iostream>
 using namespace std;
@@ -1023,9 +1040,11 @@ int main(){
 }
 --------------------------------------------------------------------------------------------------------------------------------------
 19.
+
 EXPECTED OUTPUT:
 DFS Traversal:
 0 1 3 4 2 
+
 PROGRAM:
 #include<iostream>
 using namespace std;
@@ -1089,12 +1108,13 @@ int main() {
     return 0;
 }
 --------------------------------------------------------------------------------------------------------------------------------------
-
 20.
+
 EXPECTED OUTPUT:
 BFS Traversal:
 0 1 2 3 4
 
+PROGRAM
 #include <iostream>
 using namespace std:
 class Queue {
