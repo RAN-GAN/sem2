@@ -1,1211 +1,652 @@
-1.
+1)
+PROBLEM STATEMENT 
+In a growing company, the Marketing department embarks on new projects to enhance brand 
+visibility. To streamline project management, a MarketingProjects table is created to track project details. 
+Initially, it captures ProjectID, ProjectName, and Budget. As the team expands, a new requirement arises to 
+monitor project statuses. The table structure is altered to include a Status column. Upon successful 
+implementation, the MarketingProjects table facilitates efficient tracking of ongoing marketing initiatives. 
+Eventually, when the need to restructure arises, the table is dropped, ensuring a clean database environment. 
+This seamless process ensures effective project management and database maintenance.
 
-#include<iostream>
-using namespace std;
-struct node
-{
-int data;
-node * next;
-};
-node *head,*tail,*newnode,*front,*back;
-void createnode(int num)
-{
-newnode=new node();
-newnode->data=num;
-newnode->next=nullptr;
-if(head==nullptr)
-{
-head=newnode;
-tail=newnode;
-}
-else
-{
-tail->next=newnode;
-tail=newnode;
-}
-}
-void print()
-{
-node *ptr=head;
-while(ptr!=nullptr)
-{
-cout<<ptr->data<<" ";
-ptr=ptr->next;
-}
-}
-int count=1;
-void find(int findNum){
-node * temp=head;
-node *temp1=head->next;
-if(temp->data==findNum)
-{
-head=head->next;
-return;
-}
-while(temp1!=nullptr)
-{
-if(temp1->data==findNum)
-{
-temp->next=temp1->next;
-return;
-}
-temp=temp->next;
-temp1=temp1->next;
-}
-}
-int main()
-{
-int n,num,findNum;cin>>n;
-for(int i=1;i<=n;i++)
-{
-cin>>num;
-createnode(num);
-}
-print();
-cout << endl;
-cin >> findNum;
-find(findNum);
-print();
-}
---------------------------------------------------------------------------------------------------------------------------------------
-2.
+QUREY:
 
-EXPECTED OUTPUT:
-1 2 3 4 5
+create table MarketingProjects( 
+ProjectID int, 
+ProjectName varchar(255), 
+Budget varchar(20) 
+); 
+alter table MarketingProjects add column(Status varchar(20)); 
+insert into MarketingProjects values( 
+1, 
+'Project A', 
+'50000.00', 
+'null' 
+); 
+insert into MarketingProjects values( 
+2, 
+'Project B', 
+'75000.00', 
+'null' 
+); 
+insert into MarketingProjects values( 
+3, 
+'Project C', 
+'100000.00', 
+'null' 
+); 
+select * from MarketingProjects; 
+==============================================================================
+2)
+PROBLEM STATEMENT 
+In a bustling office environment, a company establishes its employee database to efficiently manage 
+personnel information. The Employees table is created to centralize data on staff, capturing crucial details 
+such as ID, Name, and Age. As the workforce grows, the system handles seamless data entry, populating the 
+table with employee profiles. HR swiftly accesses and updates employee records, ensuring accuracy and 
+compliance. The structured database enables quick retrieval and analysis of workforce demographics. This 
+robust system optimizes HR operations, fostering a well-organized and productive workplace.
 
-PROGRAM
-#include<iostream>
-using namespace std;
-struct node{
-  int data;
-  node * pre;
-  node * next;
-};
-node *head,*tail,*newNode;
-void createNode(int n){
-    newNode=new node();
-    newNode->data=n;
-    if(head==nullptr){
-        head=newNode;
-        tail=newNode;
-    }else{
-        newNode->pre=tail;
-        tail->next=newNode;
-        tail=newNode;
-    }
-}
-void display(){
-    node *ptr=head;
-    while(ptr!=nullptr){
-        cout << ptr->data << " ";
-        ptr=ptr->next;
-    }
-}
-int main(){
-int n,num;
-cin >> num;
-for(int i=0;i<num;i++){
-cin >> n;
-createNode(n);
-}
-display();
-}
+QUERY :
+create table Employees 
+( ID int, 
+Name varchar(255), 
+Age int 
+); 
+============================================================
+3)
+Imagine you're developing a web application for a restaurant. The application needs to handle menu 
+items and their corresponding prices. To achieve this, you decide to create a database table to store menu 
+item details. Each menu item should have a unique identifier, and prices. Initially the prices are stored as a 
+integer. But for the customer's wish the price should be stored precisely with two decimal places to ensure 
+accurate billing.
 
--------------------------------------------------------------------------------------------------------------------------------------
-3.
+QUERY :
+alter table products modify column price decimal(10,2); 
+select *from products;
+=============================================
+4)
+PROBLEM STATEMENT 
+You are developing a contact management system for a small business. The system needs to store 
+contact information for employees, clients, and suppliers. Each contact entry should include a unique 
+identifier, first name, last name, email address, and phone number. Additionally, the system should enforce 
+that each contact has a unique identifier. Due to privacy reasons the management decided to remove phone 
+number from the database.
 
-EXPECTED OUTPUT:
-1 2 3 4 5 6 7
+QUERY :
 
-PROGRAM
-#include<iostream>
-using namespace std;
-struct node{
-int data;
-node *next;
-};
-node *head,*tail,*newNode;
-void createNode(int n){
-newNode=new node();
-newNode->data=n;
-if(head==nullptr){
-head=newNode;
-tail=newNode;
-}else{
-tail->next=newNode;
-tail=newNode;
-}
-tail->next=head;
-}
-void display(){
-node *ptr=head;
-do{
-cout << ptr->data << " ";
-ptr=ptr->next;
-}while(ptr!=head);
-}
-int main(){
-int n,num;
-cin >> num;
-for(int i=0;i<num;i++){
-cin >> n;
-createNode(n);
-}
-display();
-}
---------------------------------------------------------------------------------------------------------------------------------------
-4
+alter table contacts drop column phone_number;              
+select * from contacts;
+==========================================
+5)
+In your role as a database analyst for a multinational corporation, you are preparing a report for the 
+sales department that requires extracting specific data from the company's sales database. The report needs 
+to focus on the performance metrics of salespeople, specifically highlighting their names and commission 
+rates. This data will assist the management team in analyzing sales strategies and commission structures 
+across various regions.
 
-EXPECTED OUTPUT:
-1 Inserted in stack.
-2 Inserted in stack.
-3 Inserted in stack.
-The stack is Full, So we can't add the element.
+QUERY 
+select name,commission from salesman;
+===========================================
+6)
+PROBLEM STATEMENT 
 
-PROGRAM
-#include<iostream>
-using namespace std;
-int n;
-class Stack{
-    private:
-        int arr[100];
-        int top;
-    public:
-        Stack(int n){
-            arr[n];
-            top = -1;
-        }
-      bool isFull(){
-            return (top == n-1);
-        }
-        void push(int num){
-            if(isFull()){
-                cout << "The stack is Full, So we can't add the element.";
-                return;
-            }
-            arr[++top] = num;
-            cout << arr[top] << " Inserted in stack." << endl;
-        }
-};
-int main(){
-int num;
-cin >> n;
-Stack stack(n);
-for(int i=0;i<=n;i++){
-cin >> num;
-stack.push(num);
-}
-}
---------------------------------------------------------------------------------------------------------------------------------------
-5.
+As part of routine database maintenance for an online retailer, you have been given the responsibility 
+of managing the archival and cleanup of old transaction records. This involves removing entries from the 
+order_details table that are dated before January 1, 2020. This task is critical to ensure the database remains 
+efficient and storage costs are minimized, while keeping the system’s performance optimal for current 
+transaction processing.
 
-EXPECTED OUTPUT:
-1 Inserted in stack.
-2 Inserted in stack
-3 Inserted in stack.
-4 Inserted in stack.
-5 Inserted in stack.
-The stack is Full, so we can't add the element.
+QUERY 
 
-PROGRAM
-#include<iostream>
-using namespace std;
-int n;
-class Stack{
-    private:
-        int arr[100];
-        int top;
-    public:
-        Stack(int n){
-            arr[n];
-            top = -1;
-        } 
-       bool isFull(){
-            return (top == n-1);
-        }
-        void push(int num){
-            if(isFull()){
-                cout << "The stack is Full, So we can't add the element.";
-                return;
-            }
-            arr[++top] = num;
-            cout << arr[top] << " Inserted in stack." << endl;
-}
-};
-int main(){
-int num;
-cin >> n;
-Stack stack(n);
-for(int i=0;i<=n;i++){
-cin >> num;
-stack.push(num);
-}
-}
---------------------------------------------------------------------------------------------------------------------------------------
-6.
+delete from order_details where order_date < '2020-01-01';
+===================================================
+7)
+PROBLEM STATEMENT 
+   As an HR analyst at your company, you are tasked with preparing a report for an upcoming 
+departmental review meeting. The focus of this report is on department 57, which has been undergoing 
+significant changes and requires a detailed examination of its workforce. Your job is to extract the details of 
+all employees assigned to this department to assist the management team in assessing staffing levels and 
+planning for potential reassignments or further recruitment.
 
-ExPECTED OUTPUT:
-The Stack element's are: 5 4 3 2 1
-5 is removed in the stack.
-4 is removed in the stack.
-3 is removed in the stack.
-The final stack element's are: 2 1
+QUERY 
+select * from emp_details where EMP_DEPT=57;
+=========================================================
+8)
+PROBLEM STATEMENT 
+As a database administrator, you are tasked with demonstrating to new trainees how SQL can handle 
+arithmetic operations directly within queries. This is particularly useful for generating calculated results on 
+the fly, which is a common requirement in reporting and data analysis tasks. Your objective is to show how to 
+perform a basic arithmetic operation, such as adding two numbers together, using SQL.
+
+QUERY 
+select num1,num2,(num1+num2) as AdditionResult from Calculations;
+===================================================
+9)
+PROBLEM STATEMENT 
+As a data manager for an e-commerce platform, you are preparing for a major seasonal sale event. 
+Part of the marketing strategy is to highlight premium products to attract high-end buyers. You are assigned 
+to curate a list of the top five most expensive items currently available, which will be prominently featured on 
+the homepage to draw attention and drive sales.
+
+QUERY 
+
+SELECT name, price FROM product_data ORDER BY price DESC LIMIT 5;
+================================================================
+10)
+PROBLEM STATEMENT 
+You are developing a financial application that manages bank accounts. As part of the application, 
+you need to implement a feature that allows fund transfers between two accounts. To ensure data integrity 
+and consistency, you decide to execute the fund transfer operation within a transaction. 
+This involves two accounts, Account A and Account B. Account A has an ID of 123 and an initial balance of 
+$1000, while Account B has an ID of 456 and an initial balance of $2000. The goal is to transfer $500 from 
+Account A to Account B. 
+To achieve this, you utilize SQL transactions. You start a transaction, deduct $500 from Account A, add $500 
+to Account B, and then commit the transaction to make the changes permanent. Finally, you verify the 
+updated account balances by selecting data from the Accounts table.
+
+QUERY 
+
+CREATE TABLE Accounts ( 
+AccountID INT PRIMARY KEY, 
+AccountName VARCHAR(100), 
+Balance DECIMAL(10, 2) 
+);
+INSERT INTO Accounts  VALUES 
+(123, 'Account A', 1000.00), 
+(456, 'Account B', 2000.00);
+UPDATE Accounts SET Balance = Balance - 500 WHERE AccountID = 123;
+UPDATE Accounts SET Balance = Balance + 500 WHERE AccountID = 456;
+SELECT * FROM Accounts;
+==========================================================
+11)
+PROBLEM STATEMENT 
+A financial institution, needing to empower their analyst, creates a table 'Accounts' to store account 
+details. Sample data is inserted. To facilitate analysis, a user 'fin_analyst' is established with SELECT privileges 
+on 'Accounts'. Finally, data from 'Accounts' is queried for analysis.
+
+QUERY
  
-PROGRAM
-#include<iostream>
-using namespace std;
-class node{
-public:
-int data;
-node * next;
-};
-node *head,*tail,*newNode,*ptr;
-void push(int n){
-newNode = new node();
-newNode->data = n;
-if(tail == nullptr){
-head = newNode;
-tail = newNode;
-}else{
-newNode->next = head;
-head = newNode;
-}
-}
-bool isEmpty(){
-return (head == nullptr);
-}
-void pop(){
-if(isEmpty()){
-cout << endl << "The Stack is empty, so we can't pop the element.";
-return;
-}
-cout << endl << head->data << " is removed in the stack.";
-head = head->next;
-}
-void display(){
-ptr = head;
-while(ptr!=nullptr){
-cout << ptr->data << " ";
-ptr = ptr->next;
-}
-}
-int main(){
-int n,num,popCnt;
-cin >> n;
-for(int i=0;i<n;i++){
-cin >> num;
-push(num);
-}
-cout << "The Stack element's are: ";
-display();
-cin >> popCnt;
-for(int i=0;i<popCnt;i++){
-pop();
-}
-cout << endl << "The final stack element's are: ";
-display();
-}
---------------------------------------------------------------------------------------------------------------------------------------
-7.
+start transaction; 
+create table Accounts (AccountID int, AccountName varchar(225),Balance varchar(230)); 
+Insert into Accounts values(1, 'Savings',5000.00);  
+insert into Accounts values (2, 'Checking', 2500.88); 
+insert into Accounts values (3, 'Investment',10000.00); 
+select from Accounts; 
+commit;
+================================================
+12)
+PROBLEM STATEMENT 
 
-EXPECTED OUTPUT:
-The Stack element's are: 55 44 33 22 11 
-55 is removed in the stack.
-44 is removed in the stack.
-33 is removed in the stack.
-22 is removed in the stack.
-The final stack element's are: 11
+As the database administrator at a bustling city library, you face a common issue where multiple 
+librarians often attempt to update the inventory counts of books simultaneously. This situation requires a 
+robust solution to manage concurrency and maintain data integrity. The challenge lies in implementing a 
+system where updates to the book quantities in the library's database are processed in an orderly manner, 
+ensuring that the transaction initiated first by any librarian is completed before others.
 
-PROGRAM
-
-#include<iostream>
-using namespace std;
-class node{
-    public:
-        int data;
-        node * next;
-};
- node *head,*tail,*newNode,*ptr;
-void push(int n){
-    newNode =  new node();
-    newNode->data = n;
-    if(tail == nullptr){
-        head = newNode;
-        tail = newNode;
-    }else{
-        newNode->next = head;
-        head = newNode;
-    }
-}
- bool isEmpty(){
-    return (head == nullptr);
-}
-void pop(){
-    if(isEmpty()){
-        cout << endl << "The Stack is empty, so we can't pop the element.";
-        return;
-    }
-    cout << endl << head->data << " is removed in the stack.";
-    head = head->next;
-}
-void display(){
-    ptr = head;
-    while(ptr!=nullptr){
-        cout << ptr->data << " ";
-        ptr = ptr->next;
-    }
-}
-
-int main(){
-    int n,num,popCnt;
-    cin >> n;
-    for(int i=0;i<n;i++){
-        cin >> num;
-        push(num);
-    }
-    cout << "The Stack element's are: ";
-    display();
-    cin >> popCnt;
-    for(int i=0;i<popCnt;i++){
-        pop();
-    }
-    cout << endl << "The final stack element's are: ";
-display();
-}
---------------------------------------------------------------------------------------------------------------------------------------
-8.
-
-EXPECTED OUTPUT 1:
-True
+QUERY
  
-PROGRAM
-#include<iostream>
-using namespace std;
-int n;
-char arr[1000];
-int peek;
-class Stack{
-public:
-Stack(int n){
-arr[n];
-peek = -1;
+start transaction; 
+update Books set Quantity=28 where BookID=1; 
+update Books set LastUpdated='2024-04-15 09:02:00'  where BookID=1; 
+select * from Books where BookID=1; 
+commit;
+=========================================================
+13)
+You've been tasked with enhancing the database schema for a school management system. 
+Currently, the system has a table named "students" that stores student information, including their student 
+ID, name, and marks. Now, the management wants to associate each student with the 
+department they attend. To achieve this, you need to add a new column to the "students" table named 
+"department_id" to store the foreign key referencing the "departments".
 
-}
-bool isFull(){
-return (peek == n-1);
-}
-bool isEmpty(){
-return (peek == -1);
-}
-void push(char c){
-if(isFull()){
-cout << "The stack is full.";
-return;
-}
-arr[++peek] = c;
-}
-void pop(){
-if(isEmpty()){
-cout << "The stack is empty.";
-return;
-}
-arr[peek--];
-}
-};
-int main(){
-string a;
-getline(cin,a);
-n = a.length();
-Stack stack(n);
-for(int i=0;i<a.length();i++){
-if(a[i] == '(' || a[i] == '[' || a[i] == '{' || a[i] == '<'){
-stack.push(a[i]);
-}
-else{
-if((arr[peek]=='(' && a[i] == ')') || (arr[peek]=='{' && a[i] == stack.pop();
-}
-}
-}
-if(stack.isEmpty()){
-cout << "True";
-}
-else{
-cout << "False";
-}
-}
+QUERY: 
+create table students(ID int, Name varchar(20),Marks Int,department_id varchar(20));
+ insert into students value(1,'John Doe',90,null); 
+insert into students value(2,'Jane Smith',85,null); 
+insert into students value(3,'Michael Johnson',65,null); insert 
+into students value(4,'Emily Davis',88,null); 
+select * from students;
+==================================================
+14)
+Problem Statement: 
 
---------------------------------------------------------------------------------------------------------------------------------------
-9.
+In a company, the HR department is updating the employee database schema to enhance data 
+management. They aim to remove the EmergencyContactName column from the Employees table while 
+preserving existing data. To achieve this, they plan to create a temporary table, copy relevant data, and 
+then drop the original column.
 
-EXPECTED OUTPUT:
-Result: 5
-
-PROGRAM
-// editor2
-#include<iostream>
-using namespace std;
-int val[100];
-int op[100];
-int p1=-1,p2=-1;
-void push1(int num){
-val[++p1]=num;
-}
-void push2(char o){
-op[++p2]=o;
-}
-void pop1(){ --p1;
-}
-void pop2(){ --p2;
-}
-int operation( int v1,int v2,char o){
-if(o=='+')return v1+v2;
-else if(o=='-')return v1-v2;
-else if(o=='*')return v1*v2;
-else if(o=='/')return v1/v2;
-return 0;
-}
-int perce(char o){
-    if(o=='+'||o=='-')return 1;
-    else if(o=='*'||o=='/')return 2;
-    else return 0;
-}
-int main(){
-    string a;
-    getline(cin,a);
-    for(int i=0;i<a.length();i++){
-        if(a[i]=='('){
-            push2(a[i]);
-        }else if(a[i]==')'){
-            while(op[p2]!='('){
-                char o=op[p2];
-                pop2();
-                int v2=val[p1];
-                pop1();
-                int v1=val[p1];
-                pop1();
-                int v= operation(v1,v2,o);
-                push1(v);
-            }
-            pop2();//pop '('
-        }else if(a[i]=='+'||a[i]=='-'||a[i]=='*'||a[i]=='/'){
-            while(p2>0&&op[p2]!='('&&perce(a[i])<=perce(op[p2])){
-                char o=op[p2];
-                pop2();
-                int v2=val[p1];
-                pop1();
-                int v1=val[p1];
-                pop1();
-                int v=operation(v1,v2,o);
-                push1(v);
-            }
-            push2(a[i]);
-        }else if(isdigit(a[i])){
-            int num=a[i]-'0';
-            while(isdigit(a[i+1])){
-                num=num*10+(a[++i]-'0');
-            }
-            push1(num);
-        }
-    }
-    while(p2!=-1){
-        char o=op[p2];
-        pop2();
-        int v2=val[p1];
-        pop1();
-        int v1=val[p1];
-        pop1();
-        int v=operation(v1,v2,o);
-        push1(v);
-    }
-cout<<"Result: "<<val[p1];
-return 0;
-}
+Query: 
+create table Employees(EmployeeID int primary key,Name varchar(225), 
+DepartmentID int,EmergencyContactName varchar(255),EmergencyContactPhone varchar(20));
+===========================================================
+15)
+Problem Statement
  
---------------------------------------------------------------------------------------------------------------------------------------
-10.
+In an expansive digital marketplace, an e-commerce conglomerate manages a vast database of 
+customer transactions. Amidst the dynamic landscape of online shopping, the company endeavors to 
+maintain a pulse on consumer activity. Within this ecosystem, there arises a requirement to 
+periodically evaluate recent customer purchases to glean insights into evolving consumer behaviors and 
+trends.
 
-EXPECTED OUTPUT:
-doc1 is inserted in the Queue. 
-doc2 is inserted in the Queue. 
-doc3 is inserted in the Queue.
-doc4 is inserted in the Queue. 
-doc5 is inserted in the Queue. 
-doc1 dequeued from the queue. 
-doc2 dequeued from the queue. 
-doc3 dequeued from the queue. 
-Final Queue elements are: doc4 doc5
+Query: 
 
-PROGRAM
-#include<iostream>
-using namespace std;
-int n;
-int front;
-int back;
-string arr[100];
-class Queue {
-public:
-Queue(int n) {
-string arr[n];
-front = -1;
-back = -1;
-}
-bool isFull() {
-return (back == n-1);
-}
-bool isEmpty() {
-return (back == -1) || (front > back);
-}
-void enqueue(string str) {
-if (isFull()) {
-cout << "Queue is full. Cannot enqueue." << endl;
-return;
-}
-if (front == -1) {
-front = 0;
-}
-arr[++back] = str;
-cout << arr[back] << " is inserted in the Queue." << endl;
-}
-void dequeue() {
-if (isEmpty()) {
-cout << "Queue is empty. Cannot dequeue." << endl;
-return;
-}
-cout << arr[front++] << " dequeued from the queue." << endl;
-}
-};
-int main() {
-string str;
-int dequeCnt;
-cin >> n;
-Queue queue(n);
-for (int i = 0; i < n; i++) {
-cin >> str;
-queue.enqueue(str);
-}
-cin >> dequeCnt;
-for (int i = 0; i < dequeCnt; i++) {
-queue.dequeue();
-}
-cout << "Final Queue elements are: ";
-for (int i = front; i <= back; i++) {
-cout << arr[i] << " ";
-}
-}
+select case when exists(select 1 from Purchases where PurchaseDate >= date_sub(current_date(),interval 
+30 day)) 
+then 'Yes' else 'No' 
+end as Purchases_Last_30_Days;
+==============================================
+16)
+Problem Statement: 
+
+In a retail database, tables for products, categories, and sales are set up. Products are categorized into 
+Electronics, Books, and Stationery, each with distinct items and prices. Sales records show 
+transactions for various products. Queries are executed to find products without sales, combine names 
+and prices of Electronics and Books, and identify electronics priced higher than any book. 
+These queries help monitor inventory, analyze sales trends, and adjust pricing strategies for maximizing 
+profits.
+
+QUERY:
+
+
+select * from products where product_id not in (select distinct product_id from sales);
+select name,price from products where category ='Electronics' or category='Books' order by category desc;
+select product_id,name,round(price,0) as rounded_price from products where category='Electronics';
+==========================================================================
+17)
+
+PROBLEM STATEMENT 
+
+In a retail e-commerce platform, orders are managed through a database. Each order has a unique ID, 
+customer ID, order date, and status. For instance, a customer places an order for various items, such as 
+electronics or clothing, with different statuses like "Pending," "Shipped," or "Delivered." To maintain 
+operational efficiency, the company needs to track the total number of orders for each status. This helps 
+in monitoring the progress of orders, ensuring timely delivery, and addressing any issues promptly.
+
+QUREY:
+
+select order_status, count(*) as total_orders from orders group by order_status order by order_status;
+==========================================================================
+18)
+
+PROBLEM STATEMENT 
+In an online marketplace, a retail platform monitors product prices across categories. Using a 
+database, they track product details such as category, name, and price. To analyze pricing strategies, they 
+calculate the median price for products in each category. This helps in understanding the pricing 
+distribution within categories, enabling the platform to adjust prices competitively and optimize revenue. 
+The query fetches median prices dynamically, aiding in strategic decision-making for pricing and product 
+placement. 
+
+QUERY:
+
+alter table products modify price double;
+SELECT category,(sum(price)-max(price)-min(price))/2 as 
+median_price FROM products Group by category order by category;
+             
+=================================================================
+19)
+PROBLEM STATEMENT 
+Within the expansive realm of cinema, a renowned movie database meticulously catalogues an extensive 
+array of films and their associated talent. Aspiring filmmakers, cinephiles, and industry 
+professionals alike rely on this comprehensive repository to explore the intricate tapestry of cinematic 
+creations. Amidst this rich tapestry, emerges a desire to uncover the collaborative endeavors between 
+directors and actors, particularly in the context of the visionary filmmaker 'Christopher Nolan'. 
+Harnessing the power of data analysis, the database aims to unveil the names of actors who have graced 
+the screen in movies directed by this iconic filmmaker. Through this exploration, the database seeks to 
+shed light on the dynamic relationships forged within the realm of filmmaking and celebrate the 
+contributions of actors to cinematic masterpieces.
+
+QUERY:
+
+select Name from Actors where ActorID in(select distinct ActorId from Cast where MovieId in (select distinct MovieID from Cast));
+=======================================================================================
+20)
+PROBLEM STATEMENT 
+In a retail store, managers aim to identify the best-performing salesperson in terms of revenue 
+generated. By analyzing sales data, they can reward high achievers and provide additional training 
+or support to those who may need improvement. The query calculates the top-performing 
+salesperson based on the total sales amount achieved. This information guides managerial 
+decisions, enhances 
+employee motivation, and fosters a competitive yet supportive work environment        
+conducive to achieving sales targets and maximizing profits.
+
+QUERY:
+create table orders(
+sale_id int,
+product_id int,
+quantity_id int,
+sale_amount decimal(10,2));
+
+insert into orders values(1,101,5,500.5);
+insert into orders values(2,102,3,300.25);
+insert into orders values(3,101,2,200);
+insert into orders values(4,103,10,3500);
+insert into orders values(5,102,7,1500.5);
+insert into orders values(6,101,3,800);
+insert into orders values(7,104,5,700.75);
+
+select product_id as top_selling_product, sale_amount as total_sales_amount from orders where sale_id=(select sale_id  where sale_amount=(select max(sale_amount) from orders));
+==================================================================================
+21)
+PROBLEM STATEMENT 
+
+In a multinational retail corporation, sales data for different years is stored in separate tables. The 
+company aims to identify products consistently popular across two consecutive years for strategic stocking 
+decisions. By comparing sales records from 2020 and 2021, they can pinpoint items with consistent 
+demand, ensuring sufficient inventory levels. This approach aids in optimizing procurement, minimizing 
+stockouts, and maintaining customer satisfaction by consistently offering sought-after products.
+
+QUERY:
+
+select sales_2020.product_id from sales_2020 inner join sales_2021 on sales_2021.product_id=sales_2020.product_id;
+=============================================================================
+22)
+PROBLEM STATEMENT 
+
+You are managing the database for an online store. The tasks involve creating tables for customer 
+information, product data, and order details, establishing relationships among them, and ensuring efficient 
+data retrieval with indexes. You also need to manage data entry for new customers, products, and orders.
+
+QUERY:
+
+create table customer_information(customer_id int,name varchar(255),email 
+varchar(255),phone_number varchar(255),address varchar(255)); 
+create table product_data(product_id int,name varchar(255),description varchar(255),price 
+decimal(20,2),category_id int); 
+create table order_details(order_id int,customer_id int,product_id int,quantity int,order_date date);
+==================================================================================
+23)
+
+PROBLEM STATEMENT
  
---------------------------------------------------------------------------------------------------------------------------------------
-11.
+Imagine you're managing a university's student database. You have two tables, Students and Courses, 
+storing information about students' grades and the courses they are enrolled in. The students table 
+contains data about each student, including their FirstName, Grade, and the CourseID they are enrolled in. 
+The Courses table stores information about various courses offered by the university, including the 
+CourseID and CourseName. Finding Students with 'A' Grades. In this scenario, you want to identify all 
+students who have achieved an 'A' grade in their courses.
 
-EXPECTED OUTPUT:
-10 is inserted in the Queue.
-20 is inserted in the Queue.
-30 is inserted in the Queue.
-40 is inserted in the Queue.
-50 is inserted in the Queue.
-10 dequeued from the queue.
-20 dequeued from the queue.
-Final Queue elements are: 30 40 50
+QUERY:
+
+select Students.FirstName,Courses.CourseName from Students join Courses on Students.CourseID=Courses.CourseID where Students.Grade='A';
+============================================================================
+24)
+PROBLEM STATEMENT 
+
+Imagine you work at a medium-sized company, and the HR department recently assigned employees to 
+different departments. You want to retrieve a list of employees along with their corresponding 
+department names. This information will help you understand which employees belong to which 
+departments. Note: Department, Employees are keep in two different table.
+
+QUERY:
+
+
+select Employees.FirstName, Department.DepartmentName from Employees join Department on Employees.DeptID=Department.DeptID;
+============================================================================================
+25)
+PROBLEM STATEMENT 
+
+In a bustling city, a food delivery service employs several delivery personnel to ensure prompt and efficient 
+delivery of orders from various restaurants to customers' doorsteps. As part of their commitment to 
+customer satisfaction, the company regularly collects feedback through ratings provided by customers after 
+each delivery. The management understands the importance of 
+assessing the performance of their delivery personnel to maintain high service standards.  
+
+QUERY:
+
+select DeliveryBoyName,avg(Rating) as AverageRating from DeliveryRatings group by DeliveryBoyName;
+========================================================================
+26)
+PROBLEM STATEMENT 
+
+In a software development company, ensuring product quality is paramount. The company meticulously 
+tracks the number of bugs reported for each project to prioritize bug fixes effectively. The project 
+management team recognizes the criticality of promptly addressing projects with the highest number of 
+reported bugs to maintain customer satisfaction and uphold the company's reputation for delivering 
+reliable software solutions.
+
+QUERY:
+
+
+select * from BugReports where ReportedBugs=(select max(ReportedBugs) from BugReports);
+====================================================================
+27)
+PROBLEM STATEMENT 
+
+In a healthcare organization, the quality assurance team analyzes surgical procedure durations to ensure 
+optimal patient care. By examining data from the procedure and surgery tables, they identify the shortest 
+and longest durations for each surgical procedure type, enabling process optimization and maintaining 
+high standards of efficiency and safety.
+
+QUERY:
+
+select Procedures.ProcedureType,min(Surgery.SurgeryDuration) as MinDuration,
+max(Surgery.SurgeryDuration) as MaxDuration
+from Procedures join Surgery on Procedures.ProcedureID=Surgery.ProcedureID group by Procedures.ProcedureType;
+=================================================================================
+28)
+PROBLEM STATEMENT 
+
+Operating within a niche of personalized travel experiences, a travel agency prioritizes 
+understanding customer booking behavior to deliver tailored travel packages. The marketing team's 
+objective is to design precise promotional offers by gauging the frequency of bookings made by each 
+customer. This approach empowers the agency to align its marketing strategies with the varied 
+preferences and behaviors of its clientele, thereby enhancing customer satisfaction and fostering loyalty.
+
+QUERY:
+
+select Customer.CustomerID,Customer.CustomerName,count(Booking.CustomerId) as TotalBookings from Customer join Booking on 
+Customer.CustomerId=Booking.CustomerID group by Customer.CustomerId,Customer.CustomerName ;
+======================================================================================
+29)
+PROBLEM STATEMENT 
+
+You are a manager at a company and you need to review the details of all employees frequently. You've 
+created a view named "EmployeeDetails" that displays the EmployeeID, FirstName, and LastName columns 
+from the Employees table for easy access to this information.
+
+QUERY:
+
+create table Employees
+(EmployeeID int,
+FirstName varchar(20),
+LastName varchar(20));
+
+insert into Employees values
+(1,'John','Doe'),
+(2,'Jane','Smith'),
+(3,'Alice','Johnson');
+create view EmployeeSalary as select EmployeeID,FirstName,LastName from Employees;
+select * from EmployeeSalary; 
+==========================================================================
+30)
+
+PROBLEM STATEMENT
  
+As a human resources manager, you need to manage employee salaries efficiently. You've created an 
+updatable view named "EmployeeSalary" that displays the EmployeeID, FirstName, LastName, and Salary of 
+all employees in the company. The view allows you to modify the salary of any employee directly through the 
+view. 
 
-#include<iostream>
-using namespace std;
-int n;
-int front;
-int back;
-int arr[100];
-class Queue{
-    private:
-    public:
-        Queue(int n){
-            int arr[n];
-            front = -1;
-            back = -1;
-        }
-        bool isFull(){
-            return (back == n-1);
-        }
-        bool isEmpty(){
-            return (back == -1) || (front > back);
-        }
-        void enqueue(int num){
-            if(isFull()){
-                cout << "Queue is full. Cannot enqueue." << endl;
-                return;
-            }
-            if(front == -1){
-                front = 0;
-            }
-            arr[++back] = num;
-            cout << arr[back] << " is inserted in the Queue." << endl;
-        }
-        
-        void dequeue(){
-            if(isEmpty()){
-                cout << "Queue is empty. Cannot dequeue." << endl;
-                return;
-            } 
-            cout << arr[front++] << " dequeued from the queue." << endl;
-        }
-};
- 
-int main(){
-    int num,dequeCnt;
-    cin >> n;
-    Queue queue(n);
-    for(int i=0;i<n;i++){
-        cin >> num;
-        queue.enqueue(num);
-    }
-    cin >> dequeCnt;
-    for(int i=0;i<dequeCnt;i++){
-        queue.dequeue();
-    }
-    cout << "Finall Queue elements are: ";
-for(int i=front;i<=back;i++){
-cout << arr[i] << " ";
-}
-}
--------------------------------------------------------------------------------------------------------------------------------------
-12.
+QUERY:
 
-15 is inserted in the Queue.
-25 is inserted in the Queue.
-35 is inserted in the Queue.
-45 is inserted in the Queue.
-55 is inserted in the Queue.
-65 is inserted in the Queue
- 
-PROGRAM
-#include<iostream>
-using namespace std;
-class node;
-    public:
-    int data;
-    node * next;
-};
-node *head,*tail,*newNode;
-void enqueue(int n){
-    newNode = new node();
-    newNode->data = n;
-    if(head==nullptr){
-        head = newNode;
-        tail = newNode;
-    }else{
-        tail->next = newNode;
-        tail = newNode;
-    }
-    cout << tail->data << " is inserted in the Queue." << endl;
-}
-int main(){
-    int n,num;
-cin >> n;
-for(int i=0;i<n;i++){
-cin >> num;
-enqueue(num);
-}
-}
+create table Employees
+(EmployeeID int,FirstName varchar(20),LastName varchar(20),Salary decimal(10,2));
+insert into Employees values
+(1,'John','Doe',50000),
+(2,'Jane','Smith',60000),
+(3,'Alice','Johnson',55000);
+create view Salary_status as select FirstName,LastName,Salary from Employees;
+update Employees set Salary = Salary+15000 where EmployeeID =1; 
+select * from Salary_status;
+================================================================
+31)
+PROBLEM STATEMENT 
 
---------------------------------------------------------------------------------------------------------------------------------------
-13.
+In a corporate setting, you've been tasked with enhancing the payroll system for a company's HR department. 
+As part of this project, you're required to implement a mechanism that ensures the "last_salary_updated" 
+column in the "employee" table is always current whenever an employee's salary changes. 
 
-Reservation for Hackers  has been added to the Queue.
-Reservation for Source code has been added to the Queue.
-Reservation for The social networker has been added to the Queue
+QUERY:
 
-PROGRAM
-#include<iostream>
-using namespace std;
-class Node {
-public:
-    string movieName;
-    Node* next;
-};
-Node* head = nullptr;
-Node* tail = nullptr;
-Node* newNode;
-void enqueue(string movie) {
-    newNode = new Node();
-    newNode->movieName = movie;
-    newNode->next = nullptr;
-    if (head == nullptr) {
-        head = newNode;
-        tail = newNode;
-    } else {
-        tail->next = newNode;
-        tail = newNode;
-    }
-    cout << "Reservation for " << newNode->movieName << " has been added to the Queue." << endl;
-}
-int main() {
-int total_reservations;
-string movie_name;  
-cin >> total_reservations;
-cin.ignore();  // To consume the newline character after total_reservations
-for (int i = 0; i < total_reservations; i++) {
-getline(cin, movie_name);
-enqueue(movie_name);
-}
-return 0;
-}
+CREATE TRIGGER update_salary_trigger 
+BEFORE UPDATE  ON employee 
+FOR EACH ROW 
+SET NEW.last_salary_updated := CURRENT_DATE ;
+===========================================================
+32)
+PROBLEM STATEMENT 
 
---------------------------------------------------------------------------------------------------------------------------------------
-14.
+You are the database administrator at an IT training center that offers various specialized programs, including 
+"Web Development" and "Data Analysis." You have been tasked with maintaining the center's database, 
+which includes managing program details and tracking trainee enrollments.
 
-EXPECTED OUTPUT:
-40 30 20 10
+QUERY:
 
-PROGRAM
-#include<iostream>
-using namespace std;
-class node{
-    public:
-    int data;
-    int pri;
-    node *next;
-};
-node *head,*tail,*newNode,*ptr,*temp;
-class Queue{
-    public:
-    void enQueue(int num, int priority)
-    {
-       newNode = new node();
-        newNode->data = num;
-        newNode->pri = priority;
-        if(head == nullptr || head->pri < newNode->pri){
-            newNode->next = head;
-            head =  newNode;
-        }else{
-            temp = head;
-            while(temp->next != nullptr && temp->next->pri > priority ){
-               temp = temp->next;
-            }
-            newNode->next = temp->next;
-            temp->next = newNode;
-     }
-}
-    void display(){
-        ptr = head;
-        while(ptr != nullptr){
-            cout << ptr->data << " ";
-            ptr = ptr->next;
-        }
-    }
-};
-int main(){
-    int n,num,priority;
-    cin >> n;
-    Queue queue;
-    for(int i=0;i<n;i++){
-        cin >> num;
-        cin >> priority;
-        queue.enQueue(num,priority);
-    }
-    queue.display();
-}
--------------------------------------------------------------------------------------------------------------------------------------
-15.
+create table Programs(
+ProgramID int primary key,
+Title varchar(50),
+Description varchar(150)
 
-EXPECTED OUTPUT:
-Name: JobB, Priority: 2
-Name: JobA, Priority: 1
-Queue is empty.Remaining queue element's are:
- 
-PROGRAM:
-#include<iostream>
-using namespace std;
-struct node{
-    string data;
-    int pri;
-    node *next;
-};
-node *head,*tail,*newNode,*ptr;
-void enqueue(string a, int num){
-    newNode = new node();
-    newNode->data = a;
-    newNode->pri = num;
-    if(head == nullptr || head->pri < newNode->pri){
-        newNode->next = head;
-        head = newNode;
-  }else{
-        ptr = head;
-        while(ptr->next != nullptr && ptr->next->pri > newNode->pri){
-            ptr = ptr->next;
-        }
-        newNode->next = ptr->next;
-        ptr->next = newNode;
-    }
-}
-void display(){
-    ptr = head;
-    while(ptr!=nullptr){
-        cout << "Name: " << ptr->data << ", Priority: " << ptr->pri << endl;
-        ptr = ptr->next;
-    }
-}
-bool isEmpty(){
-    return (head == nullptr);
-}
-void dequeue(){
-    if(isEmpty()){
-        cout << "Queue is empty.";
-    }else{
-        head = head->next;
-    }
-}
-int main(){
-    int n,num,n1;
-    string a;
-    cin >> n;
-    cin.ignore();
-    for(int i=0;i<n;i++){
-        cin >> a;
-        cin >> num;
-        cin.ignore();
-        enqueue(a,num);
-    }
-    cin >> n1;
-display();
-for(int i=0;i<n1;i++){
-dequeue();
-}
-cout << "Remaining queue element's are: " << endl;
-display();
-}
---------------------------------------------------------------------------------------------------------------------------------------
-16.
+);
+insert into Programs values(1,'Web Development','Learn'),(2,'Data Analysis','Learn');
 
-EXPECTED OUTPUT:
-Student with roll number 102 found.
+create table  Trainees (
+TraineeID int,
+FirstName varchar(20),
+LastName varchar(20),
+Email varchar(200),
+ProgramID int);
+insert into Trainees values
+(1,"Alice",'Johnson','alice.johnson@example.com',1);
 
-PROGRAM:
-#include<iostream>
-using namespace std;
- struct node{
-     int key;
-     string name;
-     string gender;
- };
- node *data;
- node *arr[1000];
- int n;
- class Student {
-     public:
-     int indexVal(int key){
-         return (key % n);
-     }
-     void insert(int key,string name,string gender){
-         data = new node();
-         data->key=key;
-         data->name=name;
-         data->gender=gender;
-         int index=indexVal(key);
-         arr[index]=data;
-     }
-     void search(int key){
-         int check=indexVal(key);
-         if(arr[check]->key==key){
-             cout<<"Student with roll number "<<key<<" found.";
-         }
-         else{
-             cout<<"No student found with roll number "<<key;
-         }
-     }
- };
- int main(){
-     int key;
-     string name,gender;
-     Student s1;
-     cin>>n;
-     for(int i=0;i<n;i++){
-         cin>>key>>name>>gender;
-         s1.insert(key,name,gender);
-     }
-     cin>>key;
-     s1.search(key);
-    }
--------------------------------------------------------------------------------------------------------------------------------------
-17.
+select t.FirstName as 'First Name',t.Lastname as 'Last Name',
+t.Email,p.Title as Program 
+from Trainees t join Programs p on t.ProgramID =p.ProgramID;
+========================================================
+33)
 
-EXPECTED OUTPUT:
-101 Programming
-102 Algorithm
-103 DataStructure
+PROBLEM STATEMENT 
 
-PROGRAM:
-#include<iostream>
-using namespace std;
-struct node {
-int key;
-string book;
-};
-node *data;
-node *arr[1000];
-int n;
-class HashingTable {
-public:
-int indexVal(int key){
-return(key % 71);
-}
-void insert(int key,string book){
-data =new node();
-data->key=key;
-data->book =book;
-int index=indexVal(key);
-if(arr[index]==nullptr)
-arr[index]=data;
-}
-void display(){
-    for(int i=0;i<71;i++){
-        if(arr[i]!=nullptr){
-            cout<<arr[i]->key<<" "<<arr[i]->book;
-            cout<<endl;
-        }
-    }
-}
-};
-int main(){
-    int key;
-    string value;
-    cin>>n;
-    HashingTable h1;
-    for (int i = 0; i < n; i++) {
-        cin>>key>>value;
-        h1.insert(key,value);
-    }
-   h1.display();
-}
---------------------------------------------------------------------------------------------------------------------------------------
-18.
+In a dynamic corporation, the payroll processing system is the cornerstone of employee compensation 
+management. The HR department aims to streamline the calculation of overtime pay for employees 
+exceeding regular work hours. To achieve this, the payroll system should incorporate a feature that 
+automatically computes overtime pay using predefined rates and employee work logs. By analyzing work 
+hours logged beyond standard thresholds and applying the appropriate overtime rates, the system ensures 
+accurate and efficient compensation processing for overtime work.
 
-EXPECTED OUTPUT 1:
-Not Found
+QUERY:
 
-PROGRAM:
-#include<iostream>
-using namespace std;
-struct node{
-int data;
-node *left;
-node *right;
-};
-node * root;
-bool res;
-int findNum;
-class tree{
-public:
-void insert(int num){
-root = ins(root,num);
-}
-node * ins(node *root, int num){
-if(root == nullptr){
-root = new node();
-root->data = num;
-return root;
-}
-if(root->data > num){
-root->left = ins(root->left,num);
-}
-else if(root->data < num){
-root->right = ins(root->right,num);
-}
- return root;
- }
- bool find(node *root){
- if(root != nullptr){
- find(root->left);
- if(root->data == findNum)
- {
- res = true;
- }
- find(root->right);
- }
- return res;
- }
-};
-int main(){
- int n,num;
- tree tr;
- cin >> n;
- for(int i=0;i<n;i++){
- cin >> num;
- tr.insert(num);
- }
- cin >> findNum;
- res = false;
- if(tr.find(root)){
- cout << "Found";
- }else{
- cout << "Not Found";
-}
-}
---------------------------------------------------------------------------------------------------------------------------------------
-19.
+create table
+EmployeeWorkLogs(EmployeeID int,dat date,RegularHours int,OvertimeHours int);
+insert into EmployeeWorkLogs
+values
+(101,'2024-05-01',8,2),
+(102,'2024-05-01',8,3),
+(103,'2024-05-01',8,1),
+(104,'2024-05-02',8,2),
+(105,'2024-05-02',8,3),
+(106,'2024-05-02',8,1),
+(107,'2024-05-03',8,2),
+(108,'2024-05-03',8,3),
+(109,'2024-05-03',8,1),
+(110,'2024-05-04',8,2);
+select EmployeeID,concat('$',(OvertimeHours *20))as OvertimePay from EmployeeWorkLogs;
+====================================================================
+34)
+PROBLEM STATEMENT 
 
-EXPECTED OUTPUT:
-DFS Traversal:
-0 1 3 4 2 
+A local blood donation center manages data related to its donors and the donations they make. The center 
+uses a database to store information about each donor, including their name, blood type, and contact details, 
+as well as records of each donation event. 
 
-PROGRAM:
-#include<iostream>
-using namespace std;
-int qu[100];
-int peek = -1, n;
-int arr[100][100];
-bool array[100];
-class Stack {
-public:
-    bool isEmpty() {
-        return (peek == -1);
-    }
-    bool isFull() {
-        return (peek == n - 1);
-    }
-    void push(int num) {
-        if (isFull()) {
-            cout << "Queue is full.";
-        } else {
-            qu[++peek] = num;
-        }
-    }
-    int pop() {
-       int a = qu[peek];
-        peek--;
-        return a;
-    }
-};
-void bfsTraversal(int startIndex) {
-    Stack qu;
-    qu.push(startIndex);
-    array[startIndex] = true;
-    while (!qu.isEmpty()) {
-        int currentVertex = qu.pop();
-        cout << currentVertex << " ";
-        for (int i = n-1; i > 0; i--) {
-            if (arr[currentVertex][i] == 1 && !array[i]) {
-                array[i] = true;
-                qu.push(i);
-            }
-        }
-    }
-}
-int main() {
-    int from, to, edges, startIndex;
-    cin >> n >> edges;
-    for (int i = 0; i < n; i++) {
-        array[i] = false;
-        for (int j = 0; j < n; j++) {
-            arr[i][j] = 0;
-        }
-    }
-    for (int i = 0; i < edges; i++) {
-        cin >> from >> to;
-        arr[from][to] = 1;
-        arr[to][from] = 1;
-    }
-    cin >> startIndex;
-    cout<<"DFS Traversal:"<<endl;
-    bfsTraversal(startIndex);
-    return 0;
-}
---------------------------------------------------------------------------------------------------------------------------------------
-20.
+QUERY:
 
-EXPECTED OUTPUT:
-BFS Traversal:
-0 1 2 3 4
+create table donor(DonorID int,FirstName varchar(20),LastName varchar(20),BloodType varchar(5),ContactNumber varchar(20));
+create table donations(DonationID int,DonorID int,DonationDate date,AmountDonated int);
+insert into donor values
+(1,'John','Doe','O+','123-456-7890'),(2,'Jane','Doe','A+','987-654-3210');
+insert into donations values
+(1,1,'2024-04-01',500),(2,2,'2024-04-02',450);
+delete from donor donor where DonorID=1;
+delete from donations where DonorID=1;
+select d.FirstName as 'First Name',d.LastName as 'Last Name',BloodType as 'Blood Type',donations.DonationDate as 'Donation Date',donations.AmountDonated as 'Amount Donated' from donor d join donations on d.donorID = donations.DonorID;
+============================================================================================
+35)
+PROBLEM STATEMENT 
 
-PROGRAM
-#include <iostream>
-using namespace std:
-class Queue {
-private:
-    static const int MAX_SIZE = 100;
-    int elements[MAX_SIZE];
-    int front, rear;
-public:
-   Queue() : front(-1), rear(-1) {}
-void enqueue(int item) {
-        if (rear == MAX_SIZE - 1) {
-            std::cout << "Queue is full" << std::endl;
-        } else if (rear == -1) {
-            front = 0;
-            rear = 0;
-            elements[rear] = item;
-        } else {
-            rear = rear + 1;
-            elements[rear] = item;
-        }
-    }
-    int dequeue() {
-        int item;
-        if (front == -1) {
-            std::cout << "Queue is empty" << std::endl;
-            return -1;
-        } else {
-            item = elements[front];
-            if (front >= rear) {
-                front = -1;
-                rear = -1;
-            } else {
-                front++;
-            }
-            return item;
-        }
-    }
-    bool isEmpty() {
-        return front == -1;
-    }
-};
-class Graph {
-private:
-    int** adjMatrix;
-    int vertices;
-public:
-    Graph(int v) : vertices(v) {
-        adjMatrix = new int*[vertices];
-        for (int i = 0; i < vertices; ++i) {
-            adjMatrix[i] = new int[vertices];
-            for (int j = 0; j < vertices; ++j)
-                adjMatrix[i][j] = 0;
-        }
-    }
-    void addEdge(int source, int destination) 
-{
-        adjMatrix[source][destination] = 1;
-        adjMatrix[destination][source] = 1;
-    }
-    void bfs(int startVertex) {
-        bool* visited = new bool[vertices]();
-        Queue queue;
-        visited[startVertex] = true;
-        queue.enqueue(startVertex);
-        while (!queue.isEmpty()) {
-            int currentVertex = queue.dequeue();
-            std::cout << currentVertex << " ";
-            for (int i = 0; i < vertices; i++) {
-                if (adjMatrix[currentVertex][i] == 1 && !visited[i]) {
-                    visited[i] = true;
-                    queue.enqueue(i);
-                }
-            }
-        }
-        delete[] visited;
-    }
-};
-int main() {
-int vertices;
-std::cin >> vertices;
-Graph graph(vertices);
-int edges;
-std::cin >> edges;
-for (int i = 0; i < edges; i++) {
-int source, destination
-std::cin >> source >> destination;
-graph.addEdge(source, destination);
-}
-int startVertex;
-std::cin >> startVertex;
-std::cout << "BFS Traversal:" << std::endl;
-graph.bfs(startVertex);
-return 0;
-}
+You are a database manager for a city's traffic management department. Your responsibility is to develop a 
+database that records details about each traffic light's location, operational status, and maintenance records. 
+Additionally, the system should allow for reporting on lights needing maintenance, traffic light functionality 
+rates, and incident reports due to traffic light failures.
+
+QUERY:
+
+
+create table Intersections
+(IntersectionID int primary key,
+Location varchar(50));
+
+insert into Intersections values
+(1,'1st Ave & Main St'),
+(2,'2nd Ave & Main St');
+
+create table TrafficLights
+(LightID int primary key,IntersectionID int,Stat varchar(20),LastServiceDate date,
+foreign key(IntersectionID) references Intersections(IntersectionID));
+insert into TrafficLights values
+(101,1,'Operational','2023-01-10'),
+(102,1,'Non-Operational','2023-03-15'),
+(201,2,'Operational','2023-02-20');
+
+create table Incidents
+(ReportID int primary key,LightID int,ReportDate date,IncidentDescription varchar(60),
+foreign key (LightID) references TrafficLights(LightID));
+
+insert into Incidents values
+(1,101,'2023-01-10','Failure led to minor accident');
+
+create table MaintainLogs
+(LogID int primary key,LightID int,ServiceDate date,Details varchar(40),
+foreign key (LightID) references TrafficLights(LightID));
+
+insert into MaintainLogs values
+(1,101,'2023-01-10','Routine Check'),
+(2,102,'2023-03-15','Replaced unit');
+
+#select Non-operational traffic lights
+
+select i.Location,t.LightID,t.stat as 'Status' from Intersections i 
+join TrafficLights t on i.IntersectionID = t.IntersectionID where t.stat='Non-Operational';
+
+# selecting incident report by location
+
+select i.Location,count(id.ReportID ) as NumberOfIncidents from Intersections i join TrafficLights t on i.IntersectionID = t.IntersectionID
+join Incidents id on id.LightID = t.LightID group by i.Location;
+
+# finding next Service due
+select  m.LightID,i.Location,m.ServiceDate as LastServiceDate, date_add(m.ServiceDate, interval 6 month) as NextServiceDate
+from MaintainLogs m join TrafficLights t on m.LightID = t.LightID join Intersections i on i.IntersectionID = t.IntersectionID order by m.LightID;
+============================================================================================
+36)
+PROBLEM STATEMENT 
+
+Imagine you're tasked with creating a payroll system for a company. As part of this project, you need to 
+retrieve employee names and their corresponding salaries from a database table named "employees." You 
+decide to use a SQL cursor named "employee_cursor" to fetch this data. The cursor will iterate through each 
+row of the table, fetching the employee name and salary one by one. As a developer, you need to write a SQL 
+query to accomplish this task efficiently, ensuring accurate retrieval of employee information for the payroll 
+system's processing.
+
+QUERY:
+
+-- Declare cursor 
+DECLARE employee_cursor CURSOR FOR 
+SELECT name, salary FROM employees; -- Open cursor 
+OPEN employee_cursor; -- Variables to store fetched data 
+DECLARE employee_name TEXT; 
+DECLARE employee_salary NUMERIC; -- Fetch data using loop 
+LOOP -- Fetch next row into variables 
+FETCH employee_cursor INTO employee_name, employee_salary; -- Exit loop if no more rows 
+EXIT WHEN NOT FOUND; -- Print employee name and salary 
+RAISE NOTICE 'Employee: %, Salary: %', employee_name, employee_salary; 
+END LOOP; -- Close cursor 
+CLOSE employee_cursor;
+======================================================================================
