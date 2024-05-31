@@ -148,7 +148,7 @@ int main()
 
 ===============================================================
 
-Write a program to implement stack using Array. 
+Q3)Write a program to implement stack using Array. 
  
 
 Input Format
