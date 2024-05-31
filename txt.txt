@@ -1,652 +1,1796 @@
-1)
-PROBLEM STATEMENT 
-In a growing company, the Marketing department embarks on new projects to enhance brand 
-visibility. To streamline project management, a MarketingProjects table is created to track project details. 
-Initially, it captures ProjectID, ProjectName, and Budget. As the team expands, a new requirement arises to 
-monitor project statuses. The table structure is altered to include a Status column. Upon successful 
-implementation, the MarketingProjects table facilitates efficient tracking of ongoing marketing initiatives. 
-Eventually, when the need to restructure arises, the table is dropped, ensuring a clean database environment. 
-This seamless process ensures effective project management and database maintenance.
+Q1)  Write a program to create a singly linked list and display the added elements. 
+Note : Insert the elements in the end of the list. 
 
-QUREY:
+Input Format
+Number of list elements in the first line List elements in the second line separated by space.  
 
-create table MarketingProjects( 
-ProjectID int, 
-ProjectName varchar(255), 
-Budget varchar(20) 
-); 
-alter table MarketingProjects add column(Status varchar(20)); 
-insert into MarketingProjects values( 
-1, 
-'Project A', 
-'50000.00', 
-'null' 
-); 
-insert into MarketingProjects values( 
-2, 
-'Project B', 
-'75000.00', 
-'null' 
-); 
-insert into MarketingProjects values( 
-3, 
-'Project C', 
-'100000.00', 
-'null' 
-); 
-select * from MarketingProjects; 
-==============================================================================
-2)
-PROBLEM STATEMENT 
-In a bustling office environment, a company establishes its employee database to efficiently manage 
-personnel information. The Employees table is created to centralize data on staff, capturing crucial details 
-such as ID, Name, and Age. As the workforce grows, the system handles seamless data entry, populating the 
-table with employee profiles. HR swiftly accesses and updates employee records, ensuring accuracy and 
-compliance. The structured database enables quick retrieval and analysis of workforce demographics. This 
-robust system optimizes HR operations, fostering a well-organized and productive workplace.
+Output Format
+Display the list as shown in the sample output.  
 
-QUERY :
-create table Employees 
-( ID int, 
-Name varchar(255), 
-Age int 
-); 
-============================================================
-3)
-Imagine you're developing a web application for a restaurant. The application needs to handle menu 
-items and their corresponding prices. To achieve this, you decide to create a database table to store menu 
-item details. Each menu item should have a unique identifier, and prices. Initially the prices are stored as a 
-integer. But for the customer's wish the price should be stored precisely with two decimal places to ensure 
-accurate billing.
+Code Constraints
 
-QUERY :
-alter table products modify column price decimal(10,2); 
-select *from products;
-=============================================
-4)
-PROBLEM STATEMENT 
-You are developing a contact management system for a small business. The system needs to store 
-contact information for employees, clients, and suppliers. Each contact entry should include a unique 
-identifier, first name, last name, email address, and phone number. Additionally, the system should enforce 
-that each contact has a unique identifier. Due to privacy reasons the management decided to remove phone 
-number from the database.
+Sample 1  Input
+5
+3 4 21 232 89
 
-QUERY :
+Sample 1  Output
+3 4 21 232 89 
 
-alter table contacts drop column phone_number;              
-select * from contacts;
-==========================================
-5)
-In your role as a database analyst for a multinational corporation, you are preparing a report for the 
-sales department that requires extracting specific data from the company's sales database. The report needs 
-to focus on the performance metrics of salespeople, specifically highlighting their names and commission 
-rates. This data will assist the management team in analyzing sales strategies and commission structures 
-across various regions.
+Answer
 
-QUERY 
-select name,commission from salesman;
-===========================================
-6)
-PROBLEM STATEMENT 
+#include <stdio.h>
+#include<stdlib.h>
+struct Node 
+{
+    int data;
+    Node* next;
+};
+void insertAtEnd(Node** headRef, int newData) {
+     struct Node nn=(struct Node )malloc(sizeof(struct Node ));
+     nn->data=newData;
+     nn->next=NULL;
+     if((*headRef)==NULL){
+         *headRef=nn;
+     }
+     else{
+         struct Node *temp=*headRef;
+         while((temp->next)!=NULL){
+             temp=temp->next;
+         }
+         temp->next=nn;
+     }
 
-As part of routine database maintenance for an online retailer, you have been given the responsibility 
-of managing the archival and cleanup of old transaction records. This involves removing entries from the 
-order_details table that are dated before January 1, 2020. This task is critical to ensure the database remains 
-efficient and storage costs are minimized, while keeping the system’s performance optimal for current 
-transaction processing.
-
-QUERY 
-
-delete from order_details where order_date < '2020-01-01';
-===================================================
-7)
-PROBLEM STATEMENT 
-   As an HR analyst at your company, you are tasked with preparing a report for an upcoming 
-departmental review meeting. The focus of this report is on department 57, which has been undergoing 
-significant changes and requires a detailed examination of its workforce. Your job is to extract the details of 
-all employees assigned to this department to assist the management team in assessing staffing levels and 
-planning for potential reassignments or further recruitment.
-
-QUERY 
-select * from emp_details where EMP_DEPT=57;
-=========================================================
-8)
-PROBLEM STATEMENT 
-As a database administrator, you are tasked with demonstrating to new trainees how SQL can handle 
-arithmetic operations directly within queries. This is particularly useful for generating calculated results on 
-the fly, which is a common requirement in reporting and data analysis tasks. Your objective is to show how to 
-perform a basic arithmetic operation, such as adding two numbers together, using SQL.
-
-QUERY 
-select num1,num2,(num1+num2) as AdditionResult from Calculations;
-===================================================
-9)
-PROBLEM STATEMENT 
-As a data manager for an e-commerce platform, you are preparing for a major seasonal sale event. 
-Part of the marketing strategy is to highlight premium products to attract high-end buyers. You are assigned 
-to curate a list of the top five most expensive items currently available, which will be prominently featured on 
-the homepage to draw attention and drive sales.
-
-QUERY 
-
-SELECT name, price FROM product_data ORDER BY price DESC LIMIT 5;
-================================================================
-10)
-PROBLEM STATEMENT 
-You are developing a financial application that manages bank accounts. As part of the application, 
-you need to implement a feature that allows fund transfers between two accounts. To ensure data integrity 
-and consistency, you decide to execute the fund transfer operation within a transaction. 
-This involves two accounts, Account A and Account B. Account A has an ID of 123 and an initial balance of 
-$1000, while Account B has an ID of 456 and an initial balance of $2000. The goal is to transfer $500 from 
-Account A to Account B. 
-To achieve this, you utilize SQL transactions. You start a transaction, deduct $500 from Account A, add $500 
-to Account B, and then commit the transaction to make the changes permanent. Finally, you verify the 
-updated account balances by selecting data from the Accounts table.
-
-QUERY 
-
-CREATE TABLE Accounts ( 
-AccountID INT PRIMARY KEY, 
-AccountName VARCHAR(100), 
-Balance DECIMAL(10, 2) 
-);
-INSERT INTO Accounts  VALUES 
-(123, 'Account A', 1000.00), 
-(456, 'Account B', 2000.00);
-UPDATE Accounts SET Balance = Balance - 500 WHERE AccountID = 123;
-UPDATE Accounts SET Balance = Balance + 500 WHERE AccountID = 456;
-SELECT * FROM Accounts;
-==========================================================
-11)
-PROBLEM STATEMENT 
-A financial institution, needing to empower their analyst, creates a table 'Accounts' to store account 
-details. Sample data is inserted. To facilitate analysis, a user 'fin_analyst' is established with SELECT privileges 
-on 'Accounts'. Finally, data from 'Accounts' is queried for analysis.
-
-QUERY
- 
-start transaction; 
-create table Accounts (AccountID int, AccountName varchar(225),Balance varchar(230)); 
-Insert into Accounts values(1, 'Savings',5000.00);  
-insert into Accounts values (2, 'Checking', 2500.88); 
-insert into Accounts values (3, 'Investment',10000.00); 
-select from Accounts; 
-commit;
-================================================
-12)
-PROBLEM STATEMENT 
-
-As the database administrator at a bustling city library, you face a common issue where multiple 
-librarians often attempt to update the inventory counts of books simultaneously. This situation requires a 
-robust solution to manage concurrency and maintain data integrity. The challenge lies in implementing a 
-system where updates to the book quantities in the library's database are processed in an orderly manner, 
-ensuring that the transaction initiated first by any librarian is completed before others.
-
-QUERY
- 
-start transaction; 
-update Books set Quantity=28 where BookID=1; 
-update Books set LastUpdated='2024-04-15 09:02:00'  where BookID=1; 
-select * from Books where BookID=1; 
-commit;
-=========================================================
-13)
-You've been tasked with enhancing the database schema for a school management system. 
-Currently, the system has a table named "students" that stores student information, including their student 
-ID, name, and marks. Now, the management wants to associate each student with the 
-department they attend. To achieve this, you need to add a new column to the "students" table named 
-"department_id" to store the foreign key referencing the "departments".
-
-QUERY: 
-create table students(ID int, Name varchar(20),Marks Int,department_id varchar(20));
- insert into students value(1,'John Doe',90,null); 
-insert into students value(2,'Jane Smith',85,null); 
-insert into students value(3,'Michael Johnson',65,null); insert 
-into students value(4,'Emily Davis',88,null); 
-select * from students;
-==================================================
-14)
-Problem Statement: 
-
-In a company, the HR department is updating the employee database schema to enhance data 
-management. They aim to remove the EmergencyContactName column from the Employees table while 
-preserving existing data. To achieve this, they plan to create a temporary table, copy relevant data, and 
-then drop the original column.
-
-Query: 
-create table Employees(EmployeeID int primary key,Name varchar(225), 
-DepartmentID int,EmergencyContactName varchar(255),EmergencyContactPhone varchar(20));
+}
+void printList(Node* head) {
+    while(head!=NULL){
+        printf("%d ",head->data);
+        head=head->next;
+    }
+}
+int main() {
+    Node* head = NULL;
+    int n;
+    scanf("%d",&n);
+    int newData;
+    for (int i = 0; i < n; i++) {
+        scanf("%d ",&newData);
+        insertAtEnd(&head, newData);
+    }
+    printList(head);
+    return 0;
+}
 ===========================================================
-15)
-Problem Statement
+
+Q2)  Write a program to implement a doubly linked list and display both direction. 
  
-In an expansive digital marketplace, an e-commerce conglomerate manages a vast database of 
-customer transactions. Amidst the dynamic landscape of online shopping, the company endeavors to 
-maintain a pulse on consumer activity. Within this ecosystem, there arises a requirement to 
-periodically evaluate recent customer purchases to glean insights into evolving consumer behaviors and 
-trends.
 
-Query: 
+Input Format
+Number of list elements List elements separated by space  
 
-select case when exists(select 1 from Purchases where PurchaseDate >= date_sub(current_date(),interval 
-30 day)) 
-then 'Yes' else 'No' 
-end as Purchases_Last_30_Days;
-==============================================
-16)
-Problem Statement: 
+Output Format
+Display the elements in both forward and reverse directions.   
 
-In a retail database, tables for products, categories, and sales are set up. Products are categorized into 
-Electronics, Books, and Stationery, each with distinct items and prices. Sales records show 
-transactions for various products. Queries are executed to find products without sales, combine names 
-and prices of Electronics and Books, and identify electronics priced higher than any book. 
-These queries help monitor inventory, analyze sales trends, and adjust pricing strategies for maximizing 
-profits.
+Code Constraints
 
-QUERY:
+Sample 1  Input
+5
+21 13 24 35 3
 
+Sample 1  Output
+Doubly linked list forwards: 3 35 24 13 21 
+Doubly linked list backwards: 21 13 24 35 3 
 
-select * from products where product_id not in (select distinct product_id from sales);
-select name,price from products where category ='Electronics' or category='Books' order by category desc;
-select product_id,name,round(price,0) as rounded_price from products where category='Electronics';
-==========================================================================
-17)
+Answer
 
-PROBLEM STATEMENT 
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    return newNode;
+}
+void insertAtEnd(struct Node** head_ref, int data) {
+    struct Node* new_node = createNode(data);
+    if (*head_ref == NULL) {
+        *head_ref = new_node;
+        return;
+    }struct Node* current = *head_ref;
+     while (current->next != NULL)
+        current = current->next;
+    current->next = new_node;
+    new_node->prev = current;
+}
+void displayBackward(struct Node* head) {
+    if (head == NULL)
+        return;
+    while (head->next != NULL)
+        head = head->next;
+    printf("Doubly linked list forwards: ");
+    while (head != NULL) {
+        printf("%d ", head->data);
+        head = head->prev;
+    }
+    printf("\n");
+} 
+ void displayFrward(struct Node* head){
+    printf("Doubly linked list backwards: ");
+    while(head !=NULL)
+    {
+        printf("%d ",head->data);
+        head =head->next;
+	} 
+	printf("\n");
+}
+int main() 
+{
+    int n;
+    scanf("%d", &n);
+    int elements[n];
+    printf(" ");
+    for (int i = 0; i < n; ++i)
+    scanf("%d", &elements[i]);
+    struct Node* head = NULL;
+    for (int i = 0; i < n; ++i)
+        insertAtEnd(&head, elements[i]);
+        displayBackward(head);
+        displayFrward(head);
+}
 
-In a retail e-commerce platform, orders are managed through a database. Each order has a unique ID, 
-customer ID, order date, and status. For instance, a customer places an order for various items, such as 
-electronics or clothing, with different statuses like "Pending," "Shipped," or "Delivered." To maintain 
-operational efficiency, the company needs to track the total number of orders for each status. This helps 
-in monitoring the progress of orders, ensuring timely delivery, and addressing any issues promptly.
+===============================================================
 
-QUREY:
-
-select order_status, count(*) as total_orders from orders group by order_status order by order_status;
-==========================================================================
-18)
-
-PROBLEM STATEMENT 
-In an online marketplace, a retail platform monitors product prices across categories. Using a 
-database, they track product details such as category, name, and price. To analyze pricing strategies, they 
-calculate the median price for products in each category. This helps in understanding the pricing 
-distribution within categories, enabling the platform to adjust prices competitively and optimize revenue. 
-The query fetches median prices dynamically, aiding in strategic decision-making for pricing and product 
-placement. 
-
-QUERY:
-
-alter table products modify price double;
-SELECT category,(sum(price)-max(price)-min(price))/2 as 
-median_price FROM products Group by category order by category;
-             
-=================================================================
-19)
-PROBLEM STATEMENT 
-Within the expansive realm of cinema, a renowned movie database meticulously catalogues an extensive 
-array of films and their associated talent. Aspiring filmmakers, cinephiles, and industry 
-professionals alike rely on this comprehensive repository to explore the intricate tapestry of cinematic 
-creations. Amidst this rich tapestry, emerges a desire to uncover the collaborative endeavors between 
-directors and actors, particularly in the context of the visionary filmmaker 'Christopher Nolan'. 
-Harnessing the power of data analysis, the database aims to unveil the names of actors who have graced 
-the screen in movies directed by this iconic filmmaker. Through this exploration, the database seeks to 
-shed light on the dynamic relationships forged within the realm of filmmaking and celebrate the 
-contributions of actors to cinematic masterpieces.
-
-QUERY:
-
-select Name from Actors where ActorID in(select distinct ActorId from Cast where MovieId in (select distinct MovieID from Cast));
-=======================================================================================
-20)
-PROBLEM STATEMENT 
-In a retail store, managers aim to identify the best-performing salesperson in terms of revenue 
-generated. By analyzing sales data, they can reward high achievers and provide additional training 
-or support to those who may need improvement. The query calculates the top-performing 
-salesperson based on the total sales amount achieved. This information guides managerial 
-decisions, enhances 
-employee motivation, and fosters a competitive yet supportive work environment        
-conducive to achieving sales targets and maximizing profits.
-
-QUERY:
-create table orders(
-sale_id int,
-product_id int,
-quantity_id int,
-sale_amount decimal(10,2));
-
-insert into orders values(1,101,5,500.5);
-insert into orders values(2,102,3,300.25);
-insert into orders values(3,101,2,200);
-insert into orders values(4,103,10,3500);
-insert into orders values(5,102,7,1500.5);
-insert into orders values(6,101,3,800);
-insert into orders values(7,104,5,700.75);
-
-select product_id as top_selling_product, sale_amount as total_sales_amount from orders where sale_id=(select sale_id  where sale_amount=(select max(sale_amount) from orders));
-==================================================================================
-21)
-PROBLEM STATEMENT 
-
-In a multinational retail corporation, sales data for different years is stored in separate tables. The 
-company aims to identify products consistently popular across two consecutive years for strategic stocking 
-decisions. By comparing sales records from 2020 and 2021, they can pinpoint items with consistent 
-demand, ensuring sufficient inventory levels. This approach aids in optimizing procurement, minimizing 
-stockouts, and maintaining customer satisfaction by consistently offering sought-after products.
-
-QUERY:
-
-select sales_2020.product_id from sales_2020 inner join sales_2021 on sales_2021.product_id=sales_2020.product_id;
-=============================================================================
-22)
-PROBLEM STATEMENT 
-
-You are managing the database for an online store. The tasks involve creating tables for customer 
-information, product data, and order details, establishing relationships among them, and ensuring efficient 
-data retrieval with indexes. You also need to manage data entry for new customers, products, and orders.
-
-QUERY:
-
-create table customer_information(customer_id int,name varchar(255),email 
-varchar(255),phone_number varchar(255),address varchar(255)); 
-create table product_data(product_id int,name varchar(255),description varchar(255),price 
-decimal(20,2),category_id int); 
-create table order_details(order_id int,customer_id int,product_id int,quantity int,order_date date);
-==================================================================================
-23)
-
-PROBLEM STATEMENT
+Write a program to implement stack using Array. 
  
-Imagine you're managing a university's student database. You have two tables, Students and Courses, 
-storing information about students' grades and the courses they are enrolled in. The students table 
-contains data about each student, including their FirstName, Grade, and the CourseID they are enrolled in. 
-The Courses table stores information about various courses offered by the university, including the 
-CourseID and CourseName. Finding Students with 'A' Grades. In this scenario, you want to identify all 
-students who have achieved an 'A' grade in their courses.
 
-QUERY:
+Input Format
+Size of stack in first line Stack elements in the next lines  
 
-select Students.FirstName,Courses.CourseName from Students join Courses on Students.CourseID=Courses.CourseID where Students.Grade='A';
-============================================================================
-24)
-PROBLEM STATEMENT 
+Output Format
+Display the stack elements.  
 
-Imagine you work at a medium-sized company, and the HR department recently assigned employees to 
-different departments. You want to retrieve a list of employees along with their corresponding 
-department names. This information will help you understand which employees belong to which 
-departments. Note: Department, Employees are keep in two different table.
+Code Constraints
 
-QUERY:
+Sample 1  Input
+5
+90
+1
+234
+89
+23
 
+Sample 1  Output
+Stack elements
+23
+89
+234
+1
+90
 
-select Employees.FirstName, Department.DepartmentName from Employees join Department on Employees.DeptID=Department.DeptID;
-============================================================================================
-25)
-PROBLEM STATEMENT 
+Answer
 
-In a bustling city, a food delivery service employs several delivery personnel to ensure prompt and efficient 
-delivery of orders from various restaurants to customers' doorsteps. As part of their commitment to 
-customer satisfaction, the company regularly collects feedback through ratings provided by customers after 
-each delivery. The management understands the importance of 
-assessing the performance of their delivery personnel to maintain high service standards.  
+#include<stdio.h>
+#define MAX 100
+int top=-1;
+int a[MAX];
 
-QUERY:
+void insert(int data){
+    top+=1;
+    a[top]=data;
+}
 
-select DeliveryBoyName,avg(Rating) as AverageRating from DeliveryRatings group by DeliveryBoyName;
-========================================================================
-26)
-PROBLEM STATEMENT 
+void print(){
+    printf("Stack elements\n");
+    for(int i=top;i>=0;i--){
+        printf("%d\n",a[i]);
+    }
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    int a;
+    for(int i=0;i<n;i++){
+        scanf("%d",&a);
+        insert(a);
+    }
+    print();
+}
 
-In a software development company, ensuring product quality is paramount. The company meticulously 
-tracks the number of bugs reported for each project to prioritize bug fixes effectively. The project 
-management team recognizes the criticality of promptly addressing projects with the highest number of 
-reported bugs to maintain customer satisfaction and uphold the company's reputation for delivering 
-reliable software solutions.
+===============================================================
 
-QUERY:
-
-
-select * from BugReports where ReportedBugs=(select max(ReportedBugs) from BugReports);
-====================================================================
-27)
-PROBLEM STATEMENT 
-
-In a healthcare organization, the quality assurance team analyzes surgical procedure durations to ensure 
-optimal patient care. By examining data from the procedure and surgery tables, they identify the shortest 
-and longest durations for each surgical procedure type, enabling process optimization and maintaining 
-high standards of efficiency and safety.
-
-QUERY:
-
-select Procedures.ProcedureType,min(Surgery.SurgeryDuration) as MinDuration,
-max(Surgery.SurgeryDuration) as MaxDuration
-from Procedures join Surgery on Procedures.ProcedureID=Surgery.ProcedureID group by Procedures.ProcedureType;
-=================================================================================
-28)
-PROBLEM STATEMENT 
-
-Operating within a niche of personalized travel experiences, a travel agency prioritizes 
-understanding customer booking behavior to deliver tailored travel packages. The marketing team's 
-objective is to design precise promotional offers by gauging the frequency of bookings made by each 
-customer. This approach empowers the agency to align its marketing strategies with the varied 
-preferences and behaviors of its clientele, thereby enhancing customer satisfaction and fostering loyalty.
-
-QUERY:
-
-select Customer.CustomerID,Customer.CustomerName,count(Booking.CustomerId) as TotalBookings from Customer join Booking on 
-Customer.CustomerId=Booking.CustomerID group by Customer.CustomerId,Customer.CustomerName ;
-======================================================================================
-29)
-PROBLEM STATEMENT 
-
-You are a manager at a company and you need to review the details of all employees frequently. You've 
-created a view named "EmployeeDetails" that displays the EmployeeID, FirstName, and LastName columns 
-from the Employees table for easy access to this information.
-
-QUERY:
-
-create table Employees
-(EmployeeID int,
-FirstName varchar(20),
-LastName varchar(20));
-
-insert into Employees values
-(1,'John','Doe'),
-(2,'Jane','Smith'),
-(3,'Alice','Johnson');
-create view EmployeeSalary as select EmployeeID,FirstName,LastName from Employees;
-select * from EmployeeSalary; 
-==========================================================================
-30)
-
-PROBLEM STATEMENT
+Q4)  Write a program to implement stack using linked list.  
  
-As a human resources manager, you need to manage employee salaries efficiently. You've created an 
-updatable view named "EmployeeSalary" that displays the EmployeeID, FirstName, LastName, and Salary of 
-all employees in the company. The view allows you to modify the salary of any employee directly through the 
-view. 
 
-QUERY:
+Input Format
+A number to be added in the stack followed by Y/N. If the input is Y, enter the second number. Enter N to stop the input.  Refer the sample input.  
 
-create table Employees
-(EmployeeID int,FirstName varchar(20),LastName varchar(20),Salary decimal(10,2));
-insert into Employees values
-(1,'John','Doe',50000),
-(2,'Jane','Smith',60000),
-(3,'Alice','Johnson',55000);
-create view Salary_status as select FirstName,LastName,Salary from Employees;
-update Employees set Salary = Salary+15000 where EmployeeID =1; 
-select * from Salary_status;
+Output Format
+Display the stack elemnets.   
+
+Code Constraints
+
+Sample 1  Input
+20
+Y
+231
+Y
+190
+Y
+98
+N
+
+Sample 1  Output
+Stack elements
+98
+190
+231
+20
+
+
+Answer
+
+#include<stdio.h>
+#define Max 100
+int top=-1;
+int a[Max];
+void insert(int data){
+    top++;
+    a[top]=data;
+}
+void print(){
+    printf("Stack elements\n");
+    for (int i=top;i>=0;i--){
+        printf("%d\n",a[i]);
+    }
+}
+
+int main(){         
+    int n;
+    char d;
+    scanf("%d",&n);
+    insert(n);
+    for(int i=0;;i++){
+        scanf("%c",&d);
+        if(d=='Y'){
+            scanf("%d",&n);
+            insert(n);
+        }
+        else if(d=='N'){
+            break;
+        }
+    }
+    
+    print();
+}
+
+
 ================================================================
-31)
-PROBLEM STATEMENT 
 
-In a corporate setting, you've been tasked with enhancing the payroll system for a company's HR department. 
-As part of this project, you're required to implement a mechanism that ensures the "last_salary_updated" 
-column in the "employee" table is always current whenever an employee's salary changes. 
+Q5)  Problem statement 
+Write a program to convert the given infix expression to postfix expression. 
+Example 
+Input 
+a+b 
+Output 
+ab+ 
+Explanation 
+Postfix representation of (a+b) is ab+ 
+ 
 
-QUERY:
+Input Format
+String input representing infix expression  
 
-CREATE TRIGGER update_salary_trigger 
-BEFORE UPDATE  ON employee 
-FOR EACH ROW 
-SET NEW.last_salary_updated := CURRENT_DATE ;
-===========================================================
-32)
-PROBLEM STATEMENT 
+Output Format
+Postfix representation of the given infix expression  
 
-You are the database administrator at an IT training center that offers various specialized programs, including 
-"Web Development" and "Data Analysis." You have been tasked with maintaining the center's database, 
-which includes managing program details and tracking trainee enrollments.
+Code Constraints
+Operators used are +, -, *, /, and ^ only  
 
-QUERY:
+Sample 1  Input
+a+b*(c^d-e)^(f+g*h)-i
 
-create table Programs(
-ProgramID int primary key,
-Title varchar(50),
-Description varchar(150)
+Sample 1  Output
+abcd^e-fgh*+^*+i-
 
-);
-insert into Programs values(1,'Web Development','Learn'),(2,'Data Analysis','Learn');
 
-create table  Trainees (
-TraineeID int,
-FirstName varchar(20),
-LastName varchar(20),
-Email varchar(200),
-ProgramID int);
-insert into Trainees values
-(1,"Alice",'Johnson','alice.johnson@example.com',1);
+Sample 2  Input
+(a+b)*(c^d+e)^(f+g)*h
 
-select t.FirstName as 'First Name',t.Lastname as 'Last Name',
-t.Email,p.Title as Program 
-from Trainees t join Programs p on t.ProgramID =p.ProgramID;
-========================================================
-33)
+Sample 2  Output
+ab+cd^e+fg+^*h*
 
-PROBLEM STATEMENT 
+Answer
 
-In a dynamic corporation, the payroll processing system is the cornerstone of employee compensation 
-management. The HR department aims to streamline the calculation of overtime pay for employees 
-exceeding regular work hours. To achieve this, the payroll system should incorporate a feature that 
-automatically computes overtime pay using predefined rates and employee work logs. By analyzing work 
-hours logged beyond standard thresholds and applying the appropriate overtime rates, the system ensures 
-accurate and efficient compensation processing for overtime work.
+#include<stdio.h>
+#include<string.h>
+#define max 100
+char a[max];
+int top=-1;
 
-QUERY:
+void push(char data){
+    top++;
+    a[top]=data;
+}
 
-create table
-EmployeeWorkLogs(EmployeeID int,dat date,RegularHours int,OvertimeHours int);
-insert into EmployeeWorkLogs
-values
-(101,'2024-05-01',8,2),
-(102,'2024-05-01',8,3),
-(103,'2024-05-01',8,1),
-(104,'2024-05-02',8,2),
-(105,'2024-05-02',8,3),
-(106,'2024-05-02',8,1),
-(107,'2024-05-03',8,2),
-(108,'2024-05-03',8,3),
-(109,'2024-05-03',8,1),
-(110,'2024-05-04',8,2);
-select EmployeeID,concat('$',(OvertimeHours *20))as OvertimePay from EmployeeWorkLogs;
+int precedence(char ch){
+    if(ch=='^')
+        return 3;
+    else if(ch=='*' || ch=='/'){
+        return 2;
+    }
+    else if(ch=='+' || ch=='-')
+        return 1;
+    return 0;
+}
+
+char pop(){
+    if(top==-1)
+        return '\0';
+    return a[top--];
+}
+
+void postfix(char *s){
+    int l=strlen(s);
+    char ans[l+1];
+    int index=0;
+    for(int i=0;i<l;i++){
+        char ch=s[i];
+        if(ch>='a' && ch<='z' || ch>='A' && ch<='Z'){
+            ans[index++]=ch;
+        }
+        else if(ch=='('){
+            push(ch);
+        }
+        else if(ch==')'){
+            while(top>=0 && a[top]!='('){
+                ans[index++]=pop();
+            }
+            top--;
+        }
+        else{
+            while(top != -1 && precedence(a[top])>=precedence(ch)){
+                ans[index++]=pop();
+            }
+            push(ch);
+        }
+    }    
+    while(top!=-1){
+        ans[index++]=pop();
+    }
+    ans[index]='\0';    
+    printf("%s",ans);
+}
+
+
+int main(){
+    char s[100];
+    scanf("%s",s);
+    postfix(s);
+    return 0;
+}
+
+==================================================================
+
+Q6)  Write a program to delete a node from the end of a doubly linked list. 
+ 
+
+Input Format
+Number of list elements List elements in the second line separated by space Number of elements to be deleted  
+
+Output Format
+Display the list before and deletion.  Refer the sample output for exact format  
+
+Code Constraints
+
+Sample 1  Input
+7
+2 3 2 3 34 21 1
+3
+
+Sample 1  Output
+2 3 2 3 34 21 1 
+2 3 2 3 
+
+
+Answer
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+void addNode(struct Node** head, int value) {
+    struct Node* nn = (struct Node*)malloc(sizeof(struct Node));
+    nn->data = value;
+    nn->next = NULL;
+    nn->prev = NULL;
+    if (*head == NULL) {
+        *head = nn;
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = nn;
+        nn->prev = temp;
+    }
+}
+
+void deleteLastNode(struct Node** head) {
+    struct Node* temp = *head;
+    while (temp->next->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = NULL;
+}
+
+void displayList(struct Node* head) {
+    while (head != NULL) {
+        printf("%d ", head->data);
+        head = head->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    int numNodes, value, deletecount;
+    scanf("%d", &numNodes);
+
+    for (int i = 0; i < numNodes; i++) {
+        scanf("%d", &value);
+        addNode(&head, value);
+    }
+    scanf("%d", &deletecount);
+    displayList(head);
+    for (int i = 0; i < deletecount; i++)
+        deleteLastNode(&head);
+    displayList(head);
+    return 0;
+}
+
+==================================================================
+
+Q7)  Implementation of queue using linked list: 
+Write a program to insert and delete elements in the queue. 
+ 
+
+Input Format
+The first line of the input consists of the value of n. Next line consists of the queue elements.  
+
+Output Format
+The first line prints the front element of the queue. The next line prints the rear element. Perform a dequeue operation: The next line prints the front element. The next line prints the rear element.  
+
+Code Constraints
+
+Sample 1  Input
+5
+12 45 78 36 95
+
+Sample 1  Output
+12
+95
+45
+95
+
+Answer
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* next;
+};
+void insert(struct node** head, int num){
+    struct node* nn=(struct node*)malloc(sizeof(struct node));
+    nn->data=num;
+    nn->next=NULL;
+    if(*head==NULL)
+        *head=nn;
+    else{
+        struct node* temp=*head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        temp->next=nn;
+    }
+}
+void dequeue(struct node **head){
+    if((*head)==NULL)
+        printf("Queue is empty");
+    else
+        *head=(*head)->next;
+}
+void displayF(struct node *head){
+    printf("%d\n",head->data);
+}
+
+void displayR(struct node *head){
+    while(head->next!=NULL){
+        head=head->next;
+    }
+    printf("%d\n",head->data);
+}
+
+int main(){
+    struct node* head=NULL;
+    int n;
+    scanf("%d",&n);
+    int data;
+    for(int i=0;i<n;i++){
+        scanf("%d",&data);
+        insert(&head,data);
+    }
+        displayF(head);
+        displayR(head);
+        dequeue(&head);
+        displayF(head);
+        displayR(head);
+}
+
+
+==================================================================
+
+
+Q8)  Packet Collision 
+A network user attempted to send multiple data packets with frame size 'k' at the same time. Due to a network fault, all packets in each frame with a higher sequence number crashed. To resend the packet, the sender must now find the maximum sequence number data packet in each frame with size 'k'. 
+Example 
+Input 
+6 
+21 34 5 6 12 23 
+3 
+Output 
+34 34 12 23  
+Explanation 
+Frame size =3  
+First Data transmission: 21 34 5 => 34 
+Second Data transmission: 34 5 6 => 34 
+Third Data transmission:  5 6 12 => 12 
+Fourth Data transmission: 6 12 23 => 23 
+ 
+
+Input Format
+First input represent number of data packets to be sent Next n number of input represents sequence number Followed by frame size (k).  
+
+Output Format
+Refer sample output  
+
+Code Constraints
+
+Sample 1  Input
+6
+21 34 5 6 12 23
+3
+
+Sample 1  Output
+34 34 12 23 
+
+Sample 2  Input
+5
+12 34 56 78 89
+2
+
+Sample 2  Output
+34 56 78 89 
+
+
+Answer
+
+// You are using GCC
+#include<stdio.h>
+
+#define MAX_SIZE 1000
+
+int arr[MAX_SIZE];
+int front = -1;
+int rear = -1;
+
+void enqueue(int n) {
+    if (rear == -1 && front == -1) {
+        rear = 0;
+        front = 0;
+        arr[rear] = n;
+        return;
+    }
+    arr[++rear] = n;
+}
+
+void print(int sw, int n) {
+    for (int i = sw - 1; i < n; i++) {
+        int max = arr[i];
+        int index = sw - 1;
+        for (int j = i, index = sw; index > 0; index--, j--) {
+            if (arr[j] > max) {
+                max = arr[j];
+            }
+        }
+        printf("%d ", max);
+    }
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        int data;
+        scanf("%d", &data);
+        enqueue(data);
+    }
+    int sw;
+    scanf("%d", &sw);
+    print(sw, n);
+    return 0;
+}
+
+===================================================================
+
+Q9)  Problem statement: 
+Implementation of binary search tree : 
+Write a Program to implement a binary search tree. 
+ 
+
+Input Format
+The input should have numbers (until the user enters a negative value)  
+
+Output Format
+The output prints the tree values.  
+
+Code Constraints
+
+Sample 1  Input
+6
+3
+2
+1
+4
+7
+8
+9
+10
+-1
+
+Sample 1  Output
+Tree values are:
+1 2 3 4 6 7 8 9 10 
+
+Sample 2  Input
+6
+3
+2
+1
+-1
+
+Sample 2  Output
+Tree values are:
+1 2 3 6 
+
+Answers
+
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+
+struct node* insert(struct node* root,int num)
+{
+    if(root==NULL)
+    {
+        struct node* nn=(struct node*)malloc(sizeof(struct node));
+        nn->data=num;
+        nn->left=NULL;
+        nn->right=NULL;
+        root=nn;
+        return root;
+    }
+    else if((root->data)>num)
+    {
+        root->left=insert(root->left,num);
+    }
+    else if((root->data)<num)
+    {
+        root->right=insert(root->right,num);
+    }
+    return root;
+}
+void print(struct node* root)
+{
+    if(root!=NULL)
+    {
+
+        print(root->left);
+        printf("%d ",root->data);
+        print(root->right);
+    }
+}
+int main()
+{
+    int n;
+    struct node* root=NULL;
+    while(1)
+    {
+        scanf("%d",&n);
+        if(n==-1)
+        {
+            break;
+        }
+        root=insert(root,n);
+    }
+    printf("Tree values are:\n");
+    print(root);
+}
+
+===================================================================
+
+Q10)  Write a program to represent a graph using the adjacency list. 
+ 
+Example 
+Input 
+6 
+4 
+1 2 
+2 3 
+3 4 
+2 4 
+Output 
+0 
+1 -> 2 
+2 -> 1 -> 3 -> 4 
+3 -> 2 -> 4 
+4 -> 3 -> 2 
+5 
+Explanation 
+There are 6 vertices from 0 to 5. The connected edges are represented as a list. While others are simply given without any connections. 
+ 
+
+Input Format
+Number of vertices Number of edges Edges with the connecting vertices  
+
+Output Format
+Adjacency list representation of the graph  
+
+Code Constraints
+
+Sample 1  Input
+6
+4
+1 2
+2 3
+3 4
+2 4
+
+
+Sample 1  Output
+0
+1 -> 2
+2 -> 1 -> 3 -> 4
+3 -> 2 -> 4
+4 -> 3 -> 2
+5
+
+
+Sample 2  Input
+6
+5
+1 2
+2 3
+3 4
+2 4
+0 5
+
+Sample 2  Output
+0 -> 5
+1 -> 2
+2 -> 1 -> 3 -> 4
+3 -> 2 -> 4
+4 -> 3 -> 2
+5 -> 0
+
+Answer
+
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* next;
+};
+struct node** head;
+void insert(int src,int dest){
+    struct node* nn=(struct node*)malloc(sizeof(struct node));
+    nn->data=dest;
+    nn->next=NULL;
+    if(head[src]==NULL)
+    {
+        head[src]=nn;
+        return;
+    }
+    else{
+        struct node* temp=head[src];
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        temp->next=nn;
+    }
+}
+void print(int vertex)
+{
+    for(int i=0;i<vertex;i++)
+    {
+        printf("%d",i);
+        while(head[i]!=NULL)
+        {
+            printf(" -> %d",head[i]->data);
+            head[i]=head[i]->next;
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int edges,vertex;
+    int start,end;
+    scanf("%d\n%d",&vertex,&edges);
+    head=(struct node*)malloc(vertex * sizeof(struct node));
+    for(int i=0;i<vertex;i++)
+    {
+        head[i]=NULL;
+    }
+    for(int i=0;i<edges;i++)
+    {
+        scanf("%d %d",&start,&end);
+        insert(start,end);
+        insert(end,start);
+    }
+    print(vertex);
+    return 0;
+}
+
 ====================================================================
-34)
-PROBLEM STATEMENT 
 
-A local blood donation center manages data related to its donors and the donations they make. The center 
-uses a database to store information about each donor, including their name, blood type, and contact details, 
-as well as records of each donation event. 
+Q11)  Subset Using Hashing 
+Problem Statement 
+Write a program to find whether the array is a subset or not using Hashing technique. 
+Example 
+Input 
+6 
+4 
+11 1 13 21 3 7 
+11 3 7 1 
+Output 
+Subset 
+Explanation 
+Since all of the values in the second list are also present in the first list, it is a subset. 
+ 
 
-QUERY:
+Input Format
+Input consists of integer 'm' followed by integer 'n' denoting the size of array arr1 and arr2 respectively, followed by 'm' number of array elements of arr1, followed by 'n' number of array elements of arr2.  
 
-create table donor(DonorID int,FirstName varchar(20),LastName varchar(20),BloodType varchar(5),ContactNumber varchar(20));
-create table donations(DonationID int,DonorID int,DonationDate date,AmountDonated int);
-insert into donor values
-(1,'John','Doe','O+','123-456-7890'),(2,'Jane','Doe','A+','987-654-3210');
-insert into donations values
-(1,1,'2024-04-01',500),(2,2,'2024-04-02',450);
-delete from donor donor where DonorID=1;
-delete from donations where DonorID=1;
-select d.FirstName as 'First Name',d.LastName as 'Last Name',BloodType as 'Blood Type',donations.DonationDate as 'Donation Date',donations.AmountDonated as 'Amount Donated' from donor d join donations on d.donorID = donations.DonorID;
-============================================================================================
-35)
-PROBLEM STATEMENT 
+Output Format
+Output displays a message indicating whether the arr2 of subset or arr1 or not.  
 
-You are a database manager for a city's traffic management department. Your responsibility is to develop a 
-database that records details about each traffic light's location, operational status, and maintenance records. 
-Additionally, the system should allow for reporting on lights needing maintenance, traffic light functionality 
-rates, and incident reports due to traffic light failures.
+Code Constraints
 
-QUERY:
+Sample 1  Input
+6
+4
+11 1 13 21 3 7
+11 3 7 1
+
+Sample 1  Output
+Subset
+
+Sample 2  Input
+6
+5
+11 1 13 21 3 7
+11 3 7 1 19
+
+Sample 2  Output
+Not a subset
+
+Answer
+
+// You are using GCC
+#include<stdio.h>
+#define max 10
+int hash[max];
+void linearprobinghashing(int n,int a[])
+{
+    for(int i=0;i<n;i++)
+    {
+        hash[i]=0;
+    }
+    for(int i=0;i<n;i++)
+    {
+        int num=a[i]%n;
+        while(hash[num]!=0)
+        {
+            num++;
+            if(num==n)
+            {
+                num=0;
+            }
+        }
+        hash[num]=a[i];
+    }
+}
+bool subset(int n1,int a1[],int n)
+{
+    int count=0;
+    for(int i=0;i<n1;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            if(hash[j]==a1[i])
+            {
+                count++;
+                // break;
+            }
+        }
+        
+    }
+    // printf("%d\n",count);
+    if(count==n1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int main()
+{
+    int n,n1;
+    scanf("%d\n%d",&n,&n1);
+    int a[n],a1[n1];
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    for(int j=0;j<n1;j++)
+    {
+        scanf("%d",&a1[j]);
+    }
+    linearprobinghashing(n,a);
+    bool check=subset(n1,a1,n);
+    if(check)
+    {
+        printf("Subset");
+    }
+    else{
+        printf("Not a subset");
+    }
+}
+
+===================================================================
+
+Q12)  Write a program to insert and delete an element from the queue. 
+ 
+
+Input Format
+The first line of input integer N consists of capacity of the queue.1 The second line of input integer O consists of no.of element to be inserted in the queue. The next line of the input consists of the number of elements to be deleted from the list.  
+
+Output Format
+Output displays the element removed from the queue.  
+
+Code Constraints
+
+Sample 1  Input
+3
+12
+13
+14
+2
+
+Sample 1  Output
+Element deleted from queue is : 12
+Element deleted from queue is : 13
 
 
-create table Intersections
-(IntersectionID int primary key,
-Location varchar(50));
+Sample 2  Input
+5
+13
+14
+15
+16
+17
+4
 
-insert into Intersections values
-(1,'1st Ave & Main St'),
-(2,'2nd Ave & Main St');
+Sample 2  Output
+Element deleted from queue is : 13
+Element deleted from queue is : 14
+Element deleted from queue is : 15
+Element deleted from queue is : 16
 
-create table TrafficLights
-(LightID int primary key,IntersectionID int,Stat varchar(20),LastServiceDate date,
-foreign key(IntersectionID) references Intersections(IntersectionID));
-insert into TrafficLights values
-(101,1,'Operational','2023-01-10'),
-(102,1,'Non-Operational','2023-03-15'),
-(201,2,'Operational','2023-02-20');
+Answer
 
-create table Incidents
-(ReportID int primary key,LightID int,ReportDate date,IncidentDescription varchar(60),
-foreign key (LightID) references TrafficLights(LightID));
+// You are using GCC
 
-insert into Incidents values
-(1,101,'2023-01-10','Failure led to minor accident');
 
-create table MaintainLogs
-(LogID int primary key,LightID int,ServiceDate date,Details varchar(40),
-foreign key (LightID) references TrafficLights(LightID));
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+struct node* create(int data)
+{
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=NULL;
+    return newnode;
+}
+void append(struct node **head,int data)
+{
+    struct node* newnode=create(data);
+    if((*head)==NULL)
+    {
+        *head=newnode;
+    }
+    else{
+        struct node* temp=*head;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+    }
+}
+void dequeue(struct node** head)
+{
+    struct node* temp=*head;
+    (*head)=(*head)->next;
+    printf("Element deleted from queue is : %d\n",temp->data);
+}
+int main()
+{
+    struct node* head=NULL;
+    int n;
+    scanf("%d",&n);
+    int data;
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&data);
+        append(&head,data);
+    }
+    int k;
+    scanf("%d",&k);
+    for(int i=0;i<k;i++)
+    {
+        dequeue(&head);
+    }
+}
 
-insert into MaintainLogs values
-(1,101,'2023-01-10','Routine Check'),
-(2,102,'2023-03-15','Replaced unit');
+====================================================================
 
-#select Non-operational traffic lights
+Q13)  Write a program to create a singly linked list and display the added elements.  
+Note : Insert the elements in the beginning of the list. 
+ 
 
-select i.Location,t.LightID,t.stat as 'Status' from Intersections i 
-join TrafficLights t on i.IntersectionID = t.IntersectionID where t.stat='Non-Operational';
+Input Format
+Number of list elements in the first line List elements in the second line separated by space.  
 
-# selecting incident report by location
+Output Format
+Display the list as shown in the sample output.  
 
-select i.Location,count(id.ReportID ) as NumberOfIncidents from Intersections i join TrafficLights t on i.IntersectionID = t.IntersectionID
-join Incidents id on id.LightID = t.LightID group by i.Location;
+Code Constraints
 
-# finding next Service due
-select  m.LightID,i.Location,m.ServiceDate as LastServiceDate, date_add(m.ServiceDate, interval 6 month) as NextServiceDate
-from MaintainLogs m join TrafficLights t on m.LightID = t.LightID join Intersections i on i.IntersectionID = t.IntersectionID order by m.LightID;
-============================================================================================
-36)
-PROBLEM STATEMENT 
+Sample 1  Input
+5
+3 4 21 232 89
 
-Imagine you're tasked with creating a payroll system for a company. As part of this project, you need to 
-retrieve employee names and their corresponding salaries from a database table named "employees." You 
-decide to use a SQL cursor named "employee_cursor" to fetch this data. The cursor will iterate through each 
-row of the table, fetching the employee name and salary one by one. As a developer, you need to write a SQL 
-query to accomplish this task efficiently, ensuring accurate retrieval of employee information for the payroll 
-system's processing.
+Sample 1  Output
+89 232 21 4 3 
 
-QUERY:
+Answer
 
--- Declare cursor 
-DECLARE employee_cursor CURSOR FOR 
-SELECT name, salary FROM employees; -- Open cursor 
-OPEN employee_cursor; -- Variables to store fetched data 
-DECLARE employee_name TEXT; 
-DECLARE employee_salary NUMERIC; -- Fetch data using loop 
-LOOP -- Fetch next row into variables 
-FETCH employee_cursor INTO employee_name, employee_salary; -- Exit loop if no more rows 
-EXIT WHEN NOT FOUND; -- Print employee name and salary 
-RAISE NOTICE 'Employee: %, Salary: %', employee_name, employee_salary; 
-END LOOP; -- Close cursor 
-CLOSE employee_cursor;
-======================================================================================
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int val;
+    struct node *next;
+};
+void insertatFirst(struct node **head,int num){
+    struct node *nn=(struct node *)malloc(sizeof(struct node));
+    nn->val=num;
+    nn->next=(*head);
+    (*head)=nn;
+}
+void print(struct node *head){
+    while(head!=NULL){
+        printf("%d ",head->val);
+        head=head->next;
+    }
+}
+int main()
+{
+    struct node *head=NULL;
+    int v;
+    scanf("%d",&v);
+    for(int i=0;i<v;i++){
+        int data;
+        scanf("%d",&data);
+        insertatFirst(&head,data);
+        }
+         print(head);
+}
+
+====================================================================
+
+Q14)  Write a C++ program to add a node to the beginning of a circular linked list with user input 
+ 
+ 
+
+Input Format
+Number of list elements List elements in the second line separated by space Number to be inserted in the third line  
+
+Output Format
+Display the list before and after insertion.   
+
+Code Constraints
+
+Sample 1  Input
+5
+23 22 12 82 12
+99
+
+Sample 1  Output
+12 82 12 22 23 
+99 12 82 12 22 23 
+
+
+Answer
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int val;
+    struct node* next;
+    struct node* prev;
+};
+
+void insert(struct node** head, int n) {
+    struct node* nn = (struct node*)malloc(sizeof(struct node));
+    nn->val = n;
+    if (*head == NULL) {
+        nn->prev = nn;
+        nn->next = nn;
+        *head = nn;
+    } else {
+        struct node* last = (*head)->prev;
+        nn->next = *head;
+        nn->prev = last;
+        last->next = nn;
+        (*head)->prev = nn;
+        *head = nn;
+    }
+}
+
+void print(struct node* head) {
+    if (head == NULL) return;
+    struct node* a = head;
+    do {
+        printf("%d ", a->val);
+        a = a->next;
+    } while (a != head);
+    printf("\n");
+}
+
+int main() {
+    struct node* head = NULL;
+    int n;
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+        int data;
+        scanf("%d", &data);
+        insert(&head, data);
+    }
+    int add;
+    scanf("%d", &add);
+    print(head);
+    insert(&head, add);
+    print(head);
+    return 0;
+}
+
+====================================================================
+Q15)  Problem statement 
+Books in a shelf are arranged in such a way that the starting letters of their titles are displayed in front of it. Based upon these letters, students can easily identify the books they are in search of. One fine day, some students find that the books are arranged in reversed order. However, they are unable to understand the process behind the arrangement. 
+One student suggested that since books are usually arranged in the form of stacks, the reversal will be in the LIFO format. Another student mentioned that first letters of the books formed an array of characters which is now seen in the reversed form. Help the students by writing a code by combining the two given findings to arrive at the algorithm for the rearrangement. 
+Example 
+Input 
+JNCAB 
+Output 
+BACNJ 
+Explanation 
+letter="JNCAB"letter[0]="J" => push() => Stack=Jletter[1]="N" => push() => Stack=JNletter[2]="C" => push() => Stack=JNCletter[3]="A" => push() => Stack=JNCAletter[4]="B" => push() => Stack=JNCABNow, one by one, pop() and print the top-most elements. 
+ 
+
+Input Format
+A single line of input which has the original set of starting letters s.  
+
+Output Format
+Display the reversed letters that matches the rearranged set of books  
+
+Code Constraints
+1 < s < 100  
+
+Sample 1  Input
+JNCAB
+
+
+Sample 1  Output
+BACNJ
+
+Sample 2  Input
+DEFG CVDF
+
+Sample 2  Output
+FDVC GFED
+
+Answer
+
+// You are using GCC
+
+// You are using GCC
+
+
+#include<stdio.h>
+#define max 50
+char a[max];
+int top=-1;
+void push(char item)
+{
+    top++;
+    a[top]=item;
+}
+void pop()
+{
+    for(int i=top;i>=0;i--)
+    {
+        printf("%c",a[i]);
+    }
+}
+int main()
+{
+    char s[50];
+    scanf("%[^\n]",s);
+    for(int i=0;s[i]!='\0';i++)
+    {
+        char c=s[i];
+        push(c);
+    }
+    pop();
+}
+
+====================================================================
+
+Q16)  Write a program to perform queue operation like enqueue and dequeue and also display. 
+Example 
+Input 
+2 
+12 
+13 
+1 
+Output 
+Element deleted from queue is : 12 
+Queue is :  
+13  
+
+Answers
+
+// You are using GCC
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 100
+struct Queue {
+    int items[MAX_SIZE];
+    int front;
+    int rear;
+};
+void initQueue(struct Queue *q) {
+    q->front = -1;
+    q->rear = -1;
+}
+int isFull(struct Queue *q) {
+    return (q->rear == MAX_SIZE - 1);
+}
+int isEmpty(struct Queue *q) {
+    return (q->front == -1 && q->rear == -1);
+}
+void enqueue(struct Queue *q, int value) {
+    if (isFull(q)) {
+        printf("Queue is full\n");
+    } else {
+        if (isEmpty(q)) {
+            q->front = q->rear = 0;
+        } else {
+            q->rear++;
+        }
+        q->items[q->rear] = value;
+    }
+}
+int dequeue(struct Queue *q) {
+    int removed;
+    if (isEmpty(q)) {
+        printf("Queue is empty\n");
+        return -1;
+    } else {
+        removed = q->items[q->front];
+        if (q->front == q->rear) {
+            q->front = q->rear = -1;
+        } else {
+            q->front++;
+        }
+        return removed;
+    }
+}
+void display(struct Queue *q) {
+    int i;
+    if (isEmpty(q)) {
+        printf("Queue is empty\n");
+    } else {
+        printf("Queue is : \n");
+        for (i = q->front; i <= q->rear; i++) {
+            printf("%d ", q->items[i]);
+        }
+        printf("\n");
+    }
+}
+int main() {
+    struct Queue q;
+    int capacity, num_elements, i, element;
+    initQueue(&q);
+    scanf("%d", &capacity);
+    for (i = 0; i < capacity; i++) {
+        scanf("%d", &element);
+        enqueue(&q, element);
+    }
+    scanf("%d", &num_elements);
+    for (i = 0; i < num_elements; i++) {
+        int removed = dequeue(&q);
+        if (removed != -1) {
+            printf("Element deleted from queue is : %d\n", removed);
+        }
+    }
+    display(&q);
+    return 0;
+}
+
+====================================================================
+
+Q17)  Ramu want to implement a fixed size queue of maximum size 5 using an array. His friend Priya has typed some code and asked Ramu to complete the missing code to implement. Help Ramu by writing suitable functions to do the basic queue operations. 
+ 
+Structure declaration and main fucntions are already implemented. Write the suitable code for functions only. 
+Example 
+Input 
+140 
+255 
+145 
+985 
+215 
+Output 
+140 255 145 985 215  
+145 985 215  
+Queue is empty 
+
+Answer
+
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node *next;
+};
+
+struct Node *create(int data)
+{
+    struct Node *newnode=(struct Node *)malloc(sizeof(struct Node));
+    newnode->data=data;
+    newnode->next=NULL;
+    return newnode;
+}
+void append(struct Node **head,int data)
+{
+    struct Node *newnode=create(data);
+    if(*head==NULL)
+    {
+        *head=newnode;
+    }
+    else{
+        struct Node *temp=*head;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+    }
+}
+void deleteNode(struct Node **head)
+{
+    if((*head)==NULL)
+    {
+        printf("Queue is empty");
+        return;
+    }
+    (*head) = (*head)->next;
+}
+void print(struct Node *head)
+{
+    while(head!=NULL)
+    {
+        printf("%d ",head->data);
+        head=head->next;
+    }
+}
+int main()
+{
+    struct Node *head=NULL;
+    int data;
+    for(int i=0;i<5;i++)
+    {
+        scanf("%d",&data);
+        append(&head,data);
+    }
+    print(head);
+    printf("\n");
+    deleteNode(&head);
+    //print(head);
+    //printf("\n");
+    deleteNode(&head);
+    print(head);
+    printf("\nQueue is empty");
+}
+
+====================================================================
+
+Q18)  Problem statement: 
+Preorder traversal 
+Write a program to display the elements of tree in the preorder traversal. 
+ 
+
+Input Format
+The input should have numbers (until the user enters a negative value)  
+
+Output Format
+The output prints the preorder traversal.  
+
+Code Constraints
+
+Sample 1  Input
+6
+3
+1
+4
+2
+-1
+
+Sample 1  Output
+Preorder Traversal:
+6 3 1 2 4 
+
+Sample 2  Input
+6
+3
+1
+4
+2
+9
+7
+8
+10
+-1
+
+Sample 2  Output
+Preorder Traversal:
+6 3 1 2 4 9 7 8 10 
+
+Answer
+
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+    int data;
+    struct Node *left;
+    struct Node *right;
+};
+struct Node *create(struct Node *root,int num)
+{
+    if(root==NULL)
+    {
+        struct Node *newnode=(struct Node *)malloc(sizeof(struct Node));
+        newnode->data=num;
+        newnode->left=NULL;
+        newnode->right=NULL;
+        root=newnode;
+        return root;
+    }
+    else if((root->data)>num)
+    {
+        root->left=create(root->left,num);
+    }
+    else if((root->data)<num)
+    {
+        root->right=create(root->right, num);
+    }
+    return root;
+}
+void print(struct Node *root)
+{
+    if(root!=NULL)
+    {
+        printf("%d ",root->data);
+        print(root->left);
+        print(root->right);
+    }
+}
+int main()
+{
+    int num;
+    struct Node *root=NULL;
+    scanf("%d",&num);
+    while(num!=-1)
+    {
+        root=create(root,num);
+        scanf("%d",&num);
+    }
+    printf("Preorder Traversal:\n");
+    print(root);
+}
+
+====================================================================
+
+Q19)  Problem statement: 
+Inorder traversal: 
+Write a program to display the elements of trees in the inorder traversal. 
+ 
+
+Input Format
+The input should have numbers (until the user enters a negative value)  
+
+Output Format
+The output prints the inorder traversal.  
+
+Code Constraints
+
+Sample 1  Input
+6
+3
+1
+4
+2
+10
+9
+7
+8
+-1
+
+Sample 1  Output
+Inorder Traversal:
+1 2 3 4 6 7 8 9 10 
+
+Sample 2  Input
+6
+3
+1
+4
+2
+-1
+
+Sample 2  Output
+Inorder Traversal:
+1 2 3 4 6 
+
+Answer
+
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+    int data;
+    struct Node *left;
+    struct Node *right;
+};
+struct Node *create(struct Node *root,int num)
+{
+    if(root==NULL)
+    {
+        struct Node *newnode=(struct Node *)malloc(sizeof(struct Node));
+        newnode->data=num;
+        newnode->left=NULL;
+        newnode->right=NULL;
+        root=newnode;
+        return root;
+    }
+    else if(root->data > num)
+    {
+        root->left=create(root->left,num);
+    }
+    else if(root->data<num)
+    {
+        root->right=create(root->right,num);
+        
+    }
+    return root;
+}
+void print(struct Node *root)
+{
+    if(root!=NULL)
+    {
+        print(root->left);
+        printf("%d ",root->data);
+        print(root->right);
+    }
+    
+}
+int main()
+{
+    int num;
+    struct Node *root=NULL;
+    scanf("%d",&num);
+    while(num!=-1)
+    {
+        root=create(root,num);
+        scanf("%d",&num);
+    }
+    printf("Inorder Traversal:\n");
+    print(root);
+}
+
+====================================================================
+
+Q20)  Write a program to represent a graph using the adjacency list. 
+ 
+Example 
+Input 
+6 
+4 
+1 2 
+2 3 
+3 4 
+2 4 
+Output 
+0 
+1 -> 2 
+2 -> 1 -> 3 -> 4 
+3 -> 2 -> 4 
+4 -> 3 -> 2 
+5 
+Explanation 
+There are 6 vertices from 0 to 5. The connected edges are represented as a list. While others are simply given without any connections. 
+ 
+
+Input Format
+Number of vertices Number of edges Edges with the connecting vertices  
+
+Output Format
+Adjacency list representation of the graph  
+
+Code Constraints
+
+Sample 1  Input
+6
+4
+1 2
+2 3
+3 4
+2 4
+
+
+Sample 1  Output
+0
+1 -> 2
+2 -> 1 -> 3 -> 4
+3 -> 2 -> 4
+4 -> 3 -> 2
+5
+
+
+Sample 2  Input
+6
+5
+1 2
+2 3
+3 4
+2 4
+0 5
+
+Sample 2  Output
+0 -> 5
+1 -> 2
+2 -> 1 -> 3 -> 4
+3 -> 2 -> 4
+4 -> 3 -> 2
+5 -> 0
+
+Answer
+
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+ struct Node
+ {
+     int data;
+     struct Node *next;
+ };
+ 
+ struct Node **head;
+ 
+ void append(int src,int dest)
+ {
+     struct Node *newnode=(struct Node *)malloc(sizeof(struct Node));
+     newnode->data=dest;
+     newnode->next=NULL;
+     
+     if(head[src]==NULL)
+     {
+         head[src]=newnode;
+         return;
+     }
+     else
+     {
+         struct Node *temp=head[src];
+         while(temp->next!=NULL)
+         {
+             temp=temp->next;
+         }
+         temp->next=newnode;
+     }
+ }
+ void print(int vertex)
+ {
+     for(int i=0;i<vertex;i++)
+     {
+         printf("%d",i);
+         while(head[i]!=NULL)
+         {
+             printf(" ");
+             printf("-> %d",head[i]->data);
+             head[i]=head[i]->next;
+         }
+         printf("\n");
+     }
+ }
+ int main()
+ {
+     int vertex,edge,start,end;
+     scanf("%d\n%d",&vertex,&edge);
+     head=(struct Node **)malloc(vertex * sizeof(struct Node *));
+     for(int i=0;i<vertex;i++)
+     {
+         head[i]=NULL;
+     }
+     for(int i=0;i<edge;i++)
+     {
+         scanf("%d %d",&start,&end);
+         append(start,end);
+         append(end,start);
+     }
+     print(vertex);
+     
+ }
+
