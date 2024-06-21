@@ -1,1796 +1,306 @@
-Q1)  Write a program to create a singly linked list and display the added elements. 
-Note : Insert the elements in the end of the list. 
-
-Input Format
-Number of list elements in the first line List elements in the second line separated by space.  
-
-Output Format
-Display the list as shown in the sample output.  
-
-Code Constraints
-
-Sample 1  Input
-5
-3 4 21 232 89
-
-Sample 1  Output
-3 4 21 232 89 
-
-Answer
-
-#include <stdio.h>
-#include<stdlib.h>
-struct Node 
-{
-    int data;
-    Node* next;
-};
-void insertAtEnd(Node** headRef, int newData) {
-     struct Node nn=(struct Node )malloc(sizeof(struct Node ));
-     nn->data=newData;
-     nn->next=NULL;
-     if((*headRef)==NULL){
-         *headRef=nn;
-     }
-     else{
-         struct Node *temp=*headRef;
-         while((temp->next)!=NULL){
-             temp=temp->next;
-         }
-         temp->next=nn;
-     }
-
-}
-void printList(Node* head) {
-    while(head!=NULL){
-        printf("%d ",head->data);
-        head=head->next;
-    }
-}
-int main() {
-    Node* head = NULL;
-    int n;
-    scanf("%d",&n);
-    int newData;
-    for (int i = 0; i < n; i++) {
-        scanf("%d ",&newData);
-        insertAtEnd(&head, newData);
-    }
-    printList(head);
-    return 0;
-}
-===========================================================
-
-Q2)  Write a program to implement a doubly linked list and display both direction. 
- 
-
-Input Format
-Number of list elements List elements separated by space  
-
-Output Format
-Display the elements in both forward and reverse directions.   
-
-Code Constraints
-
-Sample 1  Input
-5
-21 13 24 35 3
-
-Sample 1  Output
-Doubly linked list forwards: 3 35 24 13 21 
-Doubly linked list backwards: 21 13 24 35 3 
-
-Answer
-
-#include <stdio.h>
-#include <stdlib.h>
-struct Node {
-    int data;
-    struct Node* prev;
-    struct Node* next;
-};
-struct Node* createNode(int data) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    if (newNode == NULL) {
-        exit(1);
-    }
-    newNode->data = data;
-    newNode->prev = NULL;
-    newNode->next = NULL;
-    return newNode;
-}
-void insertAtEnd(struct Node** head_ref, int data) {
-    struct Node* new_node = createNode(data);
-    if (*head_ref == NULL) {
-        *head_ref = new_node;
-        return;
-    }struct Node* current = *head_ref;
-     while (current->next != NULL)
-        current = current->next;
-    current->next = new_node;
-    new_node->prev = current;
-}
-void displayBackward(struct Node* head) {
-    if (head == NULL)
-        return;
-    while (head->next != NULL)
-        head = head->next;
-    printf("Doubly linked list forwards: ");
-    while (head != NULL) {
-        printf("%d ", head->data);
-        head = head->prev;
-    }
-    printf("\n");
-} 
- void displayFrward(struct Node* head){
-    printf("Doubly linked list backwards: ");
-    while(head !=NULL)
-    {
-        printf("%d ",head->data);
-        head =head->next;
-	} 
-	printf("\n");
-}
-int main() 
-{
-    int n;
-    scanf("%d", &n);
-    int elements[n];
-    printf(" ");
-    for (int i = 0; i < n; ++i)
-    scanf("%d", &elements[i]);
-    struct Node* head = NULL;
-    for (int i = 0; i < n; ++i)
-        insertAtEnd(&head, elements[i]);
-        displayBackward(head);
-        displayFrward(head);
-}
-
-===============================================================
-
-Q3)Write a program to implement stack using Array. 
- 
-
-Input Format
-Size of stack in first line Stack elements in the next lines  
-
-Output Format
-Display the stack elements.  
-
-Code Constraints
-
-Sample 1  Input
-5
-90
-1
-234
-89
-23
-
-Sample 1  Output
-Stack elements
-23
-89
-234
-1
-90
-
-Answer
-
-#include<stdio.h>
-#define MAX 100
-int top=-1;
-int a[MAX];
-
-void insert(int data){
-    top+=1;
-    a[top]=data;
-}
-
-void print(){
-    printf("Stack elements\n");
-    for(int i=top;i>=0;i--){
-        printf("%d\n",a[i]);
-    }
-}
-int main(){
-    int n;
-    scanf("%d",&n);
-    int a;
-    for(int i=0;i<n;i++){
-        scanf("%d",&a);
-        insert(a);
-    }
-    print();
-}
-
-===============================================================
-
-Q4)  Write a program to implement stack using linked list.  
- 
-
-Input Format
-A number to be added in the stack followed by Y/N. If the input is Y, enter the second number. Enter N to stop the input.  Refer the sample input.  
-
-Output Format
-Display the stack elemnets.   
-
-Code Constraints
-
-Sample 1  Input
-20
-Y
-231
-Y
-190
-Y
-98
-N
-
-Sample 1  Output
-Stack elements
-98
-190
-231
-20
-
-
-Answer
-
-#include<stdio.h>
-#define Max 100
-int top=-1;
-int a[Max];
-void insert(int data){
-    top++;
-    a[top]=data;
-}
-void print(){
-    printf("Stack elements\n");
-    for (int i=top;i>=0;i--){
-        printf("%d\n",a[i]);
-    }
-}
-
-int main(){         
-    int n;
-    char d;
-    scanf("%d",&n);
-    insert(n);
-    for(int i=0;;i++){
-        scanf("%c",&d);
-        if(d=='Y'){
-            scanf("%d",&n);
-            insert(n);
-        }
-        else if(d=='N'){
-            break;
-        }
-    }
-    
-    print();
-}
-
-
-================================================================
-
-Q5)  Problem statement 
-Write a program to convert the given infix expression to postfix expression. 
-Example 
-Input 
-a+b 
-Output 
-ab+ 
-Explanation 
-Postfix representation of (a+b) is ab+ 
- 
-
-Input Format
-String input representing infix expression  
-
-Output Format
-Postfix representation of the given infix expression  
-
-Code Constraints
-Operators used are +, -, *, /, and ^ only  
-
-Sample 1  Input
-a+b*(c^d-e)^(f+g*h)-i
-
-Sample 1  Output
-abcd^e-fgh*+^*+i-
-
-
-Sample 2  Input
-(a+b)*(c^d+e)^(f+g)*h
-
-Sample 2  Output
-ab+cd^e+fg+^*h*
-
-Answer
-
-#include<stdio.h>
-#include<string.h>
-#define max 100
-char a[max];
-int top=-1;
-
-void push(char data){
-    top++;
-    a[top]=data;
-}
-
-int precedence(char ch){
-    if(ch=='^')
-        return 3;
-    else if(ch=='*' || ch=='/'){
-        return 2;
-    }
-    else if(ch=='+' || ch=='-')
-        return 1;
-    return 0;
-}
-
-char pop(){
-    if(top==-1)
-        return '\0';
-    return a[top--];
-}
-
-void postfix(char *s){
-    int l=strlen(s);
-    char ans[l+1];
-    int index=0;
-    for(int i=0;i<l;i++){
-        char ch=s[i];
-        if(ch>='a' && ch<='z' || ch>='A' && ch<='Z'){
-            ans[index++]=ch;
-        }
-        else if(ch=='('){
-            push(ch);
-        }
-        else if(ch==')'){
-            while(top>=0 && a[top]!='('){
-                ans[index++]=pop();
-            }
-            top--;
-        }
-        else{
-            while(top != -1 && precedence(a[top])>=precedence(ch)){
-                ans[index++]=pop();
-            }
-            push(ch);
-        }
-    }    
-    while(top!=-1){
-        ans[index++]=pop();
-    }
-    ans[index]='\0';    
-    printf("%s",ans);
-}
-
-
-int main(){
-    char s[100];
-    scanf("%s",s);
-    postfix(s);
-    return 0;
-}
-
-==================================================================
-
-Q6)  Write a program to delete a node from the end of a doubly linked list. 
- 
-
-Input Format
-Number of list elements List elements in the second line separated by space Number of elements to be deleted  
-
-Output Format
-Display the list before and deletion.  Refer the sample output for exact format  
-
-Code Constraints
-
-Sample 1  Input
-7
-2 3 2 3 34 21 1
-3
-
-Sample 1  Output
-2 3 2 3 34 21 1 
-2 3 2 3 
-
-
-Answer
-
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Node {
-    int data;
-    struct Node* prev;
-    struct Node* next;
-};
-
-void addNode(struct Node** head, int value) {
-    struct Node* nn = (struct Node*)malloc(sizeof(struct Node));
-    nn->data = value;
-    nn->next = NULL;
-    nn->prev = NULL;
-    if (*head == NULL) {
-        *head = nn;
-    } else {
-        struct Node* temp = *head;
-        while (temp->next != NULL) {
-            temp = temp->next;
-        }
-        temp->next = nn;
-        nn->prev = temp;
-    }
-}
-
-void deleteLastNode(struct Node** head) {
-    struct Node* temp = *head;
-    while (temp->next->next != NULL) {
-        temp = temp->next;
-    }
-    temp->next = NULL;
-}
-
-void displayList(struct Node* head) {
-    while (head != NULL) {
-        printf("%d ", head->data);
-        head = head->next;
-    }
-    printf("\n");
-}
-
-int main() {
-    struct Node* head = NULL;
-    int numNodes, value, deletecount;
-    scanf("%d", &numNodes);
-
-    for (int i = 0; i < numNodes; i++) {
-        scanf("%d", &value);
-        addNode(&head, value);
-    }
-    scanf("%d", &deletecount);
-    displayList(head);
-    for (int i = 0; i < deletecount; i++)
-        deleteLastNode(&head);
-    displayList(head);
-    return 0;
-}
-
-==================================================================
-
-Q7)  Implementation of queue using linked list: 
-Write a program to insert and delete elements in the queue. 
- 
-
-Input Format
-The first line of the input consists of the value of n. Next line consists of the queue elements.  
-
-Output Format
-The first line prints the front element of the queue. The next line prints the rear element. Perform a dequeue operation: The next line prints the front element. The next line prints the rear element.  
-
-Code Constraints
-
-Sample 1  Input
-5
-12 45 78 36 95
-
-Sample 1  Output
-12
-95
-45
-95
-
-Answer
-
-#include<stdio.h>
-#include<stdlib.h>
-struct node{
-    int data;
-    struct node* next;
-};
-void insert(struct node** head, int num){
-    struct node* nn=(struct node*)malloc(sizeof(struct node));
-    nn->data=num;
-    nn->next=NULL;
-    if(*head==NULL)
-        *head=nn;
-    else{
-        struct node* temp=*head;
-        while(temp->next!=NULL){
-            temp=temp->next;
-        }
-        temp->next=nn;
-    }
-}
-void dequeue(struct node **head){
-    if((*head)==NULL)
-        printf("Queue is empty");
-    else
-        *head=(*head)->next;
-}
-void displayF(struct node *head){
-    printf("%d\n",head->data);
-}
-
-void displayR(struct node *head){
-    while(head->next!=NULL){
-        head=head->next;
-    }
-    printf("%d\n",head->data);
-}
-
-int main(){
-    struct node* head=NULL;
-    int n;
-    scanf("%d",&n);
-    int data;
-    for(int i=0;i<n;i++){
-        scanf("%d",&data);
-        insert(&head,data);
-    }
-        displayF(head);
-        displayR(head);
-        dequeue(&head);
-        displayF(head);
-        displayR(head);
-}
-
-
-==================================================================
-
-
-Q8)  Packet Collision 
-A network user attempted to send multiple data packets with frame size 'k' at the same time. Due to a network fault, all packets in each frame with a higher sequence number crashed. To resend the packet, the sender must now find the maximum sequence number data packet in each frame with size 'k'. 
-Example 
-Input 
-6 
-21 34 5 6 12 23 
-3 
-Output 
-34 34 12 23  
-Explanation 
-Frame size =3  
-First Data transmission: 21 34 5 => 34 
-Second Data transmission: 34 5 6 => 34 
-Third Data transmission:  5 6 12 => 12 
-Fourth Data transmission: 6 12 23 => 23 
- 
-
-Input Format
-First input represent number of data packets to be sent Next n number of input represents sequence number Followed by frame size (k).  
-
-Output Format
-Refer sample output  
-
-Code Constraints
-
-Sample 1  Input
-6
-21 34 5 6 12 23
-3
-
-Sample 1  Output
-34 34 12 23 
-
-Sample 2  Input
-5
-12 34 56 78 89
-2
-
-Sample 2  Output
-34 56 78 89 
-
-
-Answer
-
-// You are using GCC
-#include<stdio.h>
-
-#define MAX_SIZE 1000
-
-int arr[MAX_SIZE];
-int front = -1;
-int rear = -1;
-
-void enqueue(int n) {
-    if (rear == -1 && front == -1) {
-        rear = 0;
-        front = 0;
-        arr[rear] = n;
-        return;
-    }
-    arr[++rear] = n;
-}
-
-void print(int sw, int n) {
-    for (int i = sw - 1; i < n; i++) {
-        int max = arr[i];
-        int index = sw - 1;
-        for (int j = i, index = sw; index > 0; index--, j--) {
-            if (arr[j] > max) {
-                max = arr[j];
-            }
-        }
-        printf("%d ", max);
-    }
-}
-
-int main() {
-    int n;
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++) {
-        int data;
-        scanf("%d", &data);
-        enqueue(data);
-    }
-    int sw;
-    scanf("%d", &sw);
-    print(sw, n);
-    return 0;
-}
-
-===================================================================
-
-Q9)  Problem statement: 
-Implementation of binary search tree : 
-Write a Program to implement a binary search tree. 
- 
-
-Input Format
-The input should have numbers (until the user enters a negative value)  
-
-Output Format
-The output prints the tree values.  
-
-Code Constraints
-
-Sample 1  Input
-6
-3
-2
-1
-4
-7
-8
-9
-10
--1
-
-Sample 1  Output
-Tree values are:
-1 2 3 4 6 7 8 9 10 
-
-Sample 2  Input
-6
-3
-2
-1
--1
-
-Sample 2  Output
-Tree values are:
-1 2 3 6 
-
-Answers
-
-// You are using GCC
-#include<stdio.h>
-#include<stdlib.h>
-struct node{
-    int data;
-    struct node* left;
-    struct node* right;
-};
-
-struct node* insert(struct node* root,int num)
-{
-    if(root==NULL)
-    {
-        struct node* nn=(struct node*)malloc(sizeof(struct node));
-        nn->data=num;
-        nn->left=NULL;
-        nn->right=NULL;
-        root=nn;
-        return root;
-    }
-    else if((root->data)>num)
-    {
-        root->left=insert(root->left,num);
-    }
-    else if((root->data)<num)
-    {
-        root->right=insert(root->right,num);
-    }
-    return root;
-}
-void print(struct node* root)
-{
-    if(root!=NULL)
-    {
-
-        print(root->left);
-        printf("%d ",root->data);
-        print(root->right);
-    }
-}
-int main()
-{
-    int n;
-    struct node* root=NULL;
-    while(1)
-    {
-        scanf("%d",&n);
-        if(n==-1)
-        {
-            break;
-        }
-        root=insert(root,n);
-    }
-    printf("Tree values are:\n");
-    print(root);
-}
-
-===================================================================
-
-Q10)  Write a program to represent a graph using the adjacency list. 
- 
-Example 
-Input 
-6 
-4 
-1 2 
-2 3 
-3 4 
-2 4 
-Output 
-0 
-1 -> 2 
-2 -> 1 -> 3 -> 4 
-3 -> 2 -> 4 
-4 -> 3 -> 2 
-5 
-Explanation 
-There are 6 vertices from 0 to 5. The connected edges are represented as a list. While others are simply given without any connections. 
- 
-
-Input Format
-Number of vertices Number of edges Edges with the connecting vertices  
-
-Output Format
-Adjacency list representation of the graph  
-
-Code Constraints
-
-Sample 1  Input
-6
-4
-1 2
-2 3
-3 4
-2 4
-
-
-Sample 1  Output
-0
-1 -> 2
-2 -> 1 -> 3 -> 4
-3 -> 2 -> 4
-4 -> 3 -> 2
-5
-
-
-Sample 2  Input
-6
-5
-1 2
-2 3
-3 4
-2 4
-0 5
-
-Sample 2  Output
-0 -> 5
-1 -> 2
-2 -> 1 -> 3 -> 4
-3 -> 2 -> 4
-4 -> 3 -> 2
-5 -> 0
-
-Answer
-
-// You are using GCC
-#include<stdio.h>
-#include<stdlib.h>
-struct node{
-    int data;
-    struct node* next;
-};
-struct node** head;
-void insert(int src,int dest){
-    struct node* nn=(struct node*)malloc(sizeof(struct node));
-    nn->data=dest;
-    nn->next=NULL;
-    if(head[src]==NULL)
-    {
-        head[src]=nn;
-        return;
-    }
-    else{
-        struct node* temp=head[src];
-        while(temp->next!=NULL){
-            temp=temp->next;
-        }
-        temp->next=nn;
-    }
-}
-void print(int vertex)
-{
-    for(int i=0;i<vertex;i++)
-    {
-        printf("%d",i);
-        while(head[i]!=NULL)
-        {
-            printf(" -> %d",head[i]->data);
-            head[i]=head[i]->next;
-        }
-        printf("\n");
-    }
-}
-int main()
-{
-    int edges,vertex;
-    int start,end;
-    scanf("%d\n%d",&vertex,&edges);
-    head=(struct node*)malloc(vertex * sizeof(struct node));
-    for(int i=0;i<vertex;i++)
-    {
-        head[i]=NULL;
-    }
-    for(int i=0;i<edges;i++)
-    {
-        scanf("%d %d",&start,&end);
-        insert(start,end);
-        insert(end,start);
-    }
-    print(vertex);
-    return 0;
-}
-
-====================================================================
-
-Q11)  Subset Using Hashing 
-Problem Statement 
-Write a program to find whether the array is a subset or not using Hashing technique. 
-Example 
-Input 
-6 
-4 
-11 1 13 21 3 7 
-11 3 7 1 
-Output 
-Subset 
-Explanation 
-Since all of the values in the second list are also present in the first list, it is a subset. 
- 
-
-Input Format
-Input consists of integer 'm' followed by integer 'n' denoting the size of array arr1 and arr2 respectively, followed by 'm' number of array elements of arr1, followed by 'n' number of array elements of arr2.  
-
-Output Format
-Output displays a message indicating whether the arr2 of subset or arr1 or not.  
-
-Code Constraints
-
-Sample 1  Input
-6
-4
-11 1 13 21 3 7
-11 3 7 1
-
-Sample 1  Output
-Subset
-
-Sample 2  Input
-6
-5
-11 1 13 21 3 7
-11 3 7 1 19
-
-Sample 2  Output
-Not a subset
-
-Answer
-
-// You are using GCC
-#include<stdio.h>
-#define max 10
-int hash[max];
-void linearprobinghashing(int n,int a[])
-{
-    for(int i=0;i<n;i++)
-    {
-        hash[i]=0;
-    }
-    for(int i=0;i<n;i++)
-    {
-        int num=a[i]%n;
-        while(hash[num]!=0)
-        {
-            num++;
-            if(num==n)
-            {
-                num=0;
-            }
-        }
-        hash[num]=a[i];
-    }
-}
-bool subset(int n1,int a1[],int n)
-{
-    int count=0;
-    for(int i=0;i<n1;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            if(hash[j]==a1[i])
-            {
-                count++;
-                // break;
-            }
-        }
-        
-    }
-    // printf("%d\n",count);
-    if(count==n1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-int main()
-{
-    int n,n1;
-    scanf("%d\n%d",&n,&n1);
-    int a[n],a1[n1];
-    for(int i=0;i<n;i++)
-    {
-        scanf("%d",&a[i]);
-    }
-    for(int j=0;j<n1;j++)
-    {
-        scanf("%d",&a1[j]);
-    }
-    linearprobinghashing(n,a);
-    bool check=subset(n1,a1,n);
-    if(check)
-    {
-        printf("Subset");
-    }
-    else{
-        printf("Not a subset");
-    }
-}
-
-===================================================================
-
-Q12)  Write a program to insert and delete an element from the queue. 
- 
-
-Input Format
-The first line of input integer N consists of capacity of the queue.1 The second line of input integer O consists of no.of element to be inserted in the queue. The next line of the input consists of the number of elements to be deleted from the list.  
-
-Output Format
-Output displays the element removed from the queue.  
-
-Code Constraints
-
-Sample 1  Input
-3
-12
-13
-14
-2
-
-Sample 1  Output
-Element deleted from queue is : 12
-Element deleted from queue is : 13
-
-
-Sample 2  Input
-5
-13
-14
-15
-16
-17
-4
-
-Sample 2  Output
-Element deleted from queue is : 13
-Element deleted from queue is : 14
-Element deleted from queue is : 15
-Element deleted from queue is : 16
-
-Answer
-
-// You are using GCC
-
-
-// You are using GCC
-#include<stdio.h>
-#include<stdlib.h>
-struct node{
-    int data;
-    struct node *next;
-};
-struct node* create(int data)
-{
-    struct node* newnode=(struct node*)malloc(sizeof(struct node));
-    newnode->data=data;
-    newnode->next=NULL;
-    return newnode;
-}
-void append(struct node **head,int data)
-{
-    struct node* newnode=create(data);
-    if((*head)==NULL)
-    {
-        *head=newnode;
-    }
-    else{
-        struct node* temp=*head;
-        while(temp->next!=NULL)
-        {
-            temp=temp->next;
-        }
-        temp->next=newnode;
-    }
-}
-void dequeue(struct node** head)
-{
-    struct node* temp=*head;
-    (*head)=(*head)->next;
-    printf("Element deleted from queue is : %d\n",temp->data);
-}
-int main()
-{
-    struct node* head=NULL;
-    int n;
-    scanf("%d",&n);
-    int data;
-    for(int i=0;i<n;i++)
-    {
-        scanf("%d",&data);
-        append(&head,data);
-    }
-    int k;
-    scanf("%d",&k);
-    for(int i=0;i<k;i++)
-    {
-        dequeue(&head);
-    }
-}
-
-====================================================================
-
-Q13)  Write a program to create a singly linked list and display the added elements.  
-Note : Insert the elements in the beginning of the list. 
- 
-
-Input Format
-Number of list elements in the first line List elements in the second line separated by space.  
-
-Output Format
-Display the list as shown in the sample output.  
-
-Code Constraints
-
-Sample 1  Input
-5
-3 4 21 232 89
-
-Sample 1  Output
-89 232 21 4 3 
-
-Answer
-
-// You are using GCC
-#include<stdio.h>
-#include<stdlib.h>
-struct node{
-    int val;
-    struct node *next;
-};
-void insertatFirst(struct node **head,int num){
-    struct node *nn=(struct node *)malloc(sizeof(struct node));
-    nn->val=num;
-    nn->next=(*head);
-    (*head)=nn;
-}
-void print(struct node *head){
-    while(head!=NULL){
-        printf("%d ",head->val);
-        head=head->next;
-    }
-}
-int main()
-{
-    struct node *head=NULL;
-    int v;
-    scanf("%d",&v);
-    for(int i=0;i<v;i++){
-        int data;
-        scanf("%d",&data);
-        insertatFirst(&head,data);
-        }
-         print(head);
-}
-
-====================================================================
-
-Q14)  Write a C++ program to add a node to the beginning of a circular linked list with user input 
- 
- 
-
-Input Format
-Number of list elements List elements in the second line separated by space Number to be inserted in the third line  
-
-Output Format
-Display the list before and after insertion.   
-
-Code Constraints
-
-Sample 1  Input
-5
-23 22 12 82 12
-99
-
-Sample 1  Output
-12 82 12 22 23 
-99 12 82 12 22 23 
-
-
-Answer
-
-#include <stdio.h>
-#include <stdlib.h>
-
-struct node {
-    int val;
-    struct node* next;
-    struct node* prev;
-};
-
-void insert(struct node** head, int n) {
-    struct node* nn = (struct node*)malloc(sizeof(struct node));
-    nn->val = n;
-    if (*head == NULL) {
-        nn->prev = nn;
-        nn->next = nn;
-        *head = nn;
-    } else {
-        struct node* last = (*head)->prev;
-        nn->next = *head;
-        nn->prev = last;
-        last->next = nn;
-        (*head)->prev = nn;
-        *head = nn;
-    }
-}
-
-void print(struct node* head) {
-    if (head == NULL) return;
-    struct node* a = head;
-    do {
-        printf("%d ", a->val);
-        a = a->next;
-    } while (a != head);
-    printf("\n");
-}
-
-int main() {
-    struct node* head = NULL;
-    int n;
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++) {
-        int data;
-        scanf("%d", &data);
-        insert(&head, data);
-    }
-    int add;
-    scanf("%d", &add);
-    print(head);
-    insert(&head, add);
-    print(head);
-    return 0;
-}
-
-====================================================================
-Q15)  Problem statement 
-Books in a shelf are arranged in such a way that the starting letters of their titles are displayed in front of it. Based upon these letters, students can easily identify the books they are in search of. One fine day, some students find that the books are arranged in reversed order. However, they are unable to understand the process behind the arrangement. 
-One student suggested that since books are usually arranged in the form of stacks, the reversal will be in the LIFO format. Another student mentioned that first letters of the books formed an array of characters which is now seen in the reversed form. Help the students by writing a code by combining the two given findings to arrive at the algorithm for the rearrangement. 
-Example 
-Input 
-JNCAB 
-Output 
-BACNJ 
-Explanation 
-letter="JNCAB"letter[0]="J" => push() => Stack=Jletter[1]="N" => push() => Stack=JNletter[2]="C" => push() => Stack=JNCletter[3]="A" => push() => Stack=JNCAletter[4]="B" => push() => Stack=JNCABNow, one by one, pop() and print the top-most elements. 
- 
-
-Input Format
-A single line of input which has the original set of starting letters s.  
-
-Output Format
-Display the reversed letters that matches the rearranged set of books  
-
-Code Constraints
-1 < s < 100  
-
-Sample 1  Input
-JNCAB
-
-
-Sample 1  Output
-BACNJ
-
-Sample 2  Input
-DEFG CVDF
-
-Sample 2  Output
-FDVC GFED
-
-Answer
-
-// You are using GCC
-
-// You are using GCC
-
-
-#include<stdio.h>
-#define max 50
-char a[max];
-int top=-1;
-void push(char item)
-{
-    top++;
-    a[top]=item;
-}
-void pop()
-{
-    for(int i=top;i>=0;i--)
-    {
-        printf("%c",a[i]);
-    }
-}
-int main()
-{
-    char s[50];
-    scanf("%[^\n]",s);
-    for(int i=0;s[i]!='\0';i++)
-    {
-        char c=s[i];
-        push(c);
-    }
-    pop();
-}
-
-====================================================================
-
-Q16)  Write a program to perform queue operation like enqueue and dequeue and also display. 
-Example 
-Input 
-2 
-12 
-13 
-1 
-Output 
-Element deleted from queue is : 12 
-Queue is :  
-13  
-
-Answers
-
-// You are using GCC
-#include <stdio.h>
-#include <stdlib.h>
-#define MAX_SIZE 100
-struct Queue {
-    int items[MAX_SIZE];
-    int front;
-    int rear;
-};
-void initQueue(struct Queue *q) {
-    q->front = -1;
-    q->rear = -1;
-}
-int isFull(struct Queue *q) {
-    return (q->rear == MAX_SIZE - 1);
-}
-int isEmpty(struct Queue *q) {
-    return (q->front == -1 && q->rear == -1);
-}
-void enqueue(struct Queue *q, int value) {
-    if (isFull(q)) {
-        printf("Queue is full\n");
-    } else {
-        if (isEmpty(q)) {
-            q->front = q->rear = 0;
-        } else {
-            q->rear++;
-        }
-        q->items[q->rear] = value;
-    }
-}
-int dequeue(struct Queue *q) {
-    int removed;
-    if (isEmpty(q)) {
-        printf("Queue is empty\n");
-        return -1;
-    } else {
-        removed = q->items[q->front];
-        if (q->front == q->rear) {
-            q->front = q->rear = -1;
-        } else {
-            q->front++;
-        }
-        return removed;
-    }
-}
-void display(struct Queue *q) {
-    int i;
-    if (isEmpty(q)) {
-        printf("Queue is empty\n");
-    } else {
-        printf("Queue is : \n");
-        for (i = q->front; i <= q->rear; i++) {
-            printf("%d ", q->items[i]);
-        }
-        printf("\n");
-    }
-}
-int main() {
-    struct Queue q;
-    int capacity, num_elements, i, element;
-    initQueue(&q);
-    scanf("%d", &capacity);
-    for (i = 0; i < capacity; i++) {
-        scanf("%d", &element);
-        enqueue(&q, element);
-    }
-    scanf("%d", &num_elements);
-    for (i = 0; i < num_elements; i++) {
-        int removed = dequeue(&q);
-        if (removed != -1) {
-            printf("Element deleted from queue is : %d\n", removed);
-        }
-    }
-    display(&q);
-    return 0;
-}
-
-====================================================================
-
-Q17)  Ramu want to implement a fixed size queue of maximum size 5 using an array. His friend Priya has typed some code and asked Ramu to complete the missing code to implement. Help Ramu by writing suitable functions to do the basic queue operations. 
- 
-Structure declaration and main fucntions are already implemented. Write the suitable code for functions only. 
-Example 
-Input 
-140 
-255 
-145 
-985 
-215 
-Output 
-140 255 145 985 215  
-145 985 215  
-Queue is empty 
-
-Answer
-
-// You are using GCC
-#include<stdio.h>
-#include<stdlib.h>
-struct Node{
-    int data;
-    struct Node *next;
-};
-
-struct Node *create(int data)
-{
-    struct Node *newnode=(struct Node *)malloc(sizeof(struct Node));
-    newnode->data=data;
-    newnode->next=NULL;
-    return newnode;
-}
-void append(struct Node **head,int data)
-{
-    struct Node *newnode=create(data);
-    if(*head==NULL)
-    {
-        *head=newnode;
-    }
-    else{
-        struct Node *temp=*head;
-        while(temp->next!=NULL)
-        {
-            temp=temp->next;
-        }
-        temp->next=newnode;
-    }
-}
-void deleteNode(struct Node **head)
-{
-    if((*head)==NULL)
-    {
-        printf("Queue is empty");
-        return;
-    }
-    (*head) = (*head)->next;
-}
-void print(struct Node *head)
-{
-    while(head!=NULL)
-    {
-        printf("%d ",head->data);
-        head=head->next;
-    }
-}
-int main()
-{
-    struct Node *head=NULL;
-    int data;
-    for(int i=0;i<5;i++)
-    {
-        scanf("%d",&data);
-        append(&head,data);
-    }
-    print(head);
-    printf("\n");
-    deleteNode(&head);
-    //print(head);
-    //printf("\n");
-    deleteNode(&head);
-    print(head);
-    printf("\nQueue is empty");
-}
-
-====================================================================
-
-Q18)  Problem statement: 
-Preorder traversal 
-Write a program to display the elements of tree in the preorder traversal. 
- 
-
-Input Format
-The input should have numbers (until the user enters a negative value)  
-
-Output Format
-The output prints the preorder traversal.  
-
-Code Constraints
-
-Sample 1  Input
-6
-3
-1
-4
-2
--1
-
-Sample 1  Output
-Preorder Traversal:
-6 3 1 2 4 
-
-Sample 2  Input
-6
-3
-1
-4
-2
-9
-7
-8
-10
--1
-
-Sample 2  Output
-Preorder Traversal:
-6 3 1 2 4 9 7 8 10 
-
-Answer
-
-// You are using GCC
-#include<stdio.h>
-#include<stdlib.h>
-struct Node
-{
-    int data;
-    struct Node *left;
-    struct Node *right;
-};
-struct Node *create(struct Node *root,int num)
-{
-    if(root==NULL)
-    {
-        struct Node *newnode=(struct Node *)malloc(sizeof(struct Node));
-        newnode->data=num;
-        newnode->left=NULL;
-        newnode->right=NULL;
-        root=newnode;
-        return root;
-    }
-    else if((root->data)>num)
-    {
-        root->left=create(root->left,num);
-    }
-    else if((root->data)<num)
-    {
-        root->right=create(root->right, num);
-    }
-    return root;
-}
-void print(struct Node *root)
-{
-    if(root!=NULL)
-    {
-        printf("%d ",root->data);
-        print(root->left);
-        print(root->right);
-    }
-}
-int main()
-{
-    int num;
-    struct Node *root=NULL;
-    scanf("%d",&num);
-    while(num!=-1)
-    {
-        root=create(root,num);
-        scanf("%d",&num);
-    }
-    printf("Preorder Traversal:\n");
-    print(root);
-}
-
-====================================================================
-
-Q19)  Problem statement: 
-Inorder traversal: 
-Write a program to display the elements of trees in the inorder traversal. 
- 
-
-Input Format
-The input should have numbers (until the user enters a negative value)  
-
-Output Format
-The output prints the inorder traversal.  
-
-Code Constraints
-
-Sample 1  Input
-6
-3
-1
-4
-2
-10
-9
-7
-8
--1
-
-Sample 1  Output
-Inorder Traversal:
-1 2 3 4 6 7 8 9 10 
-
-Sample 2  Input
-6
-3
-1
-4
-2
--1
-
-Sample 2  Output
-Inorder Traversal:
-1 2 3 4 6 
-
-Answer
-
-// You are using GCC
-#include<stdio.h>
-#include<stdlib.h>
-struct Node
-{
-    int data;
-    struct Node *left;
-    struct Node *right;
-};
-struct Node *create(struct Node *root,int num)
-{
-    if(root==NULL)
-    {
-        struct Node *newnode=(struct Node *)malloc(sizeof(struct Node));
-        newnode->data=num;
-        newnode->left=NULL;
-        newnode->right=NULL;
-        root=newnode;
-        return root;
-    }
-    else if(root->data > num)
-    {
-        root->left=create(root->left,num);
-    }
-    else if(root->data<num)
-    {
-        root->right=create(root->right,num);
-        
-    }
-    return root;
-}
-void print(struct Node *root)
-{
-    if(root!=NULL)
-    {
-        print(root->left);
-        printf("%d ",root->data);
-        print(root->right);
-    }
-    
-}
-int main()
-{
-    int num;
-    struct Node *root=NULL;
-    scanf("%d",&num);
-    while(num!=-1)
-    {
-        root=create(root,num);
-        scanf("%d",&num);
-    }
-    printf("Inorder Traversal:\n");
-    print(root);
-}
-
-====================================================================
-
-Q20)  Write a program to represent a graph using the adjacency list. 
- 
-Example 
-Input 
-6 
-4 
-1 2 
-2 3 
-3 4 
-2 4 
-Output 
-0 
-1 -> 2 
-2 -> 1 -> 3 -> 4 
-3 -> 2 -> 4 
-4 -> 3 -> 2 
-5 
-Explanation 
-There are 6 vertices from 0 to 5. The connected edges are represented as a list. While others are simply given without any connections. 
- 
-
-Input Format
-Number of vertices Number of edges Edges with the connecting vertices  
-
-Output Format
-Adjacency list representation of the graph  
-
-Code Constraints
-
-Sample 1  Input
-6
-4
-1 2
-2 3
-3 4
-2 4
-
-
-Sample 1  Output
-0
-1 -> 2
-2 -> 1 -> 3 -> 4
-3 -> 2 -> 4
-4 -> 3 -> 2
-5
-
-
-Sample 2  Input
-6
-5
-1 2
-2 3
-3 4
-2 4
-0 5
-
-Sample 2  Output
-0 -> 5
-1 -> 2
-2 -> 1 -> 3 -> 4
-3 -> 2 -> 4
-4 -> 3 -> 2
-5 -> 0
-
-Answer
-
-// You are using GCC
-#include<stdio.h>
-#include<stdlib.h>
- struct Node
- {
-     int data;
-     struct Node *next;
- };
- 
- struct Node **head;
- 
- void append(int src,int dest)
- {
-     struct Node *newnode=(struct Node *)malloc(sizeof(struct Node));
-     newnode->data=dest;
-     newnode->next=NULL;
-     
-     if(head[src]==NULL)
-     {
-         head[src]=newnode;
-         return;
-     }
-     else
-     {
-         struct Node *temp=head[src];
-         while(temp->next!=NULL)
-         {
-             temp=temp->next;
-         }
-         temp->next=newnode;
-     }
- }
- void print(int vertex)
- {
-     for(int i=0;i<vertex;i++)
-     {
-         printf("%d",i);
-         while(head[i]!=NULL)
-         {
-             printf(" ");
-             printf("-> %d",head[i]->data);
-             head[i]=head[i]->next;
-         }
-         printf("\n");
-     }
- }
- int main()
- {
-     int vertex,edge,start,end;
-     scanf("%d\n%d",&vertex,&edge);
-     head=(struct Node **)malloc(vertex * sizeof(struct Node *));
-     for(int i=0;i<vertex;i++)
-     {
-         head[i]=NULL;
-     }
-     for(int i=0;i<edge;i++)
-     {
-         scanf("%d %d",&start,&end);
-         append(start,end);
-         append(end,start);
-     }
-     print(vertex);
-     
- }
+1. a) Compute the GCD of two Numbers using for Loop
+def gcd_for_loop(a, b):
+    gcd = 1
+    for i in range(1, min(a, b) + 1):
+        if a % i == 0 and b % i == 0:
+            gcd = i
+    return gcd
+
+a = 48
+b = 18
+print("GCD using for loop:", gcd_for_loop(a, b))
+
+1. b) Find the maximum of a list of numbers
+
+def find_max(lst):
+    max_num = lst[0]
+    for num in lst:
+        if num > max_num:
+            max_num = num
+    return max_num
+
+numbers = [3, 5, 2, 8, 6]
+print("Maximum number:", find_max(numbers))
+
+2. a) Perform linear search in a list
+
+def linear_search(lst, x):
+    for i in range(len(lst)):
+        if lst[i] == x:
+            return i
+    return -1
+
+numbers = [3, 5, 2, 8, 6]
+x = 8
+print("Element found at index:", linear_search(numbers, x))
+
+2. b) Find square root using Newton’s method
+def newton_sqrt(n, tolerance=1e-10):
+    guess = n / 2.0
+    while True:
+        new_guess = (guess + n / guess) / 2
+        if abs(new_guess - guess) < tolerance:
+            return new_guess
+        guess = new_guess
+
+number = 16
+print("Square root:", newton_sqrt(number))
+
+3. a) Compute the GCD of two Numbers using functions
+
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+a = 48
+b = 18
+print("GCD using function:", gcd(a, b))
+
+3. b) Find the exponentiation of a number
+
+def exponentiation(base, exp):
+    return base ** exp
+
+base = 2
+exp = 3
+print("Exponentiation:", exponentiation(base, exp))
+
+4. a) Display the first n prime numbers until the range n is given
+
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def first_n_primes(n):
+    primes = []
+    num = 2
+    while len(primes) < n:
+        if is_prime(num):
+            primes.append(num)
+        num += 1
+    return primes
+
+n = 10
+print("First n prime numbers:", first_n_primes(n))
+
+4. b) Display the Product of Two Matrices
+
+def matrix_product(A, B):
+    result = [[0 for _ in range(len(B[0]))] for _ in range(len(A))]
+    for i in range(len(A)):
+        for j in range(len(B[0])):
+            for k in range(len(B)):
+                result[i][j] += A[i][k] * B[k][j]
+    return result
+
+A = [[1, 2], [3, 4]]
+B = [[5, 6], [7, 8]]
+print("Product of matrices:", matrix_product(A, B))
 
+5. a) Display the Word Count using Command Line Arguments
+
+import sys
+
+if len(sys.argv) > 1:
+    filename = sys.argv[1]
+    with open(filename, 'r') as file:
+        text = file.read()
+        word_count = len(text.split())
+        print("Word count:", word_count)
+
+5. b) Perform merge sort
+
+def merge_sort(lst):
+    if len(lst) > 1:
+        mid = len(lst) // 2
+        left_half = lst[:mid]
+        right_half = lst[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                lst[k] = left_half[i]
+                i += 1
+            else:
+                lst[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            lst[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            lst[k] = right_half[j]
+            j += 1
+            k += 1
+
+numbers = [38, 27, 43, 3, 9, 82, 10]
+merge_sort(numbers)
+print("Sorted list:", numbers)
+
+6. a) Perform insertion sort
+
+def insertion_sort(lst):
+    for i in range(1, len(lst)):
+        key = lst[i]
+        j = i - 1
+        while j >= 0 and key < lst[j]:
+            lst[j + 1] = lst[j]
+            j -= 1
+        lst[j + 1] = key
+
+numbers = [12, 11, 13, 5, 6]
+insertion_sort(numbers)
+print("Sorted list:", numbers)
+
+
+6. b) Check if a Number is Odd or Even
+
+def is_even_or_odd(num):
+    if num % 2 == 0:
+        return "Even"
+    else:
+        return "Odd"
+
+number = 7
+print("The number is:", is_even_or_odd(number))
+
+7. a) Take the most frequent words in a text file
+
+from collections import Counter
+
+def most_frequent_words(filename, n=10):
+    with open(filename, 'r') as file:
+        text = file.read()
+        words = text.split()
+        word_counts = Counter(words)
+        return word_counts.most_common(n)
+
+filename = "text.txt"
+print("Most frequent words:", most_frequent_words(filename))
+
+7. b) Display the multiplication Table
+
+def multiplication_table(n):
+    for i in range(1, 11):
+        print(f"{n} x {i} = {n*i}")
+
+number = 5
+multiplication_table(number)
+
+8. a) Check whether the given year is Leap Year or not
+
+def is_leap_year(year):
+    if year % 4 == 0:
+        if year % 100 == 0:
+            if year % 400 == 0:
+                return True
+            else:
+                return False
+        else:
+            return True
+    else:
+        return False
+
+year = 2024
+print(f"The year {year} is a leap year:", is_leap_year(year))
+
+8. b) Check vote eligibility of a person
+
+def is_eligible_to_vote(age):
+    return age >= 18
+
+age = 20
+print("Eligible to vote:", is_eligible_to_vote(age))
+
+9. a) Display Calendar
+
+import calendar
+
+def display_calendar(year, month):
+    print(calendar.month(year, month))
+
+year = 2024
+month = 6
+display_calendar(year, month)
+
+9. b) Find the factorial of a number
+
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+number = 5
+print("Factorial:", factorial(number))
+
+10. a) Convert kilometre to miles
+
+def km_to_miles(km):
+    return km * 0.621371
+
+kilometres = 5
+print("Miles:", km_to_miles(kilometres))
+
+10. b) Find the area of a triangle
+
+def triangle_area(base, height):
+    return 0.5 * base * height
+
+base = 10
+height = 5
+print("Area of triangle:", triangle_area(base, height))
+
+11. a) Print the Fibonacci series
+
+def fibonacci(n):
+    fib_series = [0, 1]
+    for i in range(2, n):
+        fib_series.append(fib_series[-1] + fib_series[-2])
+    return fib_series[:n]
+
+n = 10
+print("Fibonacci series:", fibonacci(n))
+
+11. b) Find the factorial of a number
+
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+number = 5
+print("Factorial:", factorial(number))
+
+12. a) Find the Armstrong number
+
+def is_armstrong(num):
+    num_str = str(num)
+    num_len = len(num_str)
+    total = sum(int(digit) ** num_len for digit in num_str)
+    return total == num
+
+number = 153
+print(f"The number {number} is an Armstrong number:", is_armstrong(number))
+
+12. b) Find the area of a rectangle
+
+def rectangle_area(length, width):
+    return length * width
+
+length = 5
+width = 3
+print("Area of rectangle:", rectangle_area(length, width))
