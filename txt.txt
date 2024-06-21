@@ -10,6 +10,8 @@ a = 48
 b = 18
 print("GCD using for loop:", gcd_for_loop(a, b))
 
+======================================================
+
 1. b) Find the maximum of a list of numbers
 
 def find_max(lst):
@@ -21,6 +23,8 @@ def find_max(lst):
 
 numbers = [3, 5, 2, 8, 6]
 print("Maximum number:", find_max(numbers))
+
+======================================================
 
 2. a) Perform linear search in a list
 
@@ -34,6 +38,8 @@ numbers = [3, 5, 2, 8, 6]
 x = 8
 print("Element found at index:", linear_search(numbers, x))
 
+======================================================
+
 2. b) Find square root using Newton’s method
 def newton_sqrt(n, tolerance=1e-10):
     guess = n / 2.0
@@ -46,6 +52,8 @@ def newton_sqrt(n, tolerance=1e-10):
 number = 16
 print("Square root:", newton_sqrt(number))
 
+======================================================
+
 3. a) Compute the GCD of two Numbers using functions
 
 def gcd(a, b):
@@ -57,6 +65,8 @@ a = 48
 b = 18
 print("GCD using function:", gcd(a, b))
 
+======================================================
+
 3. b) Find the exponentiation of a number
 
 def exponentiation(base, exp):
@@ -65,6 +75,8 @@ def exponentiation(base, exp):
 base = 2
 exp = 3
 print("Exponentiation:", exponentiation(base, exp))
+
+======================================================
 
 4. a) Display the first n prime numbers until the range n is given
 
@@ -88,6 +100,8 @@ def first_n_primes(n):
 n = 10
 print("First n prime numbers:", first_n_primes(n))
 
+======================================================
+
 4. b) Display the Product of Two Matrices
 
 def matrix_product(A, B):
@@ -102,6 +116,8 @@ A = [[1, 2], [3, 4]]
 B = [[5, 6], [7, 8]]
 print("Product of matrices:", matrix_product(A, B))
 
+======================================================
+
 5. a) Display the Word Count using Command Line Arguments
 
 import sys
@@ -112,6 +128,8 @@ if len(sys.argv) > 1:
         text = file.read()
         word_count = len(text.split())
         print("Word count:", word_count)
+
+======================================================
 
 5. b) Perform merge sort
 
@@ -149,6 +167,8 @@ numbers = [38, 27, 43, 3, 9, 82, 10]
 merge_sort(numbers)
 print("Sorted list:", numbers)
 
+======================================================
+
 6. a) Perform insertion sort
 
 def insertion_sort(lst):
@@ -164,6 +184,7 @@ numbers = [12, 11, 13, 5, 6]
 insertion_sort(numbers)
 print("Sorted list:", numbers)
 
+======================================================
 
 6. b) Check if a Number is Odd or Even
 
@@ -175,6 +196,8 @@ def is_even_or_odd(num):
 
 number = 7
 print("The number is:", is_even_or_odd(number))
+
+======================================================
 
 7. a) Take the most frequent words in a text file
 
@@ -190,6 +213,8 @@ def most_frequent_words(filename, n=10):
 filename = "text.txt"
 print("Most frequent words:", most_frequent_words(filename))
 
+======================================================
+
 7. b) Display the multiplication Table
 
 def multiplication_table(n):
@@ -198,6 +223,8 @@ def multiplication_table(n):
 
 number = 5
 multiplication_table(number)
+
+======================================================
 
 8. a) Check whether the given year is Leap Year or not
 
@@ -216,6 +243,8 @@ def is_leap_year(year):
 year = 2024
 print(f"The year {year} is a leap year:", is_leap_year(year))
 
+======================================================
+
 8. b) Check vote eligibility of a person
 
 def is_eligible_to_vote(age):
@@ -223,6 +252,8 @@ def is_eligible_to_vote(age):
 
 age = 20
 print("Eligible to vote:", is_eligible_to_vote(age))
+
+======================================================
 
 9. a) Display Calendar
 
@@ -235,6 +266,8 @@ year = 2024
 month = 6
 display_calendar(year, month)
 
+======================================================
+
 9. b) Find the factorial of a number
 
 def factorial(n):
@@ -246,6 +279,8 @@ def factorial(n):
 number = 5
 print("Factorial:", factorial(number))
 
+======================================================
+
 10. a) Convert kilometre to miles
 
 def km_to_miles(km):
@@ -253,6 +288,8 @@ def km_to_miles(km):
 
 kilometres = 5
 print("Miles:", km_to_miles(kilometres))
+
+======================================================
 
 10. b) Find the area of a triangle
 
@@ -262,6 +299,8 @@ def triangle_area(base, height):
 base = 10
 height = 5
 print("Area of triangle:", triangle_area(base, height))
+
+======================================================
 
 11. a) Print the Fibonacci series
 
@@ -274,6 +313,8 @@ def fibonacci(n):
 n = 10
 print("Fibonacci series:", fibonacci(n))
 
+======================================================
+
 11. b) Find the factorial of a number
 
 def factorial(n):
@@ -284,6 +325,8 @@ def factorial(n):
 
 number = 5
 print("Factorial:", factorial(number))
+
+======================================================
 
 12. a) Find the Armstrong number
 
@@ -296,6 +339,8 @@ def is_armstrong(num):
 number = 153
 print(f"The number {number} is an Armstrong number:", is_armstrong(number))
 
+======================================================
+
 12. b) Find the area of a rectangle
 
 def rectangle_area(length, width):
@@ -304,3 +349,5 @@ def rectangle_area(length, width):
 length = 5
 width = 3
 print("Area of rectangle:", rectangle_area(length, width))
+
+======================================================
