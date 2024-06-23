@@ -1,4 +1,5 @@
-1. a) Compute the GCD of two Numbers using for Loop
+1. a) Develop a python  program to Compute the GCD of two Numbers using for Loop
+
 def gcd_for_loop(a, b):
     gcd = 1
     for i in range(1, min(a, b) + 1):
@@ -12,7 +13,7 @@ print("GCD using for loop:", gcd_for_loop(a, b))
 
 ======================================================
 
-1. b) Find the maximum of a list of numbers
+1. b)  Write a  python  program to find the maximum of a list of numbers
 
 def find_max(lst):
     max_num = lst[0]
@@ -26,7 +27,7 @@ print("Maximum number:", find_max(numbers))
 
 ======================================================
 
-2. a) Perform linear search in a list
+2. a) Develop a python  program to  perform linear search in a list 
 
 def linear_search(lst, x):
     for i in range(len(lst)):
@@ -40,7 +41,7 @@ print("Element found at index:", linear_search(numbers, x))
 
 ======================================================
 
-2. b) Find square root using Newton’s method
+2. b)  Write a  python  program find square root using newton’s method
 def newton_sqrt(n, tolerance=1e-10):
     guess = n / 2.0
     while True:
@@ -54,7 +55,7 @@ print("Square root:", newton_sqrt(number))
 
 ======================================================
 
-3. a) Compute the GCD of two Numbers using functions
+3. a) Develop a python  program to  Compute the GCD of two Numbers using  functions
 
 def gcd(a, b):
     while b:
@@ -67,7 +68,7 @@ print("GCD using function:", gcd(a, b))
 
 ======================================================
 
-3. b) Find the exponentiation of a number
+3. b)  Write a  python  program find the exponentiation of a number
 
 def exponentiation(base, exp):
     return base ** exp
@@ -78,7 +79,7 @@ print("Exponentiation:", exponentiation(base, exp))
 
 ======================================================
 
-4. a) Display the first n prime numbers until the range n is given
+4. a) Develop a python  program to  to display the first n prime numbers until the range n is given.
 
 def is_prime(num):
     if num < 2:
@@ -102,7 +103,7 @@ print("First n prime numbers:", first_n_primes(n))
 
 ======================================================
 
-4. b) Display the Product of Two Matrices
+4.  b)  Write a  python  program to display the Product of Two Matrices
 
 def matrix_product(A, B):
     result = [[0 for _ in range(len(B[0]))] for _ in range(len(A))]
@@ -118,7 +119,7 @@ print("Product of matrices:", matrix_product(A, B))
 
 ======================================================
 
-5. a) Display the Word Count using Command Line Arguments
+5. a) Develop a python  program  with help of Command Line Arguments to display the Word Count. 
 
 import sys
 
@@ -131,7 +132,7 @@ if len(sys.argv) > 1:
 
 ======================================================
 
-5. b) Perform merge sort
+5. b)  Write a  python  program which performs merge sort.
 
 def merge_sort(lst):
     if len(lst) > 1:
@@ -169,7 +170,7 @@ print("Sorted list:", numbers)
 
 ======================================================
 
-6. a) Perform insertion sort
+6. a) Develop a python  program to program which performs insertion sort.
 
 def insertion_sort(lst):
     for i in range(1, len(lst)):
@@ -186,7 +187,7 @@ print("Sorted list:", numbers)
 
 ======================================================
 
-6. b) Check if a Number is Odd or Even
+6. b)  Write a  python  program to Check if a Number is Odd or Even
 
 def is_even_or_odd(num):
     if num % 2 == 0:
@@ -199,7 +200,7 @@ print("The number is:", is_even_or_odd(number))
 
 ======================================================
 
-7. a) Take the most frequent words in a text file
+7. a) Develop a python  program to Program that takes the most frequent words in a text file.
 
 from collections import Counter
 
@@ -215,7 +216,7 @@ print("Most frequent words:", most_frequent_words(filename))
 
 ======================================================
 
-7. b) Display the multiplication Table
+7. b)  Write a  python  program to Display the multiplication Table
 
 def multiplication_table(n):
     for i in range(1, 11):
@@ -226,7 +227,7 @@ multiplication_table(number)
 
 ======================================================
 
-8. a) Check whether the given year is Leap Year or not
+8. a) Develop a python  program to  Check whether the given year is Leap Year or not 
 
 def is_leap_year(year):
     if year % 4 == 0:
@@ -245,7 +246,7 @@ print(f"The year {year} is a leap year:", is_leap_year(year))
 
 ======================================================
 
-8. b) Check vote eligibility of a person
+8. b)  Write a  python  program to check vote eligibility of a person 
 
 def is_eligible_to_vote(age):
     return age >= 18
@@ -255,7 +256,7 @@ print("Eligible to vote:", is_eligible_to_vote(age))
 
 ======================================================
 
-9. a) Display Calendar
+9. a) Develop a python  program to Display Calendar
 
 import calendar
 
@@ -268,7 +269,7 @@ display_calendar(year, month)
 
 ======================================================
 
-9. b) Find the factorial of a number
+9.  b)  Write a  python  program to find the factorial of a number 
 
 def factorial(n):
     if n == 0:
@@ -281,7 +282,7 @@ print("Factorial:", factorial(number))
 
 ======================================================
 
-10. a) Convert kilometre to miles
+10. a) Develop a python  program to convert kilometre to miles 
 
 def km_to_miles(km):
     return km * 0.621371
@@ -291,7 +292,7 @@ print("Miles:", km_to_miles(kilometres))
 
 ======================================================
 
-10. b) Find the area of a triangle
+10. b)  Write a  python  program to find the area of a triangle 
 
 def triangle_area(base, height):
     return 0.5 * base * height
@@ -302,7 +303,7 @@ print("Area of triangle:", triangle_area(base, height))
 
 ======================================================
 
-11. a) Print the Fibonacci series
+11. a) Develop a python  program to print the fibbonacci series 
 
 def fibonacci(n):
     fib_series = [0, 1]
@@ -315,7 +316,7 @@ print("Fibonacci series:", fibonacci(n))
 
 ======================================================
 
-11. b) Find the factorial of a number
+11. b)  Write a  python  program to find the factorial of a number 
 
 def factorial(n):
     if n == 0:
@@ -328,7 +329,7 @@ print("Factorial:", factorial(number))
 
 ======================================================
 
-12. a) Find the Armstrong number
+12. a) Develop a python  program to  find the arm strong number 
 
 def is_armstrong(num):
     num_str = str(num)
@@ -341,7 +342,7 @@ print(f"The number {number} is an Armstrong number:", is_armstrong(number))
 
 ======================================================
 
-12. b) Find the area of a rectangle
+12. b)  Write a  python  program to  find the area of a rectangle 
 
 def rectangle_area(length, width):
     return length * width
