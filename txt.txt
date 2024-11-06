@@ -1,763 +1,1215 @@
-// Command Line Arguments - Movie Database:
-
-public class MovieDatabase {
-    public static void main(String[] args) {
-        if (args.length != 3) {
-            System.out.println("Invalid input");
-            return;
-        }
-        try {
-            int year = Integer.parseInt(args[2]);
-            System.out.println("Title: " + args[0]);
-            System.out.println("Director: " + args[1]);
-            System.out.println("Year: " + year);
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input");
-        }
-    }
-}
-
-// Command Line Arguments - Recipe Manager:
-
-public class RecipeManager {
-    public static void main(String[] args) {
-        if (args.length != 3) {
-            System.out.println("Invalid input");
-            return;
-        }
-        try {
-            int cookingTime = Integer.parseInt(args[2]);
-            System.out.println("Recipe: " + args[0]);
-            System.out.println("Chef: " + args[1]);
-            System.out.println("Cooking Time: " + cookingTime + " minutes");
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input");
-        }
-    }
-}
-
-// Command Line Arguments - Video Game Catalog:
-
-public class GameCatalog {
-    public static void main(String[] args) {
-        if (args.length != 3) {
-            System.out.println("Invalid input");
-            return;
-        }
-        try {
-            int year = Integer.parseInt(args[2]);
-            System.out.println("Title: " + args[0]);
-            System.out.println("Developer: " + args[1]);
-            System.out.println("Year: " + year);
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input");
-        }
-    }
-}
-
-// Decision Making - Driver's License:
-
-public class DrivingLicense {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int age = scanner.nextInt();
-        if (age >= 16 && age <= 100) {
-            System.out.println("Eligible");
-        } else if (age >= 1 && age < 16) {
-            System.out.println("Not eligible");
-        }
-    }
-}
-
-// Decision Making - School Admission:
-
-public class SchoolAdmission {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int age = scanner.nextInt();
-        if (age >= 5 && age <= 18) {
-            System.out.println("Eligible for admission");
-        } else if (age < 5 && age >= 1) {
-            System.out.println("Too young for admission");
-        } else if (age > 18 && age <= 100) {
-            System.out.println("Too old for admission");
-        }
-    }
-}
-
-// Decision Making - Voting Eligibility:
-
-public class VotingEligibility {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int age = scanner.nextInt();
-        if (age >= 18 && age <= 120) {
-            System.out.println("Eligible to vote");
-        } else if (age >= 1 && age < 18) {
-            System.out.println("Not eligible to vote");
-        }
-    }
-}
-
-// Looping Statements - Marathon Analysis:
-
-public class MarathonAnalysis {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int h = scanner.nextInt();
-        
-        if (n < 1 || n > 10 || h < 0 || h > 24) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int count = 0;
-        int maxMinutes = h * 60;
-        
-        for (int i = 0; i < n; i++) {
-            int time = scanner.nextInt();
-            if (time <= maxMinutes) {
-                count++;
-            }
-        }
-        System.out.println(count);
-    }
-}
-
-// Looping Statements - Swimming Competition:
-
-public class SwimmingCompetition {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int maxMinutes = scanner.nextInt();
-        
-        if (n < 1 || n > 100000 || maxMinutes < 0 || maxMinutes > 60) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int count = 0;
-        int maxSeconds = maxMinutes * 60;
-        
-        for (int i = 0; i < n; i++) {
-            int time = scanner.nextInt();
-            if (time <= maxSeconds) {
-                count++;
-            }
-        }
-        System.out.println(count);
-    }
-}
-
-// Looping Statements - Cycling Race:
-
-public class CyclingRace {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int maxHours = scanner.nextInt();
-        
-        if (n < 1 || n > 100000 || maxHours < 0 || maxHours > 24) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int count = 0;
-        int maxMinutes = maxHours * 60;
-        
-        for (int i = 0; i < n; i++) {
-            int time = scanner.nextInt();
-            if (time <= maxMinutes) {
-                count++;
-            }
-        }
-        System.out.println(count);
-    }
-}
-
-// Jump Statements - Delivery Robot:
-
-public class DeliveryRobot {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 1 || n > 100) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        boolean hasValid = false;
-        for (int i = 0; i < n; i++) {
-            int status = scanner.nextInt();
-            if (status != 0 && status != 1) {
-                System.out.println("Invalid input");
-                return;
-            }
-            if (status == 1) {
-                System.out.println(i);
-                hasValid = true;
-            }
-        }
-        
-        if (!hasValid) {
-            System.out.println("No valid locations");
-        }
-    }
-}
-
-// Jump Statements - Pathfinding:
-
-public class PathFinder {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 1 || n > 100) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        boolean hasValid = false;
-        for (int i = 0; i < n; i++) {
-            int status = scanner.nextInt();
-            if (status != 0 && status != 1) {
-                System.out.println("Invalid input");
-                return;
-            }
-            if (status == 1) {
-                System.out.println(i);
-                hasValid = true;
-            }
-        }
-        
-        if (!hasValid) {
-            System.out.println("No valid locations");
-        }
-    }
-}
-
-// Jump Statements - Emergency Response:
-
-public class EmergencySystem {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 1 || n > 100) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        boolean hasValid = false;
-        for (int i = 0; i < n; i++) {
-            int status = scanner.nextInt();
-            if (status != 0 && status != 1) {
-                System.out.println("Invalid input");
-                return;
-            }
-            if (status == 1) {
-                System.out.println(i);
-                hasValid = true;
-            }
-        }
-        
-        if (!hasValid) {
-            System.out.println("No valid locations");
-        }
-    }
-}
-
-// 1D Array Question 1 - Retail Store Sales
-public class RetailSales {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 1 || n > 7) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int[] sales = new int[n];
-        int total = 0;
-        int max = 0;
-        int maxDay = 0;
-        
-        for (int i = 0; i < n; i++) {
-            sales[i] = scanner.nextInt();
-            if (sales[i] < 0 || sales[i] > 10000) {
-                System.out.println("Invalid input");
-                return;
-            }
-            total += sales[i];
-            if (sales[i] > max) {
-                max = sales[i];
-                maxDay = i;
-            }
-        }
-        
-        System.out.println(total);
-        System.out.println(max);
-        System.out.println(maxDay);
-    }
-}
-
-// 1D Array Question 2 - Store Performance
-public class StorePerformance {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 1 || n > 7) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int[] sales = new int[n];
-        int total = 0;
-        int max = 0;
-        int maxDay = 0;
-        
-        for (int i = 0; i < n; i++) {
-            sales[i] = scanner.nextInt();
-            if (sales[i] < 0 || sales[i] > 1000) {
-                System.out.println("Invalid input");
-                return;
-            }
-            total += sales[i];
-            if (sales[i] > max) {
-                max = sales[i];
-                maxDay = i;
-            }
-        }
-        
-        System.out.println(total);
-        System.out.println(max);
-        System.out.println(maxDay);
-    }
-}
-
-// 1D Array Question 3 - Weekly Sales Analysis
-public class WeeklySales {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 1 || n > 7) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int[] sales = new int[n];
-        int total = 0;
-        int max = 0;
-        int maxDay = 0;
-        
-        for (int i = 0; i < n; i++) {
-            sales[i] = scanner.nextInt();
-            if (sales[i] < 0 || sales[i] > 1000000) {
-                System.out.println("Invalid input");
-                return;
-            }
-            total += sales[i];
-            if (sales[i] > max) {
-                max = sales[i];
-                maxDay = i;
-            }
-        }
-        
-        System.out.println(total);
-        System.out.println(max);
-        System.out.println(maxDay);
-    }
-}
-
-// 2D Array Question 1 - Inventory Data
-public class InventoryMatrix {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        
-        if (n <= 0 || m <= 0 || n > 100 || m > 100) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int[][] matrix = new int[n][m];
-        for (int i = 0; i < n; i++) {
-            long rowSum = 0;
-            for (int j = 0; j < m; j++) {
-                matrix[i][j] = scanner.nextInt();
-                if (Math.abs(matrix[i][j]) > 1000000) {
-                    System.out.println("Invalid input");
-                    return;
-                }
-                rowSum += matrix[i][j];
-            }
-            System.out.println(rowSum);
-        }
-    }
-}
-
-// 2D Array Question 2 - Warehouse Management
-public class WarehouseMatrix {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        
-        if (n <= 0 || m <= 0 || n > 100 || m > 100) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int[][] matrix = new int[n][m];
-        for (int i = 0; i < n; i++) {
-            long rowSum = 0;
-            for (int j = 0; j < m; j++) {
-                matrix[i][j] = scanner.nextInt();
-                if (Math.abs(matrix[i][j]) > 1000000) {
-                    System.out.println("Invalid input");
-                    return;
-                }
-                rowSum += matrix[i][j];
-            }
-            System.out.println(rowSum);
-        }
-    }
-}
-
-// 2D Array Question 3 - Data Visualization
-public class DataVisualization {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        
-        if (n <= 0 || m <= 0 || n > 100 || m > 100) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int[][] matrix = new int[n][m];
-        for (int i = 0; i < n; i++) {
-            long rowSum = 0;
-            for (int j = 0; j < m; j++) {
-                matrix[i][j] = scanner.nextInt();
-                if (Math.abs(matrix[i][j]) > 1000000) {
-                    System.out.println("Invalid input");
-                    return;
-                }
-                rowSum += matrix[i][j];
-            }
-            System.out.println(rowSum);
-        }
-    }
-}
-
-// String Question 1 - Social Media Username
-public class UsernameValidator1 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String username = scanner.nextLine();
-        
-        // Check length
-        if (username.length() < 5 || username.length() > 20) {
-            System.out.println("false");
-            return;
-        }
-        
-        // Check if starts or ends with underscore
-        if (username.startsWith("_") || username.endsWith("_")) {
-            System.out.println("false");
-            return;
-        }
-        
-        // Check for valid characters
-        if (!username.matches("^[a-z0-9_]+$")) {
-            System.out.println("false");
-            return;
-        }
-        
-        System.out.println("true");
-    }
-}
-
-// String Question 2 - Gaming Profile Username
-public class UsernameValidator2 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String username = scanner.nextLine();
-        
-        // Check length
-        if (username.length() < 5 || username.length() > 20) {
-            System.out.println("false");
-            return;
-        }
-        
-        // Check if starts or ends with underscore
-        if (username.startsWith("_") || username.endsWith("_")) {
-            System.out.println("false");
-            return;
-        }
-        
-        // Check for valid characters
-        if (!username.matches("^[a-z0-9_]+$")) {
-            System.out.println("false");
-            return;
-        }
-        
-        System.out.println("true");
-    }
-}
-
-// String Question 3 - E-commerce Username
-public class UsernameValidator3 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String username = scanner.nextLine();
-        
-        // Check length
-        if (username.length() < 5 || username.length() > 20) {
-            System.out.println("false");
-            return;
-        }
-        
-        // Check if starts or ends with underscore
-        if (username.startsWith("_") || username.endsWith("_")) {
-            System.out.println("false");
-            return;
-        }
-        
-        // Check for valid characters
-        if (!username.matches("^[a-z0-9_]+$")) {
-            System.out.println("false");
-            return;
-        }
-        
-        System.out.println("true");
-    }
-}
-
-// Streams Question 1 - Library Book Prices
-public class LibraryCatalog {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 0 || n > 100) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        double[] prices = new double[n];
-        for (int i = 0; i < n; i++) {
-            prices[i] = scanner.nextDouble();
-            if (prices[i] < -1000 || prices[i] > 1000) {
-                System.out.println("Invalid input");
-                return;
-            }
-        }
-        
-        double threshold = scanner.nextDouble();
-        if (threshold < -1000 || threshold > 1000) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        long count = Arrays.stream(prices)
-                          .filter(price -> price > threshold)
-                          .count();
-        
-        System.out.println(count);
-    }
-}
-
-// Streams Question 2 - Reading Club Books
-public class ReadingClub {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 0 || n > 10) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        double[] prices = new double[n];
-        for (int i = 0; i < n; i++) {
-            prices[i] = scanner.nextDouble();
-            if (prices[i] < -1000 || prices[i] > 1000) {
-                System.out.println("Invalid input");
-                return;
-            }
-        }
-        
-        double threshold = scanner.nextDouble();
-        if (threshold < -1000 || threshold > 1000) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        long count = Arrays.stream(prices)
-                          .filter(price -> price > threshold)
-                          .count();
-        
-        System.out.println(count);
-    }
-}
-
-// Streams Question 3 - Charity Donations
-public class CharityDonations {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        
-        if (n < 0 || n > 10) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        double[] donations = new double[n];
-        for (int i = 0; i < n; i++) {
-            donations[i] = scanner.nextDouble();
-            if (donations[i] < -1000 || donations[i] > 1000) {
-                System.out.println("Invalid input");
-                return;
-            }
-        }
-        
-        double threshold = scanner.nextDouble();
-        if (threshold < -1000 || threshold > 1000) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        long count = Arrays.stream(donations)
-                          .filter(donation -> donation > threshold)
-                          .count();
-        
-        System.out.println(count);
-    }
-}
-
-// Date Question 1 - Date Difference Calculator
-public class DateDiff1 {
-    public static void main(String[] args) {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            LocalDate date1 = LocalDate.parse(scanner.nextLine());
-            LocalDate date2 = LocalDate.parse(scanner.nextLine());
-            
-            if (date1.isAfter(date2) || 
-                date1.isBefore(LocalDate.of(1900, 1, 1)) ||
-                date2.isAfter(LocalDate.of(2100, 12, 31))) {
-                System.out.println("Invalid input");
-                return;
-            }
-            
-            long days = ChronoUnit.DAYS.between(date1, date2);
-            System.out.println(days);
-        } catch (Exception e) {
-            System.out.println("Invalid input");
-        }
-    }
-}
-
-// Date Question 2 - Construction Project Timeline
-public class DateDiff2 {
-    public static void main(String[] args) {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            LocalDate startDate = LocalDate.parse(scanner.nextLine());
-            LocalDate endDate = LocalDate.parse(scanner.nextLine());
-            
-            if (startDate.isAfter(endDate) || 
-                startDate.isBefore(LocalDate.of(1900, 1, 1)) ||
-                endDate.isAfter(LocalDate.of(2100, 12, 31))) {
-                System.out.println("Invalid input");
-                return;
-            }
-            
-            long days = ChronoUnit.DAYS.between(startDate, endDate);
-            System.out.println(days);
-        } catch (Exception e) {
-            System.out.println("Invalid input");
-        }
-    }
-}
-
-// Date Question 3 - Travel Duration Calculator
-public class DateDiff3 {
-    public static void main(String[] args) {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            LocalDate departureDate = LocalDate.parse(scanner.nextLine());
-            LocalDate returnDate = LocalDate.parse(scanner.nextLine());
-            
-            if (departureDate.isAfter(returnDate) || 
-                departureDate.isBefore(LocalDate.of(1900, 1, 1)) ||
-                returnDate.isAfter(LocalDate.of(2100, 12, 31))) {
-                System.out.println("Invalid input");
-                return;
-            }
-            
-            long days = ChronoUnit.DAYS.between(departureDate, returnDate);
-            System.out.println(days);
-        } catch (Exception e) {
-            System.out.println("Invalid input");
-        }
-    }
-}
-
-// Tokenizing Question 1 - Language Learning Word Counter
-public class WordCounter1 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String sentence = scanner.nextLine();
-        
-        if (sentence.isEmpty() || !sentence.matches("^[a-zA-Z\\s]+$")) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        StringTokenizer tokenizer = new StringTokenizer(sentence);
-        System.out.println(tokenizer.countTokens());
-    }
-}
-
-// Tokenizing Question 2 - Writing Application Word Counter
-public class WordCounter2 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String text = scanner.nextLine();
-        
-        if (text.isEmpty() || !text.matches("^[a-zA-Z\\s]+$")) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        StringTokenizer tokenizer = new StringTokenizer(text);
-        System.out.println(tokenizer.countTokens());
-    }
-}
-
-// Tokenizing Question 3 - Language Learning Tool
-public class WordCounter3 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String sentence = scanner.nextLine();
-        
-        if (sentence.isEmpty() || !sentence.matches("^[a-zA-Z\\s]+$")) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        StringTokenizer tokenizer = new StringTokenizer(sentence);
-        System.out.println(tokenizer.countTokens());
-    }
-}
+Command Line Arguments 
+1. In a film database, users must enter each movie’s title, director, and release year. Sometimes, 
+errors occur with the release year. Three command line arguments represent movie details: the 
+movie's title, director, and release year. The application should process this information and output a 
+formatted message showing the movie's details. 
+Input Format 
+• The first line contains a string representing the Movie Title. 
+• The second line contains a string representing the Movie Director. 
+• The third line contains an integer representing the Release Year. 
+Output Format 
+• The first line should print Title: <Title> 
+• The second line should print Director: <Director> 
+• The third line should print Year: <Year> 
+• If the release year is not a valid integer, print Invalid input 
+Constraints 
+• The application must handle exactly three command line arguments. 
+• Ensure that the title and director are properly formatted strings. 
+• The release year must be an integer. 
+• CODE: 
+public class Movie { 
+private String title; 
+private String director; 
+private int year; 
+public Movie(String title, String director, int year) { 
+this.title = title; 
+this.director = director; 
+this.year = year; 
+} 
+public void printDetails() { 
+System.out.println("Title: " + title); 
+System.out.println("Director: " + director); 
+System.out.println("Year: " + year); 
+} 
+} 
+2. In a recipe management system, users must enter details for each recipe. Occasionally, errors 
+occur with the cooking time input. Three command line arguments representing recipe details: the 
+recipe's name, chef, and cooking time in minutes. The application should process this information 
+and output a formatted message showing the recipe's details. 
+Input Format 
+• The first line contains a string representing the Recipe Name. 
+• The second line contains a string representing the Chef's Name. 
+• The third line contains an integer representing the Cooking Time in Minutes. 
+Output Format 
+• The first line should print Recipe: <Recipe Name> 
+• The second line should print Chef: <Chef Name> 
+• The third line should print Cooking Time: <Cooking Time> minutes 
+• If the cooking time is not a valid integer, print Invalid input 
+Constraints 
+• The application must handle exactly three command line arguments. 
+• Ensure that the recipe name and chef name are properly formatted strings. 
+• The cooking time must be an integer. 
+CODE: 
+import java.util.*; 
+import java.util.stream.*; 
+public class BookFilter { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt();    
+if (n < 0 || n > 10) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+List<Double> prices = new ArrayList<>(); 
+for (int i = 0; i < n; i++) { 
+double price = scanner.nextDouble(); 
+if (price < -1000 || price > 1000) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+prices.add(price); 
+} 
+double threshold = scanner.nextDouble(); 
+if (threshold < -1000 || threshold > 1000) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+long count = prices.stream().filter(price -> price > threshold).count(); 
+System.out.println(count); 
+} 
+} 
+3. In a library system, users input details about video games for cataloging, including the game title, 
+developer, and release year. However, some entries might contain incorrect year formats. Three 
+command line arguments representing video game details: the game's title, developer, and release 
+year. The application should process this information and output a formatted message showing the 
+game's details. 
+Input Format 
+• The first line contains a string representing the Game Title. 
+• The second line contains a string representing the Game Developer. 
+• The third line contains an integer representing the Release Year. 
+Output Format 
+• The first line should print Title: <Title> 
+• The second line should print Developer: <Developer> 
+• The third line should print Year: <Year> 
+• If the release year is not a valid integer, print Invalid input 
+Constraints 
+• he application must handle exactly three command line arguments. 
+• Ensure that the title and developer are properly formatted strings. 
+• The release year must be an integer. 
+CODE: 
+import java.util.*; 
+import java.util.stream.*; 
+public class DonationFilter { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt();         
+if (n < 0 || n > 10) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+List<Double> donations = new ArrayList<>(); 
+for (int i = 0; i < n; i++) { 
+double donation = scanner.nextDouble(); 
+if (donation < -1000 || donation > 1000) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+donations.add(donation); 
+} 
+double threshold = scanner.nextDouble(); 
+if (threshold < -1000 || threshold > 1000) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+long count = donations.stream().filter(donation -> donation > threshold).count(); 
+System.out.println(count); 
+} 
+} 
+Decision making statements 
+1. Imagine a scenario where you’re building software for a driving school to check if an individual 
+qualifies for a driver’s license. The age requirement is a minimum of 16 years. Based on the 
+provided age, determine if they qualify or not. 
+Input Format 
+• A single integer representing the individual’s age. 
+Output Format 
+• If the person is 16 or older, print Eligible 
+• If the person is under 16, print Not eligible 
+Constraints 
+• Age must be between 1 and 100 
+CODE: 
+import java.util.Scanner; 
+public class LicenseEligibility { 
+public static void main(String[] args) { 
+int age = new Scanner(System.in).nextInt();         
+if (age < 1 || age > 100) { 
+System.out.println("Invalid input"); 
+} else { 
+System.out.println(age >= 16 ? "Eligible" : "Not eligible"); 
+} 
+} 
+} 
+2. You are an admissions officer at a school where students must be aged between 5 and 18 to be 
+eligible for admission. Students or their guardians provide their age to check if they qualify. Based 
+on the age provided, display whether they’re eligible for admission, too young, or too old. 
+Input Format 
+• The first line contains an integer representing the student's age. 
+Output Format 
+• If the age is between 5 and 18 (inclusive), print Eligible for admission 
+• If the age is less than 5, print Too young for admission 
+• If the age is more than 18, print Too old for admission 
+Constraints 
+• Age is between 1 and 100 
+CODE: 
+import java.util.Scanner; 
+public class AdmissionEligibility { 
+public static void main(String[] args) { 
+int age = new Scanner(System.in).nextInt(); 
+if (age < 1 || age > 100) { 
+System.out.println("Invalid input"); 
+} else if (age < 5) { 
+System.out.println("Too young for admission"); 
+} else if (age > 18) { 
+System.out.println("Too old for admission"); 
+} else { 
+System.out.println("Eligible for admission"); 
+} 
+} 
+} 
+3. A local election committee is preparing a tool to help people check if they are eligible to vote in 
+the upcoming elections. Anyone aged 18 and above is allowed to vote. Based on the provided age, 
+determine if they qualify or not. 
+Input Format 
+• A single integer representing the individual’s age. 
+Output Format 
+• If the person is 18 or older, print Eligible to vote 
+• If the person is under 18, print Not eligible to vote 
+Constraints: 
+• Age must be between 1 and 120 
+CODE: 
+import java.util.Scanner; 
+public class VotingEligibility { 
+public static void main(String[] args) { 
+int age = new Scanner(System.in).nextInt(); 
+if (age < 1 || age > 120) { 
+System.out.println("Invalid input"); 
+} else if (age >= 18) { 
+System.out.println("Eligible to vote"); 
+} else { 
+System.out.println("Not eligible to vote"); 
+} 
+} 
+} 
+Looping statements 
+1. You are developing a system to analyze the performance of athletes in a marathon. You need to 
+determine how many athletes have finished the marathon in less than a given number of hours. 
+Given the completion times of several athletes and the maximum time allowed, compute the 
+number of athletes who meet the criteria. 
+Input Format 
+• The first line is an integer n, indicating the number of athletes. 
+• The second line is an integer h, the maximum hours allowed. 
+• The next n lines contain integers representing each athlete's completion time in minutes. 
+Output Format 
+• Print the total number of athletes who finished within the given time. 
+• If the input is invalid, print Invalid input 
+Constraints: 
+• 1 ≤ n ≤ 10 
+• 0 ≤ h ≤ 24 
+CODE: 
+import java.util.Scanner; 
+public class MarathonPerformance { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in);         
+int n = scanner.nextInt(); 
+int h = scanner.nextInt();      
+if (n < 1 || n > 10 || h < 0 || h > 24) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+int maxMinutes = h * 60; 
+int eligibleAthletes = 0; 
+for (int i = 0; i < n; i++) { 
+int time = scanner.nextInt(); 
+if (time <= maxMinutes) { 
+eligibleAthletes++; 
+} 
+}         
+System.out.println(eligibleAthletes); 
+} 
+} 
+2. As a coach for a swimming team, you want to evaluate your swimmer's performance in a recent 
+competition. Each swimmer's completion time is recorded in seconds, and you want to know how 
+many finished within a specified time limit set by the event organizers. You will input the number 
+of swimmers, the allowed time limit in minutes, and the completion times for each swimmer. Your 
+goal is to determine how many swimmers met the time requirement. 
+Input Format 
+• The first line is an integer n, indicating the number of swimmers. 
+• The second line is an integer maxMinutes, the maximum allowed time in minutes. 
+• The next n lines contain integers representing each swimmer's completion time in seconds. 
+Output Format 
+• Print the total number of swimmers who finished within the given time. 
+• If the input is invalid, print Invalid input 
+Constraints 
+• 1 ≤ n ≤ 100,000 
+• 0 ≤ maxMinutes ≤ 60 
+• CODE 
+import java.util.Scanner; 
+public class SwimmingPerformance { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in);      
+int n = scanner.nextInt(); 
+int maxMinutes = scanner.nextInt(); 
+if (n < 1 || n > 100000 || maxMinutes < 0 || maxMinutes > 60) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+int maxSeconds = maxMinutes * 60; 
+int eligibleSwimmers = 0; 
+for (int i = 0; i < n; i++) { 
+int completionTime = scanner.nextInt(); 
+if (completionTime <= maxSeconds) { 
+eligibleSwimmers++; 
+} 
+} 
+System.out.println(eligibleSwimmers); 
+} 
+} 
+3. As the coach for a cycling team, you want to evaluate your cyclists' performance in a recent race. 
+Each cyclist's completion time is recorded in minutes, and you want to know how many finished 
+within a specified time limit set by the event organizers. You will input the number of cyclists, the 
+allowed time limit in hours, and the completion times for each cyclist. Your goal is to determine 
+how many cyclists met the time requirement. 
+Input Format 
+• The first line is an integer n, indicating the number of cyclists. 
+• The second line is an integer maxHours, the maximum allowed time in hours. 
+• The next n lines contain integers representing each cyclist's completion time in minutes. 
+Output Format: 
+• Print the total number of cyclists who finished within the given time. 
+• If the input is invalid, print Invalid input 
+Constraints: 
+• 1 ≤ n ≤ 100,000 
+• 0 ≤ maxHours ≤ 24 
+• 0 ≤ completionTime ≤ 1440 
+CODE: 
+import java.util.Scanner; 
+public class CyclingPerformance { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+int maxHours = scanner.nextInt(); 
+if (n < 1 || n > 100000 || maxHours < 0 || maxHours > 24) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+int maxMinutes = maxHours * 60; 
+int eligibleCyclists = 0; 
+for (int i = 0; i < n; i++) { 
+int completionTime = scanner.nextInt(); 
+if (completionTime < 0 || completionTime > 1440) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+if (completionTime <= maxMinutes) { 
+eligibleCyclists++; 
+} 
+} 
+System.out.println(eligibleCyclists); 
+} 
+} 
+Jump statements 
+1. As a software engineer for a cutting-edge delivery service, you have developed a program that 
+helps a delivery robot plan its route. The robot must identify valid delivery points from a series of 
+locations marked as either valid (1) or invalid (0). Implement a function to reads the number of 
+locations and their validity statuses, then outputs the indices of valid locations.  
+Input Format 
+• An integer n (the number of locations). 
+• n integers indicating the validity of each location (0 or 1). 
+Output Format 
+• Print the indices of valid locations. If there are no valid locations, print No valid locations 
+• If any location is invalid (not 0 or 1), print Invalid input 
+Constraints 
+• 1 ≤ n ≤ 100 
+• CODE: 
+import java.util.Scanner; 
+public class DeliveryRobotRoutePlanner { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 1 || n > 100) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+int[] locations = new int[n]; 
+boolean hasValidLocation = false;  
+for (int i = 0; i < n; i++) { 
+locations[i] = scanner.nextInt(); 
+if (locations[i] != 0 && locations[i] != 1) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+}   
+for (int i = 0; i < n; i++) { 
+if (locations[i] == 1) { 
+System.out.print(i + " "); 
+hasValidLocation = true; // Set flag if a valid location is found 
+} 
+}    
+if (!hasValidLocation) { 
+System.out.println("No valid locations"); 
+} 
+scanner.close(); 
+} 
+} 
+2. A delivery robot uses adaptive pathfinding to navigate through various locations to pick up 
+packages. Some locations may be broken, and the robot must skip these locations while navigating. 
+Implement a method to simulate the robot's pathfinding through valid locations. 
+Input Format: 
+• The first line contains an integer n representing the number of locations. 
+• The second line contains a sequence of n integers where each integer represents a location (1 
+for valid, 0 for broken). 
+Output Format: 
+• Print the indices of the valid locations the robot visits 
+• If any location is invalid (not 0 or 1), print Invalid input 
+• If there are no valid locations, print No valid locations 
+Constraints: 
+• 1 ≤ n ≤ 100 
+• CODE: 
+import java.util.Scanner; 
+public class DeliveryRobotPathfinding { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 1 || n > 100) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+int[] locations = new int[n]; 
+boolean hasValidLocation = false; // Flag to check if there are valid locations 
+for (int i = 0; i < n; i++) { 
+locations[i] = scanner.nextInt(); 
+if (locations[i] < 0 || locations[i] > 1) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+} 
+for (int i = 0; i < n; i++) { 
+if (locations[i] == 1) { 
+System.out.print(i + " "); 
+hasValidLocation = true; 
+} 
+} 
+if (!hasValidLocation) { 
+System.out.println("No valid locations"); 
+} 
+scanner.close(); 
+} 
+} 
+3. An emergency response system is mapping safe locations in an area. Each location is marked as 
+safe (1) or unsafe (0). Implement a method to process the status of each location and print the 
+indices of the safe ones.  
+Input Format 
+• An integer n (the number of locations). 
+• n integers representing each location's safety status (0 or 1). 
+Output Format 
+• Print the indices of the valid locations the robot visits. 
+• If any location is invalid (not 0 or 1), print Invalid input 
+Constraints 
+• 1 ≤ n ≤ 100 
+• CODE: 
+import java.util.Scanner; 
+public class SafeLocationFinder { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 1 || n > 100) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+int[] safetyStatus = new int[n]; 
+for (int i = 0; i < n; i++) { 
+safetyStatus[i] = scanner.nextInt(); 
+if (safetyStatus[i] < 0 || safetyStatus[i] > 1) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+} 
+for (int i = 0; i < n; i++) { 
+if (safetyStatus[i] == 1) { 
+System.out.print(i + " "); 
+} 
+} 
+scanner.close(); 
+} 
+} 
+1D Array 
+1. At a busy retail store, the manager reviews a week's worth of sales data to gauge performance. 
+Using an array of daily sales figures, the task is to find the total weekly sales, identify the highest 
+sales figure, and determine which day saw the peak sales. 
+Input Format: 
+• The first line contains an integer n representing the number of days. 
+• The second line contains an array of n integers representing daily sales figures. 
+Output Format: 
+• Print the total sales for the week. 
+• Print the highest sales amount. 
+• Print the day of the week (0-indexed) with the highest sales. 
+• Print Invalid input, for negative inputs. 
+Constraints: 
+• 1 ≤ n ≤ 7 
+• 0 ≤ sales figure ≤ 10000 
+• CODE: 
+import java.util.Scanner; 
+public class WeeklySalesAnalysis { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 1 || n > 7) { 
+System.out.println("Invalid input."); 
+scanner.close(); 
+return; 
+} 
+int[] sales = new int[n]; 
+int totalSales = 0; 
+int highestSales = 0; 
+int dayWithHighestSales = -1; 
+for (int i = 0; i < n; i++) { 
+sales[i] = scanner.nextInt(); 
+// Validate sales figures 
+if (sales[i] < 0) { 
+System.out.println("Invalid input."); 
+scanner.close(); 
+return; 
+} 
+totalSales += sales[i]; 
+if (sales[i] > highestSales) { 
+highestSales = sales[i]; 
+dayWithHighestSales = i; // Store the day index 
+} 
+} 
+System.out.println(totalSales); 
+System.out.println(highestSales); 
+System.out.println(dayWithHighestSales);        
+scanner.close(); 
+} 
+} 
+2. The manager of a retail store is analyzing a week’s revenue to understand store performance. 
+With daily sales data in hand, they need to calculate the total revenue, identify the day with the 
+highest earnings, and determine the maximum sales amount. This analysis guides future decisions 
+for the store. 
+Input Format 
+• The first line contains an integer n representing the number of days. 
+• The second line contains an array of n integers representing daily sales figures. 
+Output Format 
+• Print the total revenue for the week. 
+• Print the highest sales amount. 
+• Print the day of the week (0-indexed) with the highest sales. 
+• If the input is invalid, print "Invalid input." 
+Constraints 
+• 1 ≤ n ≤ 7 
+• 0 ≤ sales figure ≤ 1000 
+• CODE: 
+import java.util.Scanner; 
+public class WeeklyRevenueAnalysis { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 1 || n > 7) { 
+System.out.println("Invalid input."); 
+scanner.close(); 
+return; 
+} 
+int[] sales = new int[n]; 
+int totalRevenue = 0; 
+int highestSales = 0; 
+int dayWithHighestSales = -1; 
+for (int i = 0; i < n; i++) { 
+sales[i] = scanner.nextInt(); 
+if (sales[i] < 0 || sales[i] > 1000) { 
+System.out.println("Invalid input."); 
+scanner.close(); 
+return; 
+} 
+totalRevenue += sales[i]; 
+if (sales[i] > highestSales) { 
+highestSales = sales[i]; 
+} 
+dayWithHighestSales = i; // Store the day index 
+} 
+System.out.println(totalRevenue); 
+System.out.println(highestSales); 
+System.out.println(dayWithHighestSales); 
+scanner.close(); 
+} 
+} 
+3. In a bustling retail store, the manager is keen to assess weekly sales performance. Armed with an 
+array of daily sales figures, they aim to compute the total sales for the week, identify the highest 
+sales figure, and pinpoint which day had the most significant sales, guiding future strategies. 
+Input Format: 
+• The first line contains an integer n representing the number of days. 
+• The second line contains an array of n integers representing daily sales figures. 
+Output Format: 
+• Print the total sales for the week. 
+• Print the highest sales amount. 
+• Print the day of the week (0-indexed) with the highest sales. 
+• If the input is invalid, print "Invalid input" 
+Constraints: 
+• 1 ≤ n ≤ 7 
+• 0 ≤ sales figure ≤ 10^6 
+• CODE: 
+import java.util.Scanner; 
+public class WeeklySalesPerformance { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 1 || n > 7) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+int[] sales = new int[n]; 
+int totalSales = 0; 
+int highestSales = 0; 
+int dayWithHighestSales = -1; 
+for (int i = 0; i < n; i++) { 
+sales[i] = scanner.nextInt(); 
+if (sales[i] < 0 || sales[i] > 1_000_000) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+totalSales += sales[i]; 
+if (sales[i] > highestSales) { 
+highestSales = sales[i]; 
+dayWithHighestSales = i;  
+} 
+} 
+System.out.println(totalSales); 
+System.out.println(highestSales); 
+System.out.println(dayWithHighestSales); 
+scanner.close(); 
+} 
+} 
+2D Array 
+1. Emily, a logistics manager, needs a program to aggregate daily inventory data by calculating row
+wise sums for her department’s record matrix. Implement a program that first accepts two integers, 
+n (rows) and m (columns). Then, read n * m integers representing daily inventory counts across 
+categories. The program should output each row’s total on a new line. 
+Input Format: 
+• The first line contains an integer n representing the number of rows. 
+• The second line contains an integer m representing the number of columns. 
+• The next n lines each contain m integers representing the elements of the 2D array. 
+Output Format: 
+• The output is n lines, each containing the sum of the respective row in the 2D array. 
+• If the input dimensions are invalid (e.g., negative numbers for rows or columns), print 
+Invalid input 
+Constraints: 
+• -100 <= n, m <= 100 
+• -1000000 <= element <= 1000000 
+CODE: 
+import java.util.Scanner; 
+public class InventoryAggregator { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+int m = scanner.nextInt(); 
+if (n < 0 || m < 0) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+int[][] inventoryMatrix = new int[n][m]; 
+for (int i = 0; i < n; i++) { 
+for (int j = 0; j < m; j++) { 
+inventoryMatrix[i][j] = scanner.nextInt(); 
+} 
+} 
+for (int i = 0; i < n; i++) { 
+int totalInventory = 0; 
+for (int j = 0; j < m; j++) { 
+totalInventory += inventoryMatrix[i][j]; 
+} 
+System.out.println(totalInventory); 
+}         
+scanner.close(); 
+} 
+} 
+2. In a warehouse management system, each row in a grid represents a different product category, 
+and each column represents the weekly sales for that category. You’ve been tasked to develop a 
+program that first takes two integers as input—representing the number of categories n and weeks 
+m. The program should then accept n * m integers to populate the matrix and calculate the total 
+sales for each category (row), printing each total on a new line. 
+Input Format: 
+• The first line contains an integer n representing the number of rows. 
+• The second line contains an integer m representing the number of columns. 
+• The next n lines each contain m integers representing the elements of the 2D array. 
+Output Format: 
+• The output is n lines, each containing the sum of the respective row in the 2D array. 
+• If the input dimensions are invalid (e.g., negative numbers for rows or columns), print 
+Invalid input 
+Constraints: 
+• -100 <= n, m <= 100 
+• -1000000 <= element <= 1000000 
+• CODE 
+import java.util.Scanner; 
+public class WarehouseSales { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+int m = scanner.nextInt(); 
+if (n < 0 || m < 0) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+int[][] salesMatrix = new int[n][m]; 
+for (int i = 0; i < n; i++) { 
+for (int j = 0; j < m; j++) { 
+salesMatrix[i][j] = scanner.nextInt(); 
+} 
+} 
+for (int i = 0; i < n; i++) { 
+int totalSales = 0; 
+for (int j = 0; j < m; j++) { 
+totalSales += salesMatrix[i][j]; 
+} 
+System.out.println(totalSales); 
+}     
+scanner.close(); 
+} 
+} 
+3. Maria is working on a data visualization project where she needs the row-wise totals of various 
+datasets represented as matrices. Implement a program to assist her by first accepting two integers, 
+n and m, for the number of rows and columns. Next, the program should read n * m integers to 
+populate the matrix. For each row, calculate and print its sum on a new line.  
+Input Format: 
+• The first line contains an integer n representing the number of rows. 
+• The second line contains an integer m representing the number of columns. 
+• The next n lines each contain m integers representing the elements of the 2D array. 
+Output Format: 
+• The output is n lines, each containing the sum of the respective row in the 2D array. 
+• If the input dimensions are invalid (e.g., negative numbers for rows or columns), print 
+Invalid input 
+Constraints: 
+• -100 <= n, m <= 100 
+• -1000000 <= element <= 1000000 
+• CODE: 
+import java.util.Scanner; 
+public class MatrixRowSum { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+int m = scanner.nextInt(); 
+if (n < 0 || m < 0) { 
+System.out.println("Invalid input"); 
+scanner.close(); 
+return; 
+} 
+int[][] matrix = new int[n][m]; 
+for (int i = 0; i < n; i++) { 
+for (int j = 0; j < m; j++) { 
+matrix[i][j] = scanner.nextInt(); 
+} 
+} 
+for (int i = 0; i < n; i++) { 
+int rowSum = 0; 
+for (int j = 0; j < m; j++) { 
+rowSum += matrix[i][j]; 
+} 
+System.out.println(rowSum); 
+}     
+scanner.close(); 
+} 
+} 
+String function 
+1. Maria is creating a profile on a social media platform, where usernames need to follow specific 
+rules They should be between 5 and 20 characters. They should only contain lowercase letters, 
+digits, and underscores. They must not start or end with an underscore. 
+Input Format 
+• A single line containing Maria’s chosen username. 
+Output Format 
+• Print true if the username meets the requirements, and false if any rule is violated. 
+Constraints 
+• 5 ≤ string length ≤ 20 
+• 
+CODE: 
+import java.util.Scanner; 
+public class UsernameValidator { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+String username = scanner.nextLine(); 
+boolean isValid = isUsernameValid(username); 
+System.out.println(isValid);  
+scanner.close(); 
+} 
+private static boolean isUsernameValid(String username) { 
+if (username.length() < 5 || username.length() > 20) { 
+return false; 
+} 
+if (username.startsWith("") || username.endsWith("")) { 
+return false; 
+} 
+for (char c : username.toCharArray()) { 
+if (!Character.isLowerCase(c) && !Character.isDigit(c) && c != '_') { 
+return false; 
+} 
+} 
+return true;  
+} 
+} 
+2. Sarah is creating a new username for her online game profile but must follow some rules, The 
+username must be between 5 and 20 characters long. It can only include lowercase letters, digits, 
+and underscores. It cannot start or end with an underscore and also it should not contains any other 
+special characters. 
+Input Format 
+• A single line containing Sarah’s chosen username. 
+Output Format 
+• Print true if the username meets all criteria, and false if any rule is broken. 
+Constraints 
+• 5 ≤ string length ≤ 20 
+• CODE: 
+import java.util.Scanner; 
+public class UsernameValidator { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+String username = scanner.nextLine(); 
+boolean isValid = isUsernameValid(username); 
+System.out.println(isValid); 
+scanner.close(); 
+} 
+private static boolean isUsernameValid(String username) { 
+if (username.length() < 5 || username.length() > 20) { 
+return false; 
+} 
+if (username.startsWith("") || username.endsWith("")) { 
+return false; 
+} 
+for (char c : username.toCharArray()) { 
+if (!Character.isLowerCase(c) && !Character.isDigit(c) && c != '_') { 
+return false; 
+} 
+} 
+return true;  
+} 
+} 
+3. An e-commerce site requires usernames to follow specific guidelines, Usernames should be 5 to 
+20 characters in length. They can only contain lowercase letters, digits, and underscores. They 
+should not start or end with an underscore. 
+Input Format 
+• A single line containing a username is chosen by a customer. 
+Output Format 
+• Print true if the username is valid, and false if invalid. 
+Constraints 
+• 5 ≤ string length ≤ 20 
+CODE: 
+import java.util.Scanner; 
+public class UsernameValidator { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+String username = scanner.nextLine(); 
+boolean isValid = isUsernameValid(username); 
+System.out.println(isValid); 
+scanner.close(); 
+} 
+private static boolean isUsernameValid(String username) { 
+if (username.length() < 5 || username.length() > 20) { 
+return false; 
+} 
+if (username.startsWith("") || username.endsWith("")) { 
+return false; 
+} 
+for (char c : username.toCharArray()) { 
+if (!Character.isLowerCase(c) && !Character.isDigit(c) && c != '_') { 
+return false; 
+} 
+} 
+return true;  
+} 
+} 
+Streams 
+1. The local library has started cataloging book prices and wants to find out how many books are 
+priced above a given threshold. Given a list of book prices, Implement a function to count and 
+display how many books cost more than a specific threshold. The input should be validated as per 
+the library’s requirements. 
+Input Format 
+• The first input is an integer n, the number of books. 
+• Next, enter each book's price as a floating point value. 
+• The last input is the floating point value represents the threshold value. 
+Output Format 
+• Print the number of books that cost more than the threshold price. 
+• If any input is negative, print Invalid input. 
+Constraints 
+• 0 ≤ n ≤ 100 
+• -1000 ≤ price ≤ 1000 
+• -1000 ≤ threshold ≤ 1000 
+CODE: 
+import java.util.Scanner; 
+public class LibraryBookPriceAnalyzer { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 0 || n > 100) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+double[] prices = new double[n]; 
+for (int i = 0; i < n; i++) { 
+prices[i] = scanner.nextDouble(); 
+if (prices[i] < 0) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+} 
+double threshold = scanner.nextDouble(); 
+if (threshold < 0) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+int count = 0; 
+for (double price : prices) { 
+if (price > threshold) { 
+count++; 
+} 
+} 
+System.out.println(count); 
+scanner.close(); 
+} 
+} 
+2. As the organizer of a reading club, you want to identify how many books are priced above a 
+certain threshold to help members select affordable reads. Implement a program that reads the 
+prices of the books and a threshold price, then counts how many books cost more than the specified 
+threshold using Java Streams. 
+Input Format 
+• The first line contains an integer n, the number of books. 
+• The second line contains n doubles representing the prices of the books. 
+• The third line contains a double representing the threshold price. 
+Output Format 
+• Print the number of books that cost more than the threshold price. 
+• If any input is negative, print "Invalid input" 
+Constraints 
+• 0 ≤ n ≤ 10 
+• -1000 ≤ price ≤ 1000 
+• -1000 ≤ threshold ≤ 1000 
+CODE: 
+import java.util.Scanner; 
+import java.util.stream.Stream; 
+public class BookPriceAnalyzer { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 0 || n > 10) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+double[] prices = new double[n]; 
+for (int i = 0; i < n; i++) { 
+prices[i] = scanner.nextDouble(); 
+if (prices[i] < 0) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+} 
+double threshold = scanner.nextDouble(); 
+if (threshold < 0) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+long count = Stream.of(prices).flatMapToDouble(Stream::of).filter(price -> price > 
+threshold).count(); 
+System.out.println(count); 
+scanner.close(); 
+} 
+} 
+3. As a finance manager at a charity organization, you need to assess how many donations received 
+exceed a specific amount to identify high-value contributions. Implement a program that reads the 
+donation amounts and a threshold amount, then counts how many donations are greater than the 
+specified threshold using Java Streams. 
+Input Format 
+• The first line contains an integer n, the number of donations. 
+• The second line contains n doubles representing the donation amounts. 
+• The third line contains a double representing the threshold amount. 
+Output Format 
+• Print the number of donations that exceed the threshold amount. 
+• If any input is negative, print "Invalid input" 
+Constraints 
+• 0 ≤ n ≤ 10 
+• -1000 ≤ donation ≤ 1000 
+• -1000 ≤ threshold ≤ 1000 
+CODE: 
+import java.util.Scanner; 
+import java.util.stream.Stream; 
+public class DonationAnalyzer { 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+int n = scanner.nextInt(); 
+if (n < 0 || n > 10) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+double[] donations = new double[n]; 
+for (int i = 0; i < n; i++) { 
+donations[i] = scanner.nextDouble(); 
+if (donations[i] < 0) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+} 
+double threshold = scanner.nextDouble(); 
+if (threshold < 0) { 
+System.out.println("Invalid input"); 
+return; 
+} 
+long count = Stream.of(donations).flatMapToDouble(Stream::of).filter(donation -> 
+donation > threshold).count(); 
+System.out.println(count);         
+scanner.close(); 
+} 
+} 
+Date and Number classes 
+1. You are a software developer tasked with creating a utility that calculates the difference in days 
+between two dates. Implement a module that reads two dates from the user and calculates the 
+number of days between them. 
+Input Format 
+• The first line contains a date in the format yyyy-mm-dd. 
+• The second line contains another date in the format yyyy-mm-dd. 
+Output Format 
+• Print the number of days between the two dates. 
+• If any input is invalid, print "Invalid input" 
+• If the first date is later than the second date, print "Invalid input". 
+Constraints 
+• The first date is not later than the second date. 
+• 1900-01-01 <= Dates <= 2100-12-31. 
+CODE: 
+import java.time.LocalDate; 
+import java.time.format.DateTimeParseException; 
+import java.time.temporal.ChronoUnit; 
+import java.util.Scanner; 
+public class DateDifferenceSimple { 
+public static String calculateDaysBetween(String firstDate, String secondDate) { 
+try { 
+LocalDate start = LocalDate.parse(firstDate); 
+LocalDate end = LocalDate.parse(secondDate); 
+if (start.isAfter(end)) { 
+return "Invalid input"; 
+} 
+long daysBetween = ChronoUnit.DAYS.between(start, end); 
+return String.valueOf(daysBetween); 
+} catch (DateTimeParseException e) { 
+return "Invalid input"; 
+} 
+} 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in);   
+System.out.print("Enter the first date (yyyy-mm-dd): "); 
+String firstDate = scanner.nextLine(); 
+System.out.print("Enter the second date (yyyy-mm-dd): "); 
+String secondDate = scanner.nextLine(); 
+System.out.println(calculateDaysBetween(firstDate, secondDate)); 
+scanner.close(); 
+} 
+} 
+2. You are a project manager responsible for tracking the timeline of a construction project. 
+Implement a module that reads two important dates from the user: the start date and the completion 
+date of the project, and calculates the number of days between them. 
+Input Format 
+• The first line contains a date in the format yyyy-mm-dd. 
+• The second line contains another date in the format yyyy-mm-dd. 
+Output Format 
+• Print the number of days between the two dates. 
+• If any input is invalid, print "Invalid input". 
+• If the first date is later than the second date, print "Invalid input". 
+Constraints 
+• The first date is not later than the second date. 
+• 1900-01-01 <= Dates <= 2100-12-31. 
+CODE: 
+import java.time.LocalDate; 
+import java.time.format.DateTimeParseException; 
+import java.time.temporal.ChronoUnit; 
+import java.util.Scanner; 
+public class ProjectTimelineSimple { 
+public static String calculateDaysBetween(String startDate, String endDate) { 
+try { 
+LocalDate start = LocalDate.parse(startDate); 
+LocalDate end = LocalDate.parse(endDate); 
+if (start.isAfter(end)) { 
+return "Invalid input"; 
+} 
+long daysBetween = ChronoUnit.DAYS.between(start, end); 
+return String.valueOf(daysBetween); 
+} catch (DateTimeParseException e) { 
+} 
+return "Invalid input"; 
+} 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+System.out.print("Enter the start date (yyyy-mm-dd): "); 
+String startDate = scanner.nextLine(); 
+System.out.print("Enter the end date (yyyy-mm-dd): "); 
+String endDate = scanner.nextLine(); 
+System.out.println(calculateDaysBetween(startDate, endDate)); 
+scanner.close(); 
+} 
+} 
+3. You are a travel planner responsible for organizing trips. Implement a module that reads the 
+departure date and return date of a planned trip from the user and calculates the number of days 
+between them. 
+Input Format 
+• The first line contains a date in the format yyyy-mm-dd (departure date). 
+• The second line contains another date in the format yyyy-mm-dd (return date). 
+Output Format 
+• Print the number of days between the two dates. 
+• If any input is invalid, print "Invalid input" 
+• If the departure date is later than the return date, print "Invalid input". 
+Constraints 
+• The departure date is not later than the return date. 
+• 1900-01-01 <= Dates <= 2100-12-31. 
+CODE: 
+• 
+import java.time.LocalDate; 
+import java.time.format.DateTimeParseException; 
+import java.time.temporal.ChronoUnit; 
+import java.util.Scanner; 
+public class TravelPlannerSimple { 
+public static String calculateDaysBetween(String departureDate, String returnDate) { 
+try { 
+LocalDate departure = LocalDate.parse(departureDate); 
+LocalDate returnD = LocalDate.parse(returnDate); 
+if (departure.isAfter(returnD)) { 
+return "Invalid input"; 
+} 
+long daysBetween = ChronoUnit.DAYS.between(departure, returnD); 
+return String.valueOf(daysBetween); 
+} catch (DateTimeParseException e) { 
+return "Invalid input"; 
+} 
+} 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+System.out.print("Enter the departure date (yyyy-mm-dd): "); 
+String departureDate = scanner.nextLine();         
+System.out.print("Enter the return date (yyyy-mm-dd): "); 
+String returnDate = scanner.nextLine(); 
+System.out.println(calculateDaysBetween(departureDate, returnDate)); 
+scanner.close(); 
+} 
+} 
+Tokenizing 
+1. You are creating a language learning application that helps users practice their writing skills. 
+Implement a utility that reads a sentence from the user and measures the number of words in it 
+using tokenization. 
+Input Format 
+• The first line contains a sentence (up to 100 characters). 
+Output Format 
+• Print the number of words in the sentence. 
+• If the input contains invalid characters (anything other than alphabetic characters and 
+spaces), print "Invalid input". 
+• If the sentence is empty, print "Invalid input". 
+Constraints 
+• The sentence contains only alphabetic characters and spaces. 
+• The sentence is at most 100 characters long. 
+• 
+CODE: 
+import java.util.Scanner; 
+public class LanguagePracticeTool { 
+public static String countWordsInSentence(String sentence) { 
+if (sentence.trim().isEmpty()) { 
+return "Invalid input"; 
+} 
+if (!sentence.matches("[A-Za-z ]+")) { 
+return "Invalid input"; 
+} 
+String[] words = sentence.trim().split("\\s+"); 
+return String.valueOf(words.length); 
+} 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+System.out.print("Enter a sentence (up to 100 characters): "); 
+String sentence = scanner.nextLine(); 
+if (sentence.length() > 100) { 
+System.out.println("Invalid input"); 
+} else { 
+System.out.println(countWordsInSentence(sentence)); 
+} 
+scanner.close(); 
+} 
+} 
+2. In a new writing application, developers are building a feature to help users explore their writing 
+habits. The tool will analyze user input by counting words, offering insights into writing patterns. 
+By tokenizing text, the tool accurately measures word count, providing writers with feedback on 
+their writing style and length. 
+Input Format 
+• The first line contains a sentence (up to 100 characters). 
+Output Format 
+• Print the number of words in the text input. 
+• If the input contains invalid characters (anything other than alphabetic characters and 
+spaces), print "Invalid input". 
+• If the text input is empty, print "Invalid input". 
+Constraints 
+• The text input contains only alphabetic characters and spaces. 
+• The text input is at most 100 characters long. 
+CODE: 
+import java.util.Scanner; 
+public class WritingAnalyzer { 
+public static String analyzeWriting(String textInput) { 
+if (textInput.trim().isEmpty()) { 
+return "Invalid input"; 
+} 
+if (!textInput.matches("[A-Za-z ]+")) { 
+return "Invalid input"; 
+} 
+String[] words = textInput.trim().split("\\s+"); 
+return String.valueOf(words.length); 
+} 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+System.out.print("Enter text (up to 100 characters): "); 
+String textInput = scanner.nextLine(); 
+if (textInput.length() > 100) { 
+System.out.println("Invalid input"); 
+} else { 
+System.out.println(analyzeWriting(textInput)); 
+} 
+scanner.close(); 
+} 
+} 
+3. You are developing a tool for a language learning application that needs to analyze user input for 
+vocabulary practice. Design and develop a counter that reads a sentence from the user and counts 
+the number of words in it using tokenization. 
+Input Format 
+• The first line contains a sentence (up to 100 characters). 
+Output Format 
+• Print the number of words in the sentence. 
+• If the input contains invalid characters (anything other than alphabetic characters and 
+spaces), print "Invalid input". 
+• If the sentence is empty, print "Invalid input". 
+Constraints 
+• The sentence contains only alphabetic characters and spaces. 
+• The sentence is at most 100 characters long. 
+CODE: 
+import java.util.Scanner; 
+public class WordCounter { 
+public static String countWords(String sentence) { 
+if (sentence.trim().isEmpty()) { 
+return "Invalid input"; 
+} 
+if (!sentence.matches("[A-Za-z ]+")) { 
+return "Invalid input"; 
+} 
+String[] words = sentence.trim().split("\\s+"); 
+return String.valueOf(words.length); 
+} 
+public static void main(String[] args) { 
+Scanner scanner = new Scanner(System.in); 
+System.out.print("Enter a sentence (up to 100 characters): "); 
+String sentence = scanner.nextLine(); 
+if (sentence.length() > 100) { 
+System.out.println("Invalid input"); 
+} else { 
+System.out.println(countWords(sentence)); 
+} 
+scanner.close(); 
+} 
+} 
