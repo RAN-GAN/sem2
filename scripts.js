@@ -39,7 +39,7 @@ window.onload = function () {
       // Add default option
       const defaultOption = document.createElement("option");
       defaultOption.value = "";
-      defaultOption.textContent = "Select a Topic(Display all topics)";
+      defaultOption.textContent = "Select a Topic";
       select.appendChild(defaultOption);
 
       topics.forEach((topic, index) => {
