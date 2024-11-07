@@ -11,7 +11,7 @@ window.onload = function () {
   disclaimer.after(select);
   select.after(contentDiv);
 
-  fetch("test1.txt")
+  fetch("os.txt")
     .then((response) => response.text())
     .then((text) => {
       // Display initial content
