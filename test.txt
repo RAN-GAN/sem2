@@ -1,4 +1,5 @@
 Basic Linux Commands
+
 1. TASK : To display user defined message
 Command : echo
 Syntax : echo “Message”
@@ -120,7 +121,7 @@ Syntax : chmod 777 filename
 Explanation : This command gives the corresponding permission to user, group
 and other.
 END
-2.A Basic Shell Programming
+2(A) Basic Shell Programming
 1. Defining Variables in a Script
 --------------------------------
 #!/bin/bash
@@ -233,7 +234,7 @@ else
 fi
 END
 
-2(b) Shell Programming
+2(B) Shell Scripting
 
 1. To Find Whether a Given Voter is Eligible to Vote
 ----------------------------------------------------
@@ -376,7 +377,8 @@ case $op in
     *) echo "Invalid operation" ;;
 esac
 END
-IMPLEMENTATION OF UNIX SYSTEM CALLS
+Implementation Of Unix System Calls
+
 1A
 ALGORITHM:
 Step 1: Start the program.
@@ -416,6 +418,8 @@ int main()
         printf("\n i am in the child process %d",getppid());
     }
 }
+--------------------------------------------------------------
+
 1B
 ALGORITHM:
 Step 1: Start the program.
@@ -464,8 +468,9 @@ int main( )
     exit(0);
 }
 
-1.B.2 ) WAIT() AND EXIT() SYSTEM CALLS
-PROGRAM:
+1.B.2 
+WAIT() AND EXIT() SYSTEM CALLS
+
 SOURCE CODE:
 #include <stdlib.h>
 #include <errno.h>
@@ -506,7 +511,10 @@ main()
 
     }
 }
+--------------------------------------------------------------
+
 1. C) EXECL SYSTEM CALL
+
 ALGORITHM
 Step 1: Start the program.
 Step 2: Include the necessary header files.
@@ -595,6 +603,7 @@ int main() {
 
     return 0;
 }
+--------------------------------------------------------------
 
 1.B) Write C program to simulate SJF CPU scheduling algorithm.
 ALGORITHM:
@@ -673,6 +682,8 @@ int main() {
 
     return 0;
 }
+--------------------------------------------------------------
+
 1.C) Write C program to simulate Round Robin CPU scheduling algorithm.
 ALGORITHM:
 Step 1: Start the program.
@@ -756,40 +767,39 @@ int main() {
     return 0;
 }
 END
-CONSUMER PROBLEM USING SEMAPHORES
-i)Simulation of Producer – Consumer Problem using Semaphores
-ALGORITHM:
+Producer-Consumer Problem Using Semaphores
+
+Initialization:
 1. Start the process.
-2. Initialize mutex to 1, empty to the buffer size, and full to 0.
-3. Set buffer pointers (in and out) to 0.
+2. Initialize semaphores:
+   - mutex = 1 (for mutual exclusion of the shared buffer).
+   - empty = N (number of empty slots in the buffer, initially equal to the buffer size).
+   - full = 0 (number of filled slots in the buffer, initially 0).
+3. Set buffer pointers:
+   - in = 0 (the index where the producer will insert the next item).
+   - out = 0 (the index from which the consumer will remove the next item).
+
 Producer Process:
-4. Continuously produce items.
-For each item:
-
-a. Check if there is space in the buffer using wait(empty).
-
-EX. NO: 5
-
-SIMULATION OF PRODUCER – CONSUMER
-PROBLEM USING SEMAPHORES
-
-b. Lock the buffer using wait(mutex) to prevent race conditions.
-c. Place the item in the buffer at the in position.
-d. Move the in pointer forward in a circular manner.
-e. Release the mutex using signal(mutex).
-f. Indicate a new item is available using signal(full).
+4. Continuously produce items:
+   - For each item:
+     1. Wait for space in the buffer using wait(empty).
+     2. Lock the buffer using wait(mutex) to ensure mutual exclusion.
+     3. Insert the item into the buffer at the in position.
+     4. Update the in pointer: in = (in + 1) % N.
+     5. Release the mutex using signal(mutex).
+     6. Indicate that an item is available using signal(full).
 
 Consumer Process:
-5. Continuously consume items.
-For each item:
-a. Wait for a filled slot using wait(full).
-b. Lock the buffer using wait(mutex) to prevent race conditions.
-c. Remove an item from the buffer at the out position.
-d. Move the out pointer forward in a circular manner.
-e. Release the mutex using signal(mutex).
-f. Indicate that an empty slot is now available using signal(empty).
+5. Continuously consume items:
+   - For each item:
+     1. Wait for a filled slot using wait(full).
+     2. Lock the buffer using wait(mutex) to ensure mutual exclusion.
+     3. Remove the item from the buffer at the out position.
+     4. Update the out pointer: out = (out + 1) % N.
+     5. Release the mutex using signal(mutex).
+     6. Indicate that an empty slot is available using signal(empty).
 
-6. Stop the Process.
+6. Stop the process.
 
 SOURCE CODE:
 
@@ -868,6 +878,7 @@ void consumer() {
     x--;
     mutex = signal(mutex);
 }
+--------------------------------------------------------------
 
 ii) Implementation of Dining Philosopher’s Problem to demonstrate Process
 Synchronization
@@ -974,47 +985,44 @@ int main() {
     return 0;
 }
 END
-BANKER’S ALGORITHM
+Banker’s Algorithm
+
 ALGORITHM:
+
 1. Start the Process
-Let n be the number of processes.
-Let m be the number of resource types.
-Define the following data structures:
-Available: Vector of length m representing the available resources.
-Max: An n x m matrix that represents the maximum demand of each process.
-Allocation: An n x m matrix that represents the number of resources allocated to each process.
-Need: An n x m matrix that represents the remaining resources needed by each process.
+   - Let n be the number of processes.
+   - Let m be the number of resource types.
+   - Define the following data structures:
+     - Available: Vector of length m representing the available resources.
+     - Max: An n x m matrix that represents the maximum demand of each process.
+     - Allocation: An n x m matrix that represents the number of resources allocated to each process.
+     - Need: An n x m matrix that represents the remaining resources needed by each process.
+
 2. Safety Algorithm
-Initialize:
-
-Work = Available (a vector of length m)
-Finish = [False, False, ..., False] (a boolean array of length n indicating whether each process is finished)
-Repeat until a safe sequence is found:
-
-Find an index i such that:
-Finish[i] = False (the process has not finished)
-Need[i] <= Work (the process can be completed with the available resources)
-If no such i exists, proceed to step 4.
-For the selected process P[i]:
-
-Set Work = Work + Allocation[i] (add the allocated resources of P[i] to Work)
-Set Finish[i] = True (mark process P[i] as finished)
-Go back to step 2.
-If Finish[i] = True for all processes i, then the system is in a safe state.
+   - Initialize:
+     - Work = Available (a vector of length m)
+     - Finish = [False, False, ..., False] (a boolean array of length n indicating whether each process is finished)
+   - Repeat until a safe sequence is found:
+     - Find an index i such that:
+       - Finish[i] = False (the process has not finished)
+       - Need[i] <= Work (the process can be completed with the available resources)
+     - If no such i exists, proceed to step 4.
+     - For the selected process P[i]:
+       - Set Work = Work + Allocation[i] (add the allocated resources of P[i] to Work)
+       - Set Finish[i] = True (mark process P[i] as finished)
+       - Go back to step 2.
+     - If Finish[i] = True for all processes i, then the system is in a safe state.
 
 3. Resource-Request Algorithm
-Let Request be the request vector for process P[i].
-
-When a request is made by process P[i], do the following:
-
-If Request[i] > Need[i], raise an error (process P[i] has exceeded its maximum claim).
-If Request[i] > Available, process P[i] must wait (resources are not available).
-If the request is valid, update the resources:
-
-Set Available = Available - Request[i]
-Set Allocation = Allocation + Request[i]
-Set Need = Need - Request[i]
-Stop the process.
+   - Let Request be the request vector for process P[i].
+   - When a request is made by process P[i], do the following:
+     - If Request[i] > Need[i], raise an error (process P[i] has exceeded its maximum claim).
+     - If Request[i] > Available, process P[i] must wait (resources are not available).
+     - If the request is valid, update the resources:
+       - Set Available = Available - Request[i]
+       - Set Allocation = Allocation + Request[i]
+       - Set Need = Need - Request[i]
+   - Stop the process.
 
 PROGRAM:
 
@@ -1211,7 +1219,7 @@ int main() {
     return 0;
 }
 END
-MEMORY ALLOCATION AND MANAGEMENT
+Memory Allocation And Management
 
 A) FIRST FIT ALGORITHM:
 ALGORITHM:
@@ -1277,7 +1285,7 @@ void main() {
             printf("Not allocated");
     }
 }
-
+--------------------------------------------------------------
 
 B) BEST FIT ALGORITHM:
 ALGORITHM:
@@ -1347,6 +1355,7 @@ void main() {
         printf("\n%d\t\t%d\t\t%d\t\t%d\t\t%d", i, p[i], parray[i], b[parray[i]], fragment[i]);
     }
 }
+--------------------------------------------------------------
 
 
 C) WORST FIT ALGORITHM:
@@ -1408,7 +1417,7 @@ int main() {
     return 0;
 }
 END
-PAGE REPLACEMENT ALGORITHMS
+Page Replacement Algorithms
 
 A) FIRST IN FIRST OUT
 ALGORITHM:
@@ -1480,6 +1489,7 @@ void main() {
 
     printf("Number of page faults: %d", pf + frsize);
 }
+--------------------------------------------------------------
 
 B) LEAST RECENTLY USED
 AIM:
@@ -1568,6 +1578,7 @@ void main() {
 
     printf("\nNo of page faults: %d", pf + frsize);
 }
+--------------------------------------------------------------
 
 C) OPTIMAL PAGE REPLACEMENT ALGORITHM
 AIM:
