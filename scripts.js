@@ -12,49 +12,46 @@ window.onload = function () {
   disclaimer.after(select);
   select.after(contentDiv);
 
-  fetch("test.txt")
-    .then((response) => response.text())
-    .then((text) => {
-      // Split content by END
-      const sections = text.split("END");
+  // Show loading state
+  contentDiv.innerHTML = "<p>Loading content...</p>";
 
-      // Get topics (first line of each section)
+  fetch("test.txt") // Changed from test.txt to txt.txt
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then((text) => {
+      // Display all content immediately
+      contentDiv.innerHTML = `<pre><code class="language-txt">${text}</code></pre>`;
+      Prism.highlightAll();
+
+      // Rest of the code remains same
+      const sections = text.split("END");
       const topics = sections
         .map((section) => {
           const lines = section.trim().split("\n");
           return lines[0];
         })
-        .filter((topic) => topic); // Remove empty topics
+        .filter((topic) => topic);
 
       // Add default option
       const defaultOption = document.createElement("option");
       defaultOption.value = "";
-      defaultOption.textContent = "Select a Topic(displaying all topics)";
+      defaultOption.textContent = "Select a Topic(Display all topics)";
       select.appendChild(defaultOption);
 
-      // Add topic options
       topics.forEach((topic, index) => {
         const option = document.createElement("option");
         option.value = index;
         option.textContent = topic;
         select.appendChild(option);
       });
-
-      // Add change event listener
-      select.addEventListener("change", function () {
-        if (this.value === "") {
-          // Show all content when "Select a Topic" is chosen
-          contentDiv.innerHTML = `<pre><code class="language-txt">${text}</code></pre>`;
-        } else {
-          const selectedContent = sections[this.value].trim();
-          contentDiv.innerHTML = `<pre><code class="language-txt">${selectedContent}</code></pre>`;
-        }
-        Prism.highlightAll();
-      });
     })
     .catch((error) => {
       console.error("Error loading the file:", error);
       contentDiv.innerHTML =
-        '<p style="color: red;">Error loading content. Please try refreshing the page.</p>';
+        '<p style="color: red;">Error loading content. Please check console for details.</p>';
     });
 };
