@@ -1,4 +1,3 @@
-// scripts.js
 window.onload = function () {
   // Create elements first
   const select = document.createElement("select");
@@ -12,22 +11,14 @@ window.onload = function () {
   disclaimer.after(select);
   select.after(contentDiv);
 
-  // Show loading state
-  contentDiv.innerHTML = "<p>Loading content...</p>";
-
-  fetch("test.txt") // Changed from test.txt to txt.txt
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.text();
-    })
+  fetch("test.txt")
+    .then((response) => response.text())
     .then((text) => {
-      // Display all content immediately
+      // Display initial content
       contentDiv.innerHTML = `<pre><code class="language-txt">${text}</code></pre>`;
       Prism.highlightAll();
 
-      // Rest of the code remains same
+      // Split and process sections
       const sections = text.split("END");
       const topics = sections
         .map((section) => {
@@ -36,22 +27,37 @@ window.onload = function () {
         })
         .filter((topic) => topic);
 
+      // Clear existing options
+      select.innerHTML = "";
+
       // Add default option
       const defaultOption = document.createElement("option");
       defaultOption.value = "";
       defaultOption.textContent = "Select a Topic";
       select.appendChild(defaultOption);
 
+      // Add topic options
       topics.forEach((topic, index) => {
         const option = document.createElement("option");
         option.value = index;
         option.textContent = topic;
         select.appendChild(option);
       });
+
+      // Add change event listener
+      select.addEventListener("change", function () {
+        if (this.value === "") {
+          contentDiv.innerHTML = `<pre><code class="language-txt">${text}</code></pre>`;
+        } else {
+          const selectedContent = sections[this.value].trim();
+          contentDiv.innerHTML = `<pre><code class="language-txt">${selectedContent}</code></pre>`;
+        }
+        Prism.highlightAll();
+      });
     })
     .catch((error) => {
-      console.error("Error loading the file:", error);
+      console.error("Error loading file:", error);
       contentDiv.innerHTML =
-        '<p style="color: red;">Error loading content. Please check console for details.</p>';
+        '<p style="color: red;">Error loading content. Please refresh the page.</p>';
     });
 };
