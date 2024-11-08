@@ -14,8 +14,20 @@ window.onload = function () {
   fetch("os.txt")
     .then((response) => response.text())
     .then((text) => {
+      // Function to escape HTML special characters
+      function escapeHtml(unsafe) {
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
       // Display initial content
-      contentDiv.innerHTML = `<pre><code class="language-txt">${text}</code></pre>`;
+      contentDiv.innerHTML = `<pre><code class="language-txt">${escapeHtml(
+        text
+      )}</code></pre>`;
       Prism.highlightAll();
 
       // Split and process sections
@@ -47,10 +59,14 @@ window.onload = function () {
       // Add change event listener
       select.addEventListener("change", function () {
         if (this.value === "") {
-          contentDiv.innerHTML = `<pre><code class="language-txt">${text}</code></pre>`;
+          contentDiv.innerHTML = `<pre><code class="language-txt">${escapeHtml(
+            text
+          )}</code></pre>`;
         } else {
           const selectedContent = sections[this.value].trim();
-          contentDiv.innerHTML = `<pre><code class="language-txt">${selectedContent}</code></pre>`;
+          contentDiv.innerHTML = `<pre><code class="language-txt">${escapeHtml(
+            selectedContent
+          )}</code></pre>`;
         }
         Prism.highlightAll();
       });
