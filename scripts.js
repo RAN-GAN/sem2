@@ -11,7 +11,7 @@ window.onload = function () {
   disclaimer.after(select);
   select.after(contentDiv);
 
-  fetch("os.txt")
+  fetch("java_skct.txt")
     .then((response) => response.text())
     .then((text) => {
       // Function to escape HTML special characters
