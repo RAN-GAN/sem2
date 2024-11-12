@@ -11,7 +11,7 @@ window.onload = function () {
   disclaimer.after(select);
   select.after(contentDiv);
 
-  fetch("java_skct.txt")
+  fetch("OsEndLAB2.txt")
     .then((response) => response.text())
     .then((text) => {
       // Function to escape HTML special characters
