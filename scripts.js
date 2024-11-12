@@ -1,5 +1,29 @@
 window.onload = function () {
   // Create elements first
+  const userAgent = navigator.userAgent;
+
+  if (userAgent.includes("SamsungBrowser")) {
+    const browserWarning = document.createElement("div");
+    browserWarning.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 20px;
+    `;
+    browserWarning.innerHTML =
+      "The Samsung Browser is not supported.<br>Please switch to a different browser.";
+    document.body.appendChild(browserWarning);
+    return;
+  }
   const select = document.createElement("select");
   select.id = "topicSelect";
 
