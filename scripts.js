@@ -55,27 +55,7 @@ window.onload = function () {
           .replace(/"/g, "&quot;")
           .replace(/'/g, "&#039;");
       }
-      const browserWarning = document.createElement("div");
-      browserWarning.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      font-size: 1.2rem;
-      text-align: center;
-      padding: 20px;
-    `;
 
-      // Custom message based on browser
-
-      browserWarning.innerHTML = userAgent;
-      document.body.appendChild(browserWarning);
       // Display initial content
       contentDiv.innerHTML = `<pre><code class="language-txt">${escapeHtml(
         text
