@@ -45,22 +45,22 @@
         --dark-border-color: #404040;
 
         /* Default Theme (Light) */
-        --bg-primary: var(--light-bg-primary);
-        --bg-secondary: var(--light-bg-secondary);
-        --bg-code: var(--light-bg-code);
-        --text-primary: var(--light-text-primary);
-        --text-secondary: var(--light-text-secondary);
-        --border-color: var(--light-border-color);
-      }
-
-      /* Dark Theme Override */
-      [data-theme="dark"] {
         --bg-primary: var(--dark-bg-primary);
         --bg-secondary: var(--dark-bg-secondary);
         --bg-code: var(--dark-bg-code);
         --text-primary: var(--dark-text-primary);
         --text-secondary: var(--dark-text-secondary);
         --border-color: var(--dark-border-color);
+      }
+
+      /* Dark Theme Override */
+      [data-theme="dark"] {
+        --bg-primary: var(--light-bg-primary);
+        --bg-secondary: var(--light-bg-secondary);
+        --bg-code: var(--light-bg-code);
+        --text-primary: var(--light-text-primary);
+        --text-secondary: var(--light-text-secondary);
+        --border-color: var(--light-border-color);
       }
 
       /* Base Styles */
