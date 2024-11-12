@@ -1,7 +1,8 @@
 window.onload = function () {
-  // Create elements first
   const userAgent = navigator.userAgent;
+  console.log(userAgent);
 
+  // Check for both Samsung Browser and Edge
   if (userAgent.includes("SamsungBrowser")) {
     const browserWarning = document.createElement("div");
     browserWarning.style.cssText = `
@@ -19,8 +20,11 @@ window.onload = function () {
       text-align: center;
       padding: 20px;
     `;
-    browserWarning.innerHTML =
-      "The Samsung Browser is not supported.<br>Please switch to a different browser.";
+
+    // Custom message based on browser
+    const message = "Padichu eluthu da parama🙏";
+
+    browserWarning.innerHTML = message;
     document.body.appendChild(browserWarning);
     return;
   }
