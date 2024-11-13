@@ -279,6 +279,48 @@
     </style>
   </head>
   <body>
+    <h1>Ask OpenAI</h1>
+    <input type="text" id="question" placeholder="Enter your question" />
+    <button onclick="askOpenAI()">Ask</button>
+    <div id="response"></div>
+
+    <!-- Include Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+      async function askOpenAI() {
+        const question = document.getElementById("question").value;
+        const responseDiv = document.getElementById("response");
+
+        responseDiv.innerHTML = "Loading...";
+
+        try {
+          const response = await axios.post(
+            "https://api.openai.com/v1/chat/completions",
+            {
+              model: "gpt-4",
+              messages: [
+                { role: "system", content: "You are a helpful assistant." },
+                { role: "user", content: question },
+              ],
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + process.env.OP,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          // Display the API's response
+          responseDiv.innerHTML = response.data.choices[0].message.content;
+        } catch (error) {
+          console.error("Error:", error);
+          responseDiv.innerHTML =
+            "Error fetching response. Check the console for details.";
+        }
+      }
+    </script>
     <!-- <button class="theme-toggle" id="themeToggle">🌙</button> -->
     <div class="disclaimer">
       Disclaimer: For educational use only. The author does not take
