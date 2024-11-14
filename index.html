@@ -390,46 +390,46 @@
     <!-- Add Axios before other scripts -->
     <script>
       // Theme toggle setup
-      // const setupThemeToggle = () => {
-      //   try {
-      //     const themeToggle = document.getElementById("themeToggle");
-      //     if (!themeToggle) {
-      //       console.error("Theme toggle button not found!");
-      //       return;
-      //     }
+      const setupThemeToggle = () => {
+        try {
+          const themeToggle = document.getElementById("themeToggle");
+          if (!themeToggle) {
+            console.error("Theme toggle button not found!");
+            return;
+          }
 
-      //     const html = document.documentElement;
-      //     const prefersDark = window.matchMedia(
-      //       "(prefers-color-scheme: dark)"
-      //     ).matches;
+          const html = document.documentElement;
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
 
-      //     // Set initial theme
-      //     let currentTheme =
-      //       localStorage.getItem("theme") || (prefersDark ? "dark" : "light");
-      //     setTheme(currentTheme);
+          // Set initial theme
+          let currentTheme =
+            localStorage.getItem("theme") || (prefersDark ? "dark" : "light");
+          setTheme(currentTheme);
 
-      //     // Make sure button is visible
-      //     themeToggle.style.display = "block";
-      //     themeToggle.style.opacity = "1";
+          // Make sure button is visible
+          themeToggle.style.display = "block";
+          themeToggle.style.opacity = "1";
 
-      //     // Add click handler
-      //     themeToggle.addEventListener("click", () => {
-      //       currentTheme = html.getAttribute("data-theme");
-      //       const newTheme = currentTheme === "light" ? "dark" : "light";
-      //       setTheme(newTheme);
-      //     });
-      //   } catch (error) {
-      //     console.error("Error setting up theme toggle:", error);
-      //   }
-      // };
+          // Add click handler
+          themeToggle.addEventListener("click", () => {
+            currentTheme = html.getAttribute("data-theme");
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            setTheme(newTheme);
+          });
+        } catch (error) {
+          console.error("Error setting up theme toggle:", error);
+        }
+      };
 
-      // const setTheme = (theme) => {
-      //   const html = document.documentElement;
-      //   html.setAttribute("data-theme", theme);
-      //   localStorage.setItem("theme", theme);
-      //   document.getElementById("themeToggle").textContent =
-      //     theme === "light" ? "🌙" : "☀️";
-      // };
+      const setTheme = (theme) => {
+        const html = document.documentElement;
+        html.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+        document.getElementById("themeToggle").textContent =
+          theme === "light" ? "🌙" : "☀️";
+      };
 
       // Chat functionality
       const DEBOUNCE_DELAY = 1000;
