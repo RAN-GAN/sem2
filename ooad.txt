@@ -1,0 +1,91 @@
+1
+Aim: To Identify the Conceptual Classes and to develop a domain model with UML  
+class diagram for reservation and booking system. 
+ 
+Description 
+A class diagram in the Unified Modeling Language (UML) is a type of static structure diagram 
+that describes the structure of a system by showing the system's classes, their attributes, and the 
+relationships between the classes. 
+
+A class with three sections. 
+ 
+ The upper part holds the name of the class 
+ The middle part contains the attributes of the class 
+ The bottom part gives the methods or operations the class can take or undertake 
+ 
+In the system design of a system, a number of classes are identified and grouped together in a class 
+diagram which helps to determine the statically relations between those objects. With detailed 
+modeling, the classes of the conceptual design are often split in a number of subclasses. 
+
+Online Railway Ticket Reservation System: 
+Online Railway ticket reservation is very useful nowadays. This is very important to design a good-working 
+system software for ticket booking and related transactions. 
+ 
+The Reservation system should contain the following features:  
+1. If a passenger wants to reserve ticket(s), firstly, he/she has to log in to the Railway system with valid 
+credentials. Then, the passenger has to provide his/her details with the date of the journey, names of the 
+passengers and their details, origin station details, destination station details, and the class type of the required 
+ticket(s). 
+2. The Railway Reservation System will provide the available Train-list, and Seat-availability, via-details. 
+3. To book ticket passengers can pay through online/offline mode. After successful payment of the ticket 
+fare the System will generate the ticket and PNR no. will be given to the passenger. The System also keeps 
+the payment details and sends them to the system Admin. 
+4. The Passenger can check PNR status (confirmed, RAC, waiting list) by entering the PNR no. into the 
+Reservation system. 
+5. The Reservation system should store all train details, fare details (by zone, class, and date wise), PNR no, 
+date of trains, etc. This maintenance should be controlled by the Admin.  
+6. The System also has refund rules which have a date of reservation, ticket fare, and refundable percentage. 
+The passenger can simply cancel the ticket(s) by entering the PNR no and a cancel ticket request. After 
+cancelation, the Admin will pass the refundable amount to the System and the System will give the refundable 
+amount to the passenger. 
+ 
+Class Diagram:  
+ 
+These diagrams describe the operation and attributes of a class with imposed constraints in the system. In 
+this article the classes to be considered are ‘payment’, ‘train’, ‘passenger’, ‘ticket’, ‘railway reservation 
+system’, ‘admin’. The description of the classes is given below. 
+Class Attributes Processes 
+Payment,amount,ticketGeneration 
+Train,train code train name frequency,— 
+passenger, PAX_id, name,age,sex,login, search Train, modify the 
+form, pay charges, book tickets now ticket, cancel tickets 
+ticket PNR_no, status, payment type, train code search train, date of journey,, new Ticket, delete tickets 
+  
+Class Attributes Processes 
+railway reservation system ,system ,response 
+Admin ID, name formDetails, cancellationForm, 
+refundAmt 
+ 
+
+Result : 
+Thus the class diagram of reservation and booking system was created successfully. 
+END
+2
+AIM: 
+ 
+To draw the UML Package Diagram for Ticket Reservation System and Bank Management 
+System 
+ 
+HARDWARE REQUIREMENTS 
+ 
+ Intel Pentium Processor 3 
+ 
+PROJECT DESCRIPTION 
+ 
+A package diagram is represented as a folder shown as a large rectangle with a top attached to its upper left corner. 
+A package may contain both sub ordinate package and ordinary model elements. All UML models and diagrams 
+are organized into package. A package diagram in unified modeling language that depicts the dependencies 
+between the packages that make up a model. A Package Diagram (PD) showsa grouping of elements in the OO 
+model, and is a Cradle extension to UML. PDs can be used to show groups of classes in Class Diagrams (CDs), 
+groups of components or processes in Component Diagrams (CPDs), or groups of processors in Deployment 
+Diagrams (DPDs). There are three types of layer. They are a. User interface layer b. Domain layer c. Technical 
+services layer 
+ 
+Purpose of Package Diagrams 
+ 
+Package diagrams are used to structure high level system elements. Packages are used for organizing large system 
+which contains diagrams, documents and other key deliverables. 
+ 
+ Package Diagram can be used to simplify complex class diagrams, it can group classes into packages. 
+ A package is a collection of logically related UML elements. 
+ Packages are depicted as file folders and can be used on any of the UML diagrams.
