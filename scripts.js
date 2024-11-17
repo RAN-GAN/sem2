@@ -2,36 +2,36 @@ window.onload = function () {
   const userAgent = navigator.userAgent;
   console.log(userAgent);
 
-  // // Check for both Samsung Browser and Edge
-  // if (
-  //   userAgent.includes("Tizen") ||
-  //   userAgent.includes("Gear") ||
-  //   userAgent.includes("SamsungBrowser")
-  // ) {
-  //   const browserWarning = document.createElement("div");
-  //   browserWarning.style.cssText = `
-  //     position: fixed;
-  //     top: 0;
-  //     left: 0;
-  //     width: 100%;
-  //     height: 100%;
-  //     background-color: #f5f5f5;
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     z-index: 1000;
-  //     font-size: 1.2rem;
-  //     text-align: center;
-  //     padding: 20px;
-  //   `;
+  // Check for both Samsung Browser and Edge
+  if (
+    userAgent.includes("Tizen") ||
+    userAgent.includes("Gear") ||
+    userAgent.includes("SamsungBrowser")
+  ) {
+    const browserWarning = document.createElement("div");
+    browserWarning.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 20px;
+    `;
 
-  //   // Custom message based on browser
-  //   const message = "Padichu eluthu da parama🙏";
+    // Custom message based on browser
+    const message = "Padichu eluthu da parama🙏";
 
-  //   browserWarning.innerHTML = message;
-  //   document.body.appendChild(browserWarning);
-  //   return;
-  // }
+    browserWarning.innerHTML = message;
+    document.body.appendChild(browserWarning);
+    return;
+  }
   const select = document.createElement("select");
   select.id = "topicSelect";
 
