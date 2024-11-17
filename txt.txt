@@ -1,4 +1,4 @@
-1. Command Line Arguments - Movie Database:
+// Command Line Arguments - Movie Database:
 
 public class MovieDatabase {
     public static void main(String[] args) {
@@ -16,7 +16,8 @@ public class MovieDatabase {
         }
     }
 }
- Command Line Arguments - Recipe Manager:
+
+// Command Line Arguments - Recipe Manager:
 
 public class RecipeManager {
     public static void main(String[] args) {
@@ -53,8 +54,8 @@ public class GameCatalog {
         }
     }
 }
-END
-2. Decision Making
+
+// Decision Making - Driver's License:
 
 public class DrivingLicense {
     public static void main(String[] args) {
@@ -97,8 +98,8 @@ public class VotingEligibility {
         }
     }
 }
-END
-3. Looping Statements
+
+// Looping Statements - Marathon Analysis:
 
 public class MarathonAnalysis {
     public static void main(String[] args) {
@@ -175,8 +176,8 @@ public class CyclingRace {
         System.out.println(count);
     }
 }
-END
-4. Jump Statements:
+
+// Jump Statements - Delivery Robot:
 
 public class DeliveryRobot {
     public static void main(String[] args) {
@@ -268,8 +269,8 @@ public class EmergencySystem {
         }
     }
 }
-END
-5. 1D Array Question 1 - Retail Store Sales
+
+// 1D Array Question 1 - Retail Store Sales
 public class RetailSales {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -374,7 +375,7 @@ public class WeeklySales {
     }
 }
 
-6. 2D Array Question 1
+// 2D Array Question 1 - Inventory Data
 public class InventoryMatrix {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -457,8 +458,8 @@ public class DataVisualization {
         }
     }
 }
-END
-7. String Question 1
+
+// String Question 1 - Social Media Username
 public class UsernameValidator1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -471,7 +472,7 @@ public class UsernameValidator1 {
         }
         
         // Check if starts or ends with underscore
-        if (username.startsWith("") || username.endsWith("")) {
+        if (username.startsWith("_") || username.endsWith("_")) {
             System.out.println("false");
             return;
         }
@@ -499,7 +500,7 @@ public class UsernameValidator2 {
         }
         
         // Check if starts or ends with underscore
-        if (username.startsWith("") || username.endsWith("")) {
+        if (username.startsWith("_") || username.endsWith("_")) {
             System.out.println("false");
             return;
         }
@@ -527,7 +528,7 @@ public class UsernameValidator3 {
         }
         
         // Check if starts or ends with underscore
-        if (username.startsWith("") || username.endsWith("")) {
+        if (username.startsWith("_") || username.endsWith("_")) {
             System.out.println("false");
             return;
         }
@@ -542,7 +543,7 @@ public class UsernameValidator3 {
     }
 }
 
-8. Streams Question
+// Streams Question 1 - Library Book Prices
 public class LibraryCatalog {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -643,8 +644,8 @@ public class CharityDonations {
         System.out.println(count);
     }
 }
-END
-9. Date Question 1
+
+// Date Question 1 - Date Difference Calculator
 public class DateDiff1 {
     public static void main(String[] args) {
         try {
@@ -682,4 +683,81 @@ public class DateDiff2 {
                 return;
             }
             
-            long days = ChronoUnit.DAYS.
+            long days = ChronoUnit.DAYS.between(startDate, endDate);
+            System.out.println(days);
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+// Date Question 3 - Travel Duration Calculator
+public class DateDiff3 {
+    public static void main(String[] args) {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            LocalDate departureDate = LocalDate.parse(scanner.nextLine());
+            LocalDate returnDate = LocalDate.parse(scanner.nextLine());
+            
+            if (departureDate.isAfter(returnDate) || 
+                departureDate.isBefore(LocalDate.of(1900, 1, 1)) ||
+                returnDate.isAfter(LocalDate.of(2100, 12, 31))) {
+                System.out.println("Invalid input");
+                return;
+            }
+            
+            long days = ChronoUnit.DAYS.between(departureDate, returnDate);
+            System.out.println(days);
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+// Tokenizing Question 1 - Language Learning Word Counter
+public class WordCounter1 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String sentence = scanner.nextLine();
+        
+        if (sentence.isEmpty() || !sentence.matches("^[a-zA-Z\\s]+$")) {
+            System.out.println("Invalid input");
+            return;
+        }
+        
+        StringTokenizer tokenizer = new StringTokenizer(sentence);
+        System.out.println(tokenizer.countTokens());
+    }
+}
+
+// Tokenizing Question 2 - Writing Application Word Counter
+public class WordCounter2 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String text = scanner.nextLine();
+        
+        if (text.isEmpty() || !text.matches("^[a-zA-Z\\s]+$")) {
+            System.out.println("Invalid input");
+            return;
+        }
+        
+        StringTokenizer tokenizer = new StringTokenizer(text);
+        System.out.println(tokenizer.countTokens());
+    }
+}
+
+// Tokenizing Question 3 - Language Learning Tool
+public class WordCounter3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String sentence = scanner.nextLine();
+        
+        if (sentence.isEmpty() || !sentence.matches("^[a-zA-Z\\s]+$")) {
+            System.out.println("Invalid input");
+            return;
+        }
+        
+        StringTokenizer tokenizer = new StringTokenizer(sentence);
+        System.out.println(tokenizer.countTokens());
+    }
+}
