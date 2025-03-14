@@ -50,7 +50,86 @@ helloworld
 llo
 Output: 2
 
+ANSWER
+import java.util.*;
 
+class Main{
+    
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String txt=sc.nextLine();
+        String pat=sc.nextLine();
+        new Main().KMPSearch(pat, txt);
+        
+    }
+    
+    void KMPSearch(String pat, String txt){
+        int M = pat.length();
+        int N = txt.length();
+        
+        int lps[] = new int[M];
+        int j = 0;
+        
+        computeLPSArray(pat,M,lps);
+        
+        int i = 0;
+        ArrayList<Integer> results = new ArrayList<Integer>();
+        while(i < N){
+            if(pat.charAt(j) == txt.charAt(i)){
+                j++;
+                i++;
+                
+            }
+            if(j == M){
+                results.add(i-j);
+                j = lps[j - 1];
+                
+            }
+            else if (i < N && pat.charAt(j) != txt.charAt(i)){
+                if(j != 0)
+                j = lps[j - 1];
+                else
+                i = i + 1;
+                
+            }
+            
+        }
+        if(results.isEmpty())
+        System.out.println("No match found");
+        else
+        for (int result : results)
+        System.out.println(result);
+        
+    }
+    
+    void computeLPSArray(String pat, int M, int lps[]){
+        int len = 0;
+        int i = 1;
+        lps[0] = 0;
+        
+        while(i < M){
+            if(pat.charAt(i) == pat.charAt(len)){
+                len++;
+                lps[i] = len;
+                i++;
+                
+            }
+            else{
+                if(len != 0)
+                len = lps[len - 1];
+                else{
+                    lps[i] = len;
+                    i++;
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+}
 END
 2.Rare manuscript
 A young researcher searches for a rare manuscript. He has a list of specific words (the pattern) he needs to find within many books (the text). Leo checks each page, starting from every position, until he locates all occurrences of the words.
@@ -108,6 +187,36 @@ abra
 Output: 
 0
 7
+
+ANSWER
+
+import java.util.*;
+public class Main
+{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String pattern = sc.nextLine();
+        
+        if(str.matches("[a-zA-Z]+") && pattern.matches("[a-zA-Z]+")) {
+            int patternLength = pattern.length();
+            for (int i = 0; i <= str.length() - patternLength; i++)
+                if (str.substring(i, i + patternLength).equals(pattern))
+               System.out.println(i);
+            
+        }
+        else {
+            System.out.println("Invalid input");
+            
+        }
+        
+        sc.close();
+        
+    }
+    
+}
+
+
 END
 3.K-th permutation sequence
 Given a set of N distinct integers, your task is to find and print the K-th permutation sequence in lexicographical order. A permutation is an arrangement of the elements in any order, and the lexicographical order is the natural order of permutations based on the numerical or alphabetical order of the elements.
@@ -159,6 +268,63 @@ Input:
 4 10
 1 2 3 4
 Output: 2 3 4 1
+
+ANSWER
+
+import java.util.*;
+
+public class Main {
+    static String permutation;
+    static int count = 0;
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        
+        if (K <= 0 || N <= 0 || N > 10) {
+            System.out.println("Invalid input");
+            return;
+            
+        }
+        
+        Vector<Integer> vector = new Vector<>();
+        for (int i = 0; i < N; i++)
+        vector.add(sc.nextInt());
+        
+        Collections.sort(vector);
+        
+        permutation = new String();
+        count = 0;
+        
+        permute(vector, 0, N, K);
+        
+        System.out.println(permutation);
+        
+    }
+    
+    static void permute(Vector<Integer> a, int i, int n, int K) {
+        if (i == n) {
+            count++;
+            if (count == K) {
+                for(int j = 0; j < n; j++)
+                permutation = permutation.concat(a.get(j) + " ");
+                
+            }
+            return;
+            
+        }
+        
+        for(int j = i; j < n; j++) {
+            Collections.swap(a, i, j);
+            permute(a, i + 1, n, K);
+            Collections.swap(a, i, j);
+            
+        }
+        
+    }
+    
+}
 
 END
 4.Rat in a Maze
@@ -228,6 +394,56 @@ Output:
 0 1 0 0 0
 0 1 0 0 0
 0 1 1 1 1
+
+ANSWER
+
+// editor1
+import java.util.*;
+
+class Main{
+    static int[] dx = {1,0,0,-1};
+    static int[] dy = {0,-1,1,0};
+    static char[] dir = {'D','L','R','U'};
+    
+    public static void findPath(int[][] arr, int x,int y, int n, String path){
+        if(x==n-1 && y==n-1){
+            System.out.println(path);
+            return;
+        }
+        
+        for(int i=0;i<4;i++){
+            int newx = x+dx[i];
+            int newy = y+dy[i];
+            
+            if(newx >= 0 && newy >= 0 && newx<n && newy<n && arr[newx][newy]==1){
+                arr[x][y] = 0;
+                findPath(arr,newx,newy,n,path+dir[i]);
+                arr[x][y] = 1;
+            }
+        }
+    }
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        
+        if(n<=0){
+            System.out.println("Invalid input");
+        }
+        
+        int[][] arr = new int[n][n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        
+        if(arr[0][0] == 1)
+            findPath(arr,0,0,n,"");
+        
+    }
+}
+
 END
 5.Financial Trading Firm
 You are developing software for a financial trading firm. The firm is analyzing potential investment opportunities and needs to determine if a set of assets can be combined to achieve a specific target investment value.
@@ -281,3 +497,57 @@ Input:
 7 4
 1 2 3 4 5 6 7
 Output: Yes
+
+ANSWER
+
+import java.util.*;
+
+class Main{
+    static boolean f = false;
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if(n<=1 && n>20){
+            System.out.println("Invalid input");return;
+        }
+        int t = sc.nextInt();
+        if(t<=1 && t<=100){
+            System.out.println("Invalid input");return;
+        }
+        int[] a = new  int[n];
+        
+        for(int i=0;i<n;i++){
+            if(!sc.hasNextInt()){
+                System.out.print("Invalid input");
+                return;
+            }
+            
+            if(a[i]<=1 && a[i]>=1000){
+                System.out.println("Invalid input");return;
+            }
+            a[i] = sc.nextInt();
+        }
+        
+        subset(a,0,t);
+        
+        if(f){
+            System.out.println("Yes");
+        }
+        else
+            System.out.println("No");
+    }
+    
+    static void subset(int[] a,int index, int target){
+        if(target == 0){
+            f=true;
+            return;
+        }
+        
+        if(index == a.length || target<0){
+            return;
+        }
+        
+        subset(a,index+1,target-a[index]);
+        subset(a,index+1,target);
+    }
+}
