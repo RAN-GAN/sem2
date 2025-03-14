@@ -1,217 +1,377 @@
-Experiment 1
-Sarah is creating a program to help detect if a user has input any duplicate integers. The user first specifies the number of integers they’ll enter, then inputs the list of integers. The program should detect if any integer appears more than once.
+1. Insertion Sort in ascending order
+In the village of Sortland, Ella the apprentice found a jumbled list of numbers. To restore order, she used the Insertion Sort technique, carefully picking each number and placing it in its correct spot. One by one, the list transformed, bringing perfect ascending order to Sortland's delight!
 
 Input Format
 
-A single integer n, the number of integers.
-n integers as input elements.
+An integer 'n' represents the number of elements in the list.
+A list of n integers represents the value of elements.
+Output Format
 
+Displays the list in ascending order.
+Print 'Invalid input', if a character is entered as input.
+Print -1, if the list is already sorted.
+Constraints
+
+1 ≤ n ≤ 100
+Each element of the list can be an integer.
+Test Case 1
+Input:
+n = 5
+array = 8 2 3 4 6
+
+Output:
+2 3 4 6 8
+Test Case 2
+Input:
+n = 4
+array = 1 2 a 3
+
+Output:
+Invalid input
+Test Case 3
+Input:
+n = 4
+array = 1 2 3 4
+
+Output:
+-1
+Test Case 4
+Input:
+n = 6
+array = 3 1 2 2 4 1
+
+Output:
+1 1 2 2 3 4
+Test Case 5
+Input:
+n = 6
+array = 100 300 250 450 350 500
+
+Output:
+100 250 300 350 450 500
+Test Case 6
+Input:
+n = 4
+array = 1 2 3 4
+
+Output:
+-1
+END
+2. Kth Smallest Element Using Selection Sort
+You are an explorer on a quest to uncover the kth smallest treasure among n hidden gems. Using the Selection Sort technique, you meticulously select the smallest gems one by one. With patience and skill, you finally reveal the kth rare gem, completing your adventurous mission!
+
+Input Format
+
+An integer 'n' representing the number of elements in the array.
+An array of n integers.
+An integer 'k' representing the position of the smallest element to find.
 
 Output Format
 
-Print "Duplicate Found" if there is any duplicate integer, otherwise "No Duplicates"
-For invalid input, print "Invalid input"
-n ≤ 0, print "-1"
-
-    
-Test Cases
-Input:
-
-5\n10 20 30 20 40\n/pre>
-
-        
-Expected Output: Duplicate Found
-
-
-    
-Input:
-
-4\n5 y 25 35\n
-Expected Output: Invalid input
-
-Input:
-
-3\n100 150 200\n
-Expected Output: No Duplicates
-
-Input:
-
--10\n
-Expected Output: -1
-
-Input:
-
-10\n100 200 300 400 500 600 700 800 900 1000\n
-Expected Output: No Duplicates
-
-Input:
-
-3\n100 150 200\n
-Expected Output: No Duplicates
+Print the kth smallest element in the array.
+Print '-1' if all values in the array are the same.
+Print 'Invalid input' if any input is invalid, such as non-integer values or out-of-range values for k.
 
 Constraints
 
-1 ≤ n ≤ 10
-Each integer should be in the range [0,1000].
+1 ≤ n ≤ 100
+The value of k must be within the range 1 to n
 
-ANSWER
+Test Case 1  
+Input:  
+5  
+5 2 3 1 4  
+3  
 
-import java.util.*;
+Output:  
+3  
 
-public class DuplicateChecker {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+Test Case 2  
+Input:  
+3  
+54 f 65  
+2  
 
-        // Check if n is a valid integer
-        if (!scanner.hasNextInt()) {
-            System.out.println("Invalid input");
-            return;
-        }
-        
-        int n = scanner.nextInt();
-        if (n <= 0) {
-            System.out.println("-1");
-            return;
-        }
+Output:  
+Invalid input  
 
-        HashSet<Integer> seenNumbers = new HashSet<>();
-        for (int i = 0; i < n; i++) {
-            if (!scanner.hasNextInt()) {
-                System.out.println("Invalid input");
-                return;
-            }
-            int num = scanner.nextInt();
+Test Case 3  
+Input:  
+4  
+7 7 7 7  
+1  
 
-            // Check if number is within valid range
-            if (num < 0 || num > 1000) {
-                System.out.println("Invalid input");
-                return;
-            }
+Output:  
+-1  
 
-            if (!seenNumbers.add(num)) {
-                System.out.println("Duplicate Found");
-                return;
-            }
-        }
-        System.out.println("No Duplicates");
-    }
-}
+Test Case 4  
+Input:  
+6  
+8 3 8 1 4 4  
+2  
 
+Output:  
+3  
+
+Test Case 5  
+Input:  
+5  
+5 2 3 1 4  
+6  
+
+Output:  
+Invalid input  
+
+Test Case 6  
+Input:  
+4  
+7 7 7 7  
+1  
+
+Output:  
+-1  
 
 END
-Experiment 2
-A library has a sorted list of ISBN numbers for all the books in its collection. Grace wants a program to help her locate a specific ISBN number. The program should take the number of books, the sorted list of ISBN numbers, and the ISBN she wants to find.
+3. Bubble Sort with User-Defined Comparator
+
+In Codeville, a list of numbers awaited sorting. The wise wizard crafted a bubbleSort spell, allowing the user to choose the magic:
+
+'a' for ascending order (harmony)
+'d' for descending order (chaos)
+With the perfect comparator function, numbers danced into order, fulfilling the user's chosen destiny for the enchanted list.
 
 Input Format
 
-A single integer n, the number of books.
-n sorted integers representing ISBN numbers.
-An integer representing the ISBN to search for.
-
+An integer n representing the number of elements in the array.
+A list of n integers representing the values of the elements.
+A character 'a' or 'd', where:
+'a' denotes sorting in ascending order
+'d' denotes sorting in descending order
 
 Output Format
 
-Print "Found" if the ISBN exists in the collection.
-Print "Not Found" if the ISBN does not exist.
-Print "Invalid input" for any non-numeric inputs.
-If n ≤ 0, print "-1".
-
-
-Test Cases
-Input:
-
-6\n100001 100123 100456 100789 100999 101000\n100456\n
-Expected Output: Found
-
-Input:
-
-5\n200000 a 201000 201500 202000\n201250\n
-Expected Output: Invalid input
-
-Input:
-
-4\n300001 300002 300003 300004\n300005\n
-Expected Output: Not Found
-
-Input:
-
--2\n
-Expected Output: -1
-
-Input:
-
-3\n400100 400200 400300\n400200\n
-Expected Output: Found
-
-Input:
-
-4\n300001 300002 300003 300004\n300005\n
-Expected Output: Not Found
+Displays the array after sorting based on the user-defined comparator function.
+Prints "Invalid input" if any invalid characters are entered as array elements.
+Prints "-1" if the array is already sorted in the specified order.
 
 Constraints
 
--10 ≤ n ≤ 10
-ISBN numbers are integers in the range [100000,999999].
+1 ≤ n ≤ 1000
+The order character should be either 'a' or 'd'
 
-ANSWER
+Test Cases
+Input:
+3
+3 1 2
+a
 
-import java.util.*;
+Output:
+1 2 3
 
-public class ISBNFinder {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        // Read number of books
-        if (!scanner.hasNextInt()) {
-            System.out.println("Invalid input");
-            return;
-        }
-        int n = scanner.nextInt();
-        
-        // Validate n
-        if (n <= 0) {
-            System.out.println("-1");
-            return;
-        }
-        
-        int[] isbns = new int[n];
-        
-        // Read ISBN numbers
-        for (int i = 0; i < n; i++) {
-            if (!scanner.hasNextInt()) {
-                System.out.println("Invalid input");
-                return;
-            }
-            isbns[i] = scanner.nextInt();
-        }
-        
-        // Read the ISBN to search for
-        if (!scanner.hasNextInt()) {
-            System.out.println("Invalid input");
-            return;
-        }
-        int target = scanner.nextInt();
-        
-        // Perform binary search
-        if (binarySearch(isbns, target)) {
-            System.out.println("Found");
-        } else {
-            System.out.println("Not Found");
-        }
-    }
-    
-    private static boolean binarySearch(int[] arr, int target) {
-        int left = 0, right = arr.length - 1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] == target) {
-                return true;
-            } else if (arr[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return false;
-    }
-}
+Input:
+5
+1 2 3 b 5
+d
+
+Output:
+Invalid input
+
+Input:
+4
+1 2 3 4
+a
+
+Output:
+-1
+
+Input:
+6
+1 4 3 9 7 2
+d
+
+Output:
+9 7 4 3 2 1
+
+Input:
+7
+9 8 7 6 5 4 1
+d
+
+Output:
+-1
+
+Input:
+4
+1 2 3 4
+a
+
+Output:
+-1
+END
+4.Activity Selection with Resource Requirements
+
+A community center hosts events, each needing specific resources. Events overlap, so the manager must pick events carefully, ensuring none clash while using the least resources. The goal is to plan efficiently, keeping the resource usage minimal while accommodating as many non-overlapping events as possible.
+
+Input Format
+
+An integer n representing the number of activities.
+The next n lines contain three integers representing the start time, end time, and resource requirement of an activity.
+
+Output Format
+
+Print the start time, end time, and resource requirement of each selected activity.
+Print the total resources allocated in the next line.
+Print "Invalid input" if start time > end time.
+
+Constraints
+
+1 ≤ n ≤ 100
+0 ≤ start time, end time ≤ 10
+
+
+Test Cases
+
+Input:
+4
+1 3 2
+2 5 3
+4 6 1
+5 7 4
+
+Output:
+1 3 2
+4 6 1
+3
+
+Input:
+1
+2 1 10
+
+Output:
+Invalid input
+
+Input:
+2
+1 3 2
+4 6 3
+
+Output:
+1 3 2
+4 6 3
+5
+
+Input:
+3
+1 5 4
+3 2 5
+3 7 6
+
+Output:
+Invalid input
+
+Input:
+5
+1 4 3
+3 5 2
+0 6 6
+5 7 1
+8 9 2
+
+Output:
+1 4 3
+5 7 1
+8 9 2
+6
+
+Input:
+2
+1 3 2
+4 6 3
+
+Output:
+1 3 2
+4 6 3
+5
+END
+5.Activity Selection with Penalties
+
+In a bustling kingdom, a scheduler must plan royal events. Each event has a start time, end time, and penalty for skipping it. The task is to choose events wisely, ensuring none overlap while minimizing the kingdom's total penalty, keeping the royal calendar efficient and harmonious.
+
+Input Format
+An integer n representing the number of activities.
+The next n lines contain three integers representing the start time, end time, and penalty of an activity.
+Output Format
+Print the start time, end time, and penalty of each selected activity in separate lines.
+Print the total penalty of the selected activities.
+Print "Invalid input" if start time > end time.
+Constraints
+1
+≤
+𝑛
+≤
+100
+1≤n≤100
+0
+≤
+0≤ start time, end time 
+≤
+10
+≤10
+Input:
+3
+1 3 10
+2 5 20
+4 6 15
+
+Output:
+1 3 10
+4 6 15
+25
+
+Input:
+2
+1 3 5
+4 2 10
+
+Output:
+Invalid input
+
+Input:
+3
+1 5 8
+2 6 6
+3 7 10
+
+Output:
+1 5 8
+8
+
+Input:
+2
+1 3 5
+5 4 10
+
+Output:
+Invalid input
+
+Input:
+4
+1 3 5
+2 5 10
+4 6 15
+5 7 20
+
+Output:
+1 3 5
+4 6 15
+20
+
+Input:
+3
+1 5 8
+2 6 6
+3 7 10
+
+Output:
+1 5 8
+8
