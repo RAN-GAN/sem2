@@ -1,13 +1,10 @@
 1.KMP Algorithm
 As a software engineer working on a text editor, implement the "Find" functionality using the Knuth-Morris-Pratt (KMP) algorithm to efficiently locate occurrences of a specific word or phrase within a larger document.
 
-
-
 Input Format
 
 First line contains a string representing the document content.
 Second line contains a string representing the word or phrase to be found.
-
 
 Output Format
 
@@ -134,13 +131,10 @@ END
 2.Rare manuscript
 A young researcher searches for a rare manuscript. He has a list of specific words (the pattern) he needs to find within many books (the text). Leo checks each page, starting from every position, until he locates all occurrences of the words.
 
-
-
 Input Format
 
 The first line contains a string str.
 The next line contains a string that represents a pattern.
-
 
 Output Format
 
@@ -221,13 +215,10 @@ END
 3.K-th permutation sequence
 Given a set of N distinct integers, your task is to find and print the K-th permutation sequence in lexicographical order. A permutation is an arrangement of the elements in any order, and the lexicographical order is the natural order of permutations based on the numerical or alphabetical order of the elements.
 
-
-
 Input Format
 
 The first line contains two integers, N and K.
 The second line contains N distinct integers representing the elements of the set.
-
 
 Output Format
 
@@ -330,13 +321,10 @@ END
 4.Rat in a Maze
 Given an N x N maze, the task is to find a path for a rat starting from the top-left corner (0, 0) to the bottom-right corner (N-1, N-1). The rat can only move in two directions: right or down. The maze is represented by a grid where cells with value 1 are open paths, and cells with value 0 are walls that the rat cannot pass through. You need to print a valid solution path if it exists.
 
-
-
 Input Format
 
 The first line contains an integer N, representing the size of the maze.
 The next N lines each contain N integers, where each integer is either 0 (wall) or 1 (path), representing the maze grid.
-
 
 Output Format
 
