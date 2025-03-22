@@ -384,52 +384,86 @@ Output:
 0 1 1 1 1
 
 ANSWER
+import java.util.Scanner;
 
-// editor1
-import java.util.*;
+public class Main {
+    static int N; 
+    static int maze[][]; 
+    static int sol[][]; 
+  
+    boolean isSafe(int x, int y) 
+    { 
+        return (x >= 0 && x < N && y >= 0 && y < N && maze[x][y] == 1); 
+    } 
 
-class Main{
-    static int[] dx = {1,0,0,-1};
-    static int[] dy = {0,-1,1,0};
-    static char[] dir = {'D','L','R','U'};
-    
-    public static void findPath(int[][] arr, int x,int y, int n, String path){
-        if(x==n-1 && y==n-1){
-            System.out.println(path);
-            return;
-        }
-        
-        for(int i=0;i<4;i++){
-            int newx = x+dx[i];
-            int newy = y+dy[i];
+    void printSolution() 
+    { 
+        for (int x = 0; x < N; x++) { 
+            for (int y = 0; y < N; y++) 
+                System.out.print(sol[x][y] + " "); 
+            System.out.println(); 
+        } 
+    } 
+
+    boolean solveMaze() 
+    { 
+        if (solveMazeUtil(0, 0) == false) { 
+            return false; 
+        } 
+  
+        printSolution(); 
+        return true; 
+    } 
+  
+    boolean solveMazeUtil(int x, int y) 
+    { 
+        if (x == N - 1 && y == N - 1) { 
+            sol[x][y] = 1; 
+            return true; 
+        } 
+  
+        if (isSafe(x, y) == true) { 
+            sol[x][y] = 1; 
+  
+            if (solveMazeUtil(x + 1, y)) 
+                return true; 
+
+            if (solveMazeUtil(x, y + 1)) 
+                return true; 
+  
+            sol[x][y] = 0; 
+            return false; 
+        } 
+  
+        return false; 
+    } 
+
+    public static void main(String args[]) { 
+   
+        Scanner scanner = new Scanner(System.in);
+        try {
             
-            if(newx >= 0 && newy >= 0 && newx<n && newy<n && arr[newx][newy]==1){
-                arr[x][y] = 0;
-                findPath(arr,newx,newy,n,path+dir[i]);
-                arr[x][y] = 1;
-            }
+
+        N = scanner.nextInt();
+        maze =new int[N][N];
+        for(int i = 0 ; i<N; i++)
+			for(int j=0; j<N; j++)
+				maze[i][j]=scanner.nextInt();
+            
+        sol = new int[N][N]; 
+  
+        Main rat = new Main(); 
+       
+        if (N <= 0 || N > 10)
+          System.out.println("Invalid input");
+        else if(!rat.solveMaze())
+          System.out.println("Solution doesn't exist"); 
+        } catch(Exception e) {
+        System.out.println("Invalid input");
+
         }
-    }
-    
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        
-        if(n<=0){
-            System.out.println("Invalid input");
-        }
-        
-        int[][] arr = new int[n][n];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                arr[i][j] = sc.nextInt();
-            }
-        }
-        
-        if(arr[0][0] == 1)
-            findPath(arr,0,0,n,"");
-        
-    }
+        scanner.close();
+    } 
 }
 
 END
