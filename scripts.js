@@ -44,7 +44,7 @@ window.onload = function () {
   disclaimer.after(select);
   select.after(contentDiv);
 
-  fetch("txt2.txt")
+  fetch("txt.txt")
     .then((response) => response.text())
     .then((text) => {
       // Function to escape HTML special characters

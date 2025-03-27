@@ -1,575 +1,781 @@
-1.KMP Algorithm
-As a software engineer working on a text editor, implement the "Find" functionality using the Knuth-Morris-Pratt (KMP) algorithm to efficiently locate occurrences of a specific word or phrase within a larger document.
+Implementation of Linear search
+
+Question
+A librarian is organizing books on a shelf. A student asks for a specific book, but the librarian has no index. She checks each book one by one until she finds the right one. Implement a function to help her search for the book’s position efficiently using linear search.
 
 Input Format
-
-First line contains a string representing the document content.
-Second line contains a string representing the word or phrase to be found.
-
-Output Format
-
-A vector of integers, where each integer represents the starting index of a match found in the text.
-Print no match found if there is no match.
-
-
-Constraints
-
-1 <= Text <= 10^6
-1 <= Pattern <= 10^5
-
-Test Case 1:
-Input:
-abxabcabcaby
-abcaby
-Output: 6
-
-Test Case 2:
-Input:
-hello world
-ox
-Output: No match found
-
-Test Case 3:
-Input:
-mississippi
-issip
-Output: 4
-
-Test Case 4:
-Input:
-aabaaabaaac
-aabaaac
-Output: 4
-
-Test Case 5:
-Input:
-helloworld
-llo
-Output: 2
-
-ANSWER
-import java.util.*;
-
-class Main{
-    
-    public static void main(String[] args){
-        Scanner sc=new Scanner(System.in);
-        String txt=sc.nextLine();
-        String pat=sc.nextLine();
-        new Main().KMPSearch(pat, txt);
-        
-    }
-    
-    void KMPSearch(String pat, String txt){
-        int M = pat.length();
-        int N = txt.length();
-        
-        int lps[] = new int[M];
-        int j = 0;
-        
-        computeLPSArray(pat,M,lps);
-        
-        int i = 0;
-        ArrayList<Integer> results = new ArrayList<Integer>();
-        while(i < N){
-            if(pat.charAt(j) == txt.charAt(i)){
-                j++;
-                i++;
-                
-            }
-            if(j == M){
-                results.add(i-j);
-                j = lps[j - 1];
-                
-            }
-            else if (i < N && pat.charAt(j) != txt.charAt(i)){
-                if(j != 0)
-                j = lps[j - 1];
-                else
-                i = i + 1;
-                
-            }
-            
-        }
-        if(results.isEmpty())
-        System.out.println("No match found");
-        else
-        for (int result : results)
-        System.out.println(result);
-        
-    }
-    
-    void computeLPSArray(String pat, int M, int lps[]){
-        int len = 0;
-        int i = 1;
-        lps[0] = 0;
-        
-        while(i < M){
-            if(pat.charAt(i) == pat.charAt(len)){
-                len++;
-                lps[i] = len;
-                i++;
-                
-            }
-            else{
-                if(len != 0)
-                len = lps[len - 1];
-                else{
-                    lps[i] = len;
-                    i++;
-                    
-                }
-                
-            }
-            
-        }
-        
-    }
-    
-}
-END
-2.Rare manuscript
-A young researcher searches for a rare manuscript. He has a list of specific words (the pattern) he needs to find within many books (the text). Leo checks each page, starting from every position, until he locates all occurrences of the words.
-
-Input Format
-
-The first line contains a string str.
-The next line contains a string that represents a pattern.
+- First line represents Number of elements (n): An integer representing the size of the array.
+- Second line contains a list or array containing n elements of any data type (integers, strings, etc.).
+- Third line a target element: The value you're searching for within the array.
 
 Output Format
-
-Displays the starting indices where the pattern is found in the string str.
-Print Invalid input, if a special character is entered as input.
-
+- Print Index of the target element: If the target element is found in the array, the output will be the integer index of its position.
+- Print -1 (or any other designated value): If the target element is not found in the array.
 
 Constraints
+-100 <= n <= 100
 
-1 <= str.length <= 100
+Note
+Function name should be int linearSearch(int arr[], int n, int x)
 
-TestCases
-Test Case 1:
-Input:
-ababcababcabc
-abc
-Output: 
-2
-7
+Test Cases
+5
+4 3 2 6 8
+3
+Output:
+1
+
+5
+2 3 6 2 1
 10
+Output:
+-1
+
+2
+1 6
+6
+Output:
+1
+
+9
+8 7 6 9 5 4 3 2 5
+9
+Output:
+3
+
+1
+12
+12
+Output:
+0
+
+2
+1 6
+6
+Output:
+1
+
+END
+Implementation of Binary Search
+
+Question
+Given a sorted array of integers and a target value, perform a binary search to find the index of the target in the array. If the target exists, return its index (0-based). If the target does not exist, return -1.
+
+Input Format
+- The first line contains an integer n (the size of the array).
+- The second line contains n integers (the elements of the array), sorted in non-decreasing order.
+- The third line contains the target integer to be searched.
+
+Output Format
+- A single integer representing the index of the target in the array or -1 if the target is not found.
+- Print "Invalid input" if n is not an integer or is outside the range 1 ≤ n ≤ 10^5, or if the input array is not sorted.
+
+Constraints
+1 ≤ n ≤ 10^5
+-10^6 ≤ array elements, target ≤ 10^6
+
+Test Cases
+5
+1 3 5 7 9
+5
+Output:
+2
+
+5
+10 30 20 40 50
+20
+Output:
+Invalid input
+
+6
+3 7 13 19 28 30
+13
+Output:
+2
+
+6
+1 2 3 4 5 6
+10
+Output:
+-1
+
+4
+1 2 3 4
+abc
+Output:
+Invalid input
+
+6
+3 7 13 19 28 30
+13
+Output:
+2
+
+END
+Implementation of Sorting Algorithms
+
+Question
+Imagine you have a collection of numbers and need to find the k-th smallest one. To do this, you’ll sort the numbers using Quick Sort, a method that cleverly arranges everything in order. Once sorted, you’ll pick the k-th smallest number from the lineup and return it.
+
+Input Format
+- The first line contains an integer n (the size of the array).
+- The second line contains n integers (the elements of the array).
+- The third line contains an integer k (the position of the element to find, 1-based index).
+
+Output Format
+- A single integer representing the k-th smallest element in the array.
+- Print "Invalid input" if inputs are non-integer.
+
+Constraints
+1 ≤ n ≤ 10^5
+1 ≤ k ≤ n
+-10^6 ≤ array elements ≤ 10^6
+
+Test Cases
+6
+3 2 1 5 6 4
+2
+Output:
+2
+
+5
+1 2 a 4 5
+3
+Output:
+Invalid input
+
+4
+4 2 6 8
+3
+Output:
+6
+
+5
+10 15 20 25 30
+5
+Output:
+30
+
+3
+1 1 1
+2
+Output:
+1
+
+4
+4 2 6 8
+3
+Output:
+6
+
+END
+Implementation of Greedy Algorithms
+
+Question
+A community center hosts events, each needing specific resources. Events overlap, so the manager must pick events carefully, ensuring none clash while using the least resources. The goal is to plan efficiently, keeping the resource usage minimal while accommodating as many non-overlapping events as possible.
+
+Input Format
+- An integer n representing the number of activities.
+- The next n lines contain three integers representing the start time, end time, and resource requirement of an activity.
+
+Output Format
+- Print the start time, end time, and resource requirement of each selected activity.
+- Print the total resources allocated in the next line.
+- Print "Invalid input", if start time > end time.
+
+Constraints
+1 <= n <= 100
+0 <= start time, end time <= 10
+
+Test Cases
+4
+1 3 2
+2 5 3
+4 6 1
+5 7 4
+
+Output:
+1 3 2
+4 6 1
+Total resources: 3
+
+1
+2 1 10
+
+Output:
+Invalid input
+
+2
+1 3 2
+4 6 3
+
+Output:
+1 3 2
+4 6 3
+Total resources: 5
+
+3
+1 5 4
+3 2 5
+3 7 6
+
+Output:
+Invalid input
+
+5
+1 4 3
+3 5 2
+0 6 6
+5 7 1
+8 9 2
+
+Output:
+1 4 3
+5 7 1
+8 9 2
+Total resources: 6
+
+2
+1 3 2
+4 6 3
+
+Output:
+1 3 2
+4 6 3
+Total resources: 5
+
+END
+Implementation of Pattern Searching Algorithms
+
+Question
+As a plagiarism detection engineer, you are developing a document similarity checker that scans a document for a copied sentence using the Rabin-Karp algorithm.
+
+Your system should identify and return the starting index of the copied sentence inside the document.
+
+Input Format
+- The first line contains a string str1 (document text) representing the document.
+- The second line contains a string str2 (copied sentence) that needs to be detected.
+
+Output Format
+- A list of integers, where each integer represents the starting index (including space) of the copied sentence in the document.
+- Print "Not found" if the copied sentence is not present.
+- Print "Invalid input", if the length of str2 > str1
+
+Constraints
+1 ≤ Length of document ≤ 10⁶
+1 ≤ Length of copied sentence ≤ 10⁵
+
+Test Cases
+
+Test Case 1:
+Input:
+This is a plagiarism check. Plagiarism is not allowed
+Plagiarism
+
+Output:
+28
 
 Test Case 2:
 Input:
-Programming$
-prog
-Output: Invalid input
+short
+this is a very long copied sentence that is longer than the document
+
+Output:
+Invalid input
 
 Test Case 3:
 Input:
-helloworld
-world
-Output: 5
+This is an original document with no copied content
+Copied sentence
+
+Output:
+Not found
 
 Test Case 4:
 Input:
-racecar
-car
-Output: 4
+copied sentence
+sentence
 
-Test Case 5:
-Input:
-abracadabra
-abra
-Output: 
-0
+Output:
 7
 
-ANSWER
-
-import java.util.*;
-public class Main
-{
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        String pattern = sc.nextLine();
-        
-        if(str.matches("[a-zA-Z]+") && pattern.matches("[a-zA-Z]+")) {
-            int patternLength = pattern.length();
-            for (int i = 0; i <= str.length() - patternLength; i++)
-                if (str.substring(i, i + patternLength).equals(pattern))
-               System.out.println(i);
-            
-        }
-        else {
-            System.out.println("Invalid input");
-            
-        }
-        
-        sc.close();
-        
-    }
-    
-}
-
-
-END
-3.K-th permutation sequence
-Given a set of N distinct integers, your task is to find and print the K-th permutation sequence in lexicographical order. A permutation is an arrangement of the elements in any order, and the lexicographical order is the natural order of permutations based on the numerical or alphabetical order of the elements.
-
-Input Format
-
-The first line contains two integers, N and K.
-The second line contains N distinct integers representing the elements of the set.
-
-Output Format
-
-Print the K-th permutation of the given set of integers in lexicographical order.
-If the input is invalid (e.g., 𝐾 is greater than the total number of permutations or non-integer values), print "Invalid input"
-
-
-Constraints
-
-1 <= N <= 10
-
-Test Case 1:
-Input:
-3 4
-1 2 3
-Output: 2 3 1
-
-Test Case 2:
-Input:
-3 -1
-1 2 3
-Output: Invalid input
-
-Test Case 3:
-Input:
-3 1
-1 2 3
-Output: 1 2 3
-
-Test Case 4:
-Input:
-5 1
-1 2 3 4 5
-Output: 1 2 3 4 5
-
 Test Case 5:
 Input:
-4 10
-1 2 3 4
-Output: 2 3 4 1
+The quick brown fox jumps over the lazy dog The fox is clever
+fox
 
-ANSWER
+Output:
+16 49
 
-import java.util.*;
+Test Case 6:
+Input:
+This is an original document with no copied content
+Copied sentence
 
-public class Main {
-    static String permutation;
-    static int count = 0;
-    
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int K = sc.nextInt();
-        
-        if (K <= 0 || N <= 0 || N > 10) {
-            System.out.println("Invalid input");
-            return;
-            
-        }
-        
-        Vector<Integer> vector = new Vector<>();
-        for (int i = 0; i < N; i++)
-        vector.add(sc.nextInt());
-        
-        Collections.sort(vector);
-        
-        permutation = new String();
-        count = 0;
-        
-        permute(vector, 0, N, K);
-        
-        System.out.println(permutation);
-        
-    }
-    
-    static void permute(Vector<Integer> a, int i, int n, int K) {
-        if (i == n) {
-            count++;
-            if (count == K) {
-                for(int j = 0; j < n; j++)
-                permutation = permutation.concat(a.get(j) + " ");
-                
-            }
-            return;
-            
-        }
-        
-        for(int j = i; j < n; j++) {
-            Collections.swap(a, i, j);
-            permute(a, i + 1, n, K);
-            Collections.swap(a, i, j);
-            
-        }
-        
-    }
-    
-}
+Output:
+Not found
 
 END
-4.Rat in a Maze
-Given an N x N maze, the task is to find a path for a rat starting from the top-left corner (0, 0) to the bottom-right corner (N-1, N-1). The rat can only move in two directions: right or down. The maze is represented by a grid where cells with value 1 are open paths, and cells with value 0 are walls that the rat cannot pass through. You need to print a valid solution path if it exists.
+Implementation of Backtracking Algorithms
+
+N-Queens Problem with Empresses
+You are a chessboard designer for a new, futuristic chess game. In this game, instead of traditional chess pieces, you have N powerful "Empresses" that can attack in all directions (horizontally, vertically, and diagonally).
 
 Input Format
 
-The first line contains an integer N, representing the size of the maze.
-The next N lines each contain N integers, where each integer is either 0 (wall) or 1 (path), representing the maze grid.
+A single integer N representing the size of the chessboard and the number of queens to be placed.
+
+Output Format
+Print all possible arrangements of queens on the board. Each arrangement should be printed as an N × N grid where '1' represents a queen and '0' represents an empty space.
+If no solution exists (i.e., for N = 2 or N = 3), output "No solution exists".
+If the input is invalid (e.g., not an integer or outside the defined range N ≥ 9), print "Invalid input".
+
+Constraints
+1 <= N <= 20
+
+END
+Implementation of Dynamic Programming
+
+Question
+You are a conservator restoring a valuable artifact that contains a sequence of ancient symbols represented by lowercase English letters. Over time, parts of the sequence have faded, and you aim to uncover the longest possible pattern that remains symmetrical (reads the same forward and backward) without altering the original order of the symbols.
+
+Input Format
+- A single string artifact consisting of lowercase English letters representing the sequence of ancient symbols.
+
+Output Format
+- A single integer representing the length of the longest symmetrical pattern in the sequence.
+- Print "Invalid input" if the sequence contains any special characters or invalid symbols.
+
+Constraints
+- 1 ≤ |artifact.length| ≤ 1000
+
+Note: int findLongestPalindromicSubsequence(const string &artifact)
+
+Test Cases
+apple
+2
+
+123abc
+Invalid input
+
+madam
+5
+
+123abc#
+Invalid input
+
+racecar
+7
+
+madam
+5
+
+END
+Implementation of Range Query Algorithms
+
+Question
+You are given an array of integers. For each range minimum query, not only do you need to find the minimum value in the specified range, but you also need to count how many times this minimum value occurs in that range.
+
+Input Format
+
+The first line contains an integer N, the size of the array.
+The second line contains N integers, the elements of the array.
+The third line contains an integer Q, the number of queries.
+Each of the next Q lines contains two integers L and R, representing the range [L,R].
 
 Output Format
 
-If a solution exists, print the solution grid, where 1 represents the cells that are part of the path and 0 represents the cells that are not.
-If the input is invalid (e.g., 𝑁 ≤ 0 or non-integer values or values except 0 and 1), print "Invalid input"
-
+For each query, print the minimum value in the range and the count of its occurrences.
+Print "Invalid input", if N is negative.
 
 Constraints
 
-1 <= N <= 10
+-10 ≤ N ≤ 10
 
-Test Case 1:
-Input:
-4
-1 0 0 0
-1 1 0 1
-0 1 0 0
-0 1 1 1
-Output:
-1 0 0 0
-1 1 0 0
-0 1 0 0
-0 1 1 1
+1 ≤ Q ≤ 1000
 
-Test Case 2:
+0 ≤ L ≤ R < N
+
+Test Cases
+
+Test Case 1
 Input:
+6
+2 8 3 8 2 8
 3
-1 0 a
-1 1 0
-0 1 1
-Output: Invalid input
+1 3
+2 4
+0 5
 
-Test Case 3:
-Input:
-3
-1 0 0
-1 1 0
-0 1 1
 Output:
-1 0 0
-1 1 0
-0 1 1
+3
+1
+2
+1
+2
+2
 
-Test Case 4:
+Test Case 2
+Input:
+-8
+
+Output:
+Invalid input
+
+Test Case 3
 Input:
 5
-1 0 1 0 0
-1 1 1 0 0
-0 1 0 1 0
-0 1 0 1 1
-0 1 1 1 1
+5 1 3 1 7
+1
+1 3
+
 Output:
-1 0 0 0 0
-1 1 0 0 0
-0 1 0 0 0
-0 1 0 0 0
-0 1 1 1 1
+1
+2
 
-ANSWER
-import java.util.Scanner;
+Test Case 4
+Input:
+5
+1 3 2 2 5
+2
+0 2
+1 4
 
-public class Main {
-    static int N; 
-    static int maze[][]; 
-    static int sol[][]; 
-  
-    boolean isSafe(int x, int y) 
-    { 
-        return (x >= 0 && x < N && y >= 0 && y < N && maze[x][y] == 1); 
-    } 
+Output:
+1
+1
+2
+2
 
-    void printSolution() 
-    { 
-        for (int x = 0; x < N; x++) { 
-            for (int y = 0; y < N; y++) 
-                System.out.print(sol[x][y] + " "); 
-            System.out.println(); 
-        } 
-    } 
+Test Case 5
+Input:
+4
+5 5 5 5
+2
+0 3
+1 2
 
-    boolean solveMaze() 
-    { 
-        if (solveMazeUtil(0, 0) == false) { 
-            return false; 
-        } 
-  
-        printSolution(); 
-        return true; 
-    } 
-  
-    boolean solveMazeUtil(int x, int y) 
-    { 
-        if (x == N - 1 && y == N - 1) { 
-            sol[x][y] = 1; 
-            return true; 
-        } 
-  
-        if (isSafe(x, y) == true) { 
-            sol[x][y] = 1; 
-  
-            if (solveMazeUtil(x + 1, y)) 
-                return true; 
+Output:
+5
+4
+5
+2
 
-            if (solveMazeUtil(x, y + 1)) 
-                return true; 
-  
-            sol[x][y] = 0; 
-            return false; 
-        } 
-  
-        return false; 
-    } 
+Test Case 6
+Input:
+5
+5 1 3 1 7
+1
+1 3
 
-    public static void main(String args[]) { 
-   
-        Scanner scanner = new Scanner(System.in);
-        try {
-            
-
-        N = scanner.nextInt();
-        maze =new int[N][N];
-        for(int i = 0 ; i<N; i++)
-			for(int j=0; j<N; j++)
-				maze[i][j]=scanner.nextInt();
-            
-        sol = new int[N][N]; 
-  
-        Main rat = new Main(); 
-       
-        if (N <= 0 || N > 10)
-          System.out.println("Invalid input");
-        else if(!rat.solveMaze())
-          System.out.println("Solution doesn't exist"); 
-        } catch(Exception e) {
-        System.out.println("Invalid input");
-
-        }
-        scanner.close();
-    } 
-}
+Output:
+1
+2
 
 END
-5.Financial Trading Firm
-You are developing software for a financial trading firm. The firm is analyzing potential investment opportunities and needs to determine if a set of assets can be combined to achieve a specific target investment value.
+Implementation of Minimum Spanning Tree
 
+Question
+In a vast kingdom, cities are connected by magical roads, each with varying distances and powers. To unite the realm efficiently, a royal engineer must construct the Minimum Spanning Pathway, ensuring all cities are connected using the shortest possible roads. Using Kruskal’s wisdom, they must choose the optimal connections.
 
+Input Format
 
-Input format
+The first line contains an integer n, the number of vertices.
+The second line contains an integer e, the number of edges.
+The next e lines contain three integers u, v, and w representing an edge between vertices u and v with weight w.
 
-The first line contains two integers n(The number of assets) and target(The target investment value).
-The second line contains n space-separated integers, representing the values of the assets.
+Output Format
 
-
-Output format
-
-Print "Yes" if there exists a subset of assets that sums up to the target value, "No" otherwise.
-Print Invalid input if the input has any non-numeric characters.
-
+Print each edge of the MST in the format "u v w" on a new line.
+Print Invalid input, if n is negative.
 
 Constraints
 
-1 <= n <= 20
-1 <= asset value <= 1000
-1 <= target value <= 10000
+-10 ≤ n ≤ 10
 
-Test Case 1:
+Test Cases
+
+Test Case 1
 Input:
-5 10
-3 5 7 1 9
-Output: Yes
+5
+7
+1 2 3
+1 3 4
+2 3 6
+2 4 1
+3 4 5
+4 5 2
+3 5 7
 
-Test Case 2:
+Output:
+2 4 1
+4 5 2
+1 2 3
+1 3 4
+
+Test Case 2
 Input:
-3 4
-1 2 a 4
-Output: Invalid input
+-4
+5
+1 2 10
+1 3 6
+2 3 15
+2 4 10
+3 4 4
 
-Test Case 3:
+Output:
+Invalid input
+
+Test Case 3
 Input:
-4 10
-1 2 3 4
-Output: Yes
+5
+7
+1 2 10
+1 3 15
+2 3 20
+2 4 25
+3 4 30
+4 5 35
+3 5 40
 
-Test Case 4:
+Output:
+1 2 10
+1 3 15
+2 4 25
+4 5 35
+
+Test Case 4
 Input:
-3 5
-2 2 2
-Output: No
+3
+2
+1 2 2
+2 3 3
 
-Test Case 5:
+Output:
+1 2 2
+2 3 3
+
+Test Case 5
 Input:
-7 4
-1 2 3 4 5 6 7
-Output: Yes
+5
+4
+1 2 3
+1 3 4
+2 3 5
+4 5 2
 
-ANSWER
+Output:
+4 5 2
+1 2 3
+1 3 4
 
-import java.util.*;
+Test Case 6
+Input:
+5
+7
+1 2 10
+1 3 15
+2 3 20
+2 4 25
+3 4 30
+4 5 35
+3 5 40
 
-class Main{
-    static boolean f = false;
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        if(n<=1 && n>20){
-            System.out.println("Invalid input");return;
-        }
-        int t = sc.nextInt();
-        if(t<=1 && t<=100){
-            System.out.println("Invalid input");return;
-        }
-        int[] a = new  int[n];
-        
-        for(int i=0;i<n;i++){
-            if(!sc.hasNextInt()){
-                System.out.print("Invalid input");
-                return;
-            }
-            
-            if(a[i]<=1 && a[i]>=1000){
-                System.out.println("Invalid input");return;
-            }
-            a[i] = sc.nextInt();
-        }
-        
-        subset(a,0,t);
-        
-        if(f){
-            System.out.println("Yes");
-        }
-        else
-            System.out.println("No");
-    }
-    
-    static void subset(int[] a,int index, int target){
-        if(target == 0){
-            f=true;
-            return;
-        }
-        
-        if(index == a.length || target<0){
-            return;
-        }
-        
-        subset(a,index+1,target-a[index]);
-        subset(a,index+1,target);
-    }
-}
+Output:
+1 2 10
+1 3 15
+2 4 25
+4 5 35
+
+END
+Implementation of Shortest path Algorithms
+
+Question
+A delivery company operates in a large city with multiple hubs connected by various routes. Some routes have tolls, while others are toll-free. The company wants to optimize its delivery costs by finding the cheapest route from its central hub to all other hubs. Additionally, the company needs to ensure that it considers toll-free routes wherever possible to minimize expenses.
+
+Input Format
+
+The first line contains two integers, n and m, the number of vertices and edges, respectively.
+The next m lines each contain three integers, u, v, and w, indicating an edge from vertex u to vertex v with weight w.
+The last line contains a single integer, s, the source vertex.
+Print Invalid input, if n or m is negative.
+
+Output Format
+
+Print the shortest distance from vertex s to vertex i.
+Print Invalid input, if n is negative.
+
+Constraints
+
+-15 ≤ n, values ≤ 15
+
+Note
+
+Must use function as findShortestPaths
+
+Test Cases
+
+Input:
+5 6
+0 1 4
+0 2 2
+1 3 5
+2 1 1
+2 3 8
+3 4 3
+0
+Output:
+0 3 2 8 11 
+
+Input:
+-3
+Output:
+Invalid input
+
+Input:
+4 6
+0 1 1
+0 2 0
+1 2 2
+1 3 4
+2 3 1
+3 1 0
+0
+Output:
+0 1 0 1 
+
+Input:
+10 6
+0 1 5
+0 2 2
+1 3 3
+2 4 6
+3 5 2
+4 6 4
+0
+Output:
+0 5 2 8 8 10 12 -1 -1 -1 
+
+Input:
+10 15
+0 1 10
+0 2 0
+1 3 3
+2 3 2
+3 4 5
+4 5 1
+1 6 7
+2 7 0
+7 8 4
+8 9 1
+3 9 8
+0 5 10
+4 7 2
+6 9 6
+5 8 5
+0
+Output:
+0 10 0 2 7 8 17 0 4 5 
+
+Input:
+4 6
+0 1 1
+0 2 0
+1 2 2
+1 3 4
+2 3 1
+3 1 0
+0
+Output:
+0 1 0 1 
+
+
+END
+Implementation of Maximum Flow Minimum cut Algorithm
+
+Question
+Imagine a data center network where servers need to send data to each other. The network has a limited bandwidth capacity on each connection. You want to find the maximum amount of data that can be transferred from a source server to a destination server at any given time.
+
+Input Format
+
+First line of input consists of two integers, n and m, representing the number of vertices and the number of edges, respectively.
+Next m lines contain three integers, u, v, and capacity, representing the source vertex, destination vertex, and capacity of an edge, respectively.
+Last line of input consists of two integers, s and t, representing the source vertex and the sink vertex for the maximum flow calculation, respectively.
+
+Output Format
+
+Print the maximum flow value.
+Print Invalid input, if n or m is negative.
+
+Constraints
+
+1 <= number_of_vertices <= 100
+0 <= number_of_edges <= 1000
+1 <= source_vertex, destination_vertex <= number_of_vertices
+0 <= capacity <= 1000
+
+Input:
+4 5
+1 2 10
+2 4 15
+1 3 20
+3 4 25
+2 3 6
+1 4
+Output:
+30
+
+Input:
+-1 3
+1 2 10
+2 3 15
+1 3 20
+1 3
+Output:
+Invalid input
+
+Input:
+6 9
+1 2 16
+1 3 13
+2 3 10
+2 4 12
+3 5 14
+4 6 20
+5 6 4
+2 5 9
+3 4 7
+1 6
+Output:
+23
+
+Input:
+3 2
+1 2 10
+2 3 5
+1 3
+Output:
+5
+
+Input:
+3 2
+1 2 0
+2 3 0
+1 3
+Output:
+0
+
+Input:
+6 9
+1 2 16
+1 3 13
+2 3 10
+2 4 12
+3 5 14
+4 6 20
+5 6 4
+2 5 9
+3 4 7
+1 6
+Output:
+23

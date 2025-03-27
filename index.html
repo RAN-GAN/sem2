@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ADSA CC" />
+    <meta name="description" content="ADSA Model Lab" />
     <meta name="theme-color" content="#121212" />
-    <title>ADSA CC</title>
+    <title>ADSA Model Lab</title>
     <!-- Google tag (gtag.js) -->
     <script
       async=""
@@ -20,10 +20,6 @@
 
       gtag("config", "G-KJEPF1W07E");
     </script>
-    <!-- <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css"
-    /> -->
 
     <style>
       /* Theme Variables */
@@ -373,10 +369,92 @@
           transform: rotate(360deg);
         }
       }
+
+      /* News Banner Styles */
+      .news-banner {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto 1rem auto;
+        padding: 1rem;
+        background-color: var(--bg-secondary);
+        border-left: 4px solid #515558;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        color: var(--text-primary);
+        animation: slidein 0.5s ease-out;
+        position: relative;
+      }
+
+      .news-banner-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .news-banner-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .news-banner-content {
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .news-banner-close {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+      }
+
+      .news-banner-close:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      @keyframes slidein {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- <button class="theme-toggle" id="themeToggle">🌙</button> -->
+    <!-- New banner - Add this right after the <body> tag -->
+    <div class="news-banner" id="newsBanner">
+      <div class="news-banner-header">
+        <div class="news-banner-title"><span>📢</span> Latest announcement</div>
+        <button
+          class="news-banner-close"
+          id="closeBanner"
+          aria-label="Close banner"
+        >
+          ×
+        </button>
+      </div>
+      <div class="news-banner-content">
+        <b>
+          Exciting update: Introducing "Mayaavi" – an innovative extension for
+          seamless tab switching and effortless copy-pasting! It's free for
+          download!</b
+        >
+        <small>Exclusively for Amypo</small>
+      </div>
+    </div>
+
+    <!-- <button class="-toggle" id="themeToggle">🌙</button> -->
     <div class="disclaimer">
       Disclaimer: For educational use only. The author does not take
       responsibility for any misuse of the content provided.
@@ -432,62 +510,6 @@
           theme === "light" ? "🌙" : "☀️";
       };
 
-      // Chat functionality
-      const DEBOUNCE_DELAY = 1000;
-      let lastRequestTime = 0;
-
-      const handleAsk = async () => {
-        const questionInput = document.getElementById("question");
-        const responseDiv = document.getElementById("response");
-        const button = document.getElementById("askButton");
-        const spinner = document.getElementById("spinner");
-        const question = questionInput.value.trim();
-
-        if (!question) {
-          responseDiv.innerHTML =
-            '<span class="error">Please enter a question</span>';
-          return;
-        }
-
-        const now = Date.now();
-        if (now - lastRequestTime < DEBOUNCE_DELAY) {
-          responseDiv.innerHTML =
-            '<span class="error">Please wait a moment</span>';
-          return;
-        }
-
-        button.disabled = true;
-        spinner.style.display = "inline-block";
-        responseDiv.innerHTML = "Please wait...";
-
-        try {
-          const response = await axios.post(
-            "https://rangandale.pythonanywhere.com/api/ask",
-            { question },
-            {
-              headers: { "Content-Type": "application/json" },
-            }
-          );
-
-          if (response.data?.choices?.[0]?.message?.content) {
-            responseDiv.innerHTML = response.data.choices[0].message.content;
-          } else {
-            throw new Error("Invalid response format");
-          }
-
-          lastRequestTime = now;
-          questionInput.value = "";
-        } catch (error) {
-          console.error("Error:", error);
-          responseDiv.innerHTML = `<span class="error">${
-            error.response?.data?.error || "Something went wrong"
-          }</span>`;
-        } finally {
-          button.disabled = false;
-          spinner.style.display = "none";
-        }
-      };
-
       // Initialize everything when DOM is loaded
       document.addEventListener("DOMContentLoaded", () => {
         setupThemeToggle();
@@ -519,36 +541,41 @@
             handleAsk();
           }
         });
+
+        // Banner close functionality
+        const newsBanner = document.getElementById("newsBanner");
+        const closeBanner = document.getElementById("closeBanner");
+
+        // Check if banner was previously closed
+        const bannerClosed = localStorage.getItem("newsBannerClosed");
+
+        if (bannerClosed === "true") {
+          newsBanner.style.display = "none";
+        }
+
+        closeBanner.addEventListener("click", () => {
+          newsBanner.style.animation = "fadeout 0.3s forwards";
+          setTimeout(() => {
+            newsBanner.style.display = "none";
+            // Save banner state to localStorage
+            localStorage.setItem("newsBannerClosed", "true");
+          }, 300);
+        });
+
+        // Add a fadeout animation to your style section
+        document.head.insertAdjacentHTML(
+          "beforeend",
+          `
+          <style>
+            @keyframes fadeout {
+              from { opacity: 1; }
+              to { opacity: 0; }
+            }
+          </style>
+        `
+        );
       });
     </script>
     <script src="scripts.js"></script>
-
-    <!-- Add chat container before closing body tag -->
-    <div class="chat-container">
-      <button id="chatToggle" class="chat-toggle">💭</button>
-      <div id="chatWidget" class="chat-widget">
-        <div class="chat-header">
-          <h3>Ai Assistant</h3>
-          <button class="close-btn">×</button>
-        </div>
-        <div
-          class="chat-messages"
-          id="response"
-          role="alert"
-          aria-live="polite"
-        ></div>
-        <div class="chat-input">
-          <input
-            type="text"
-            id="question"
-            placeholder="Ask a question..."
-            aria-label="Your question"
-            maxlength="500"
-          />
-          <button id="askButton">Send</button>
-        </div>
-        <div class="spinner" id="spinner"></div>
-      </div>
-    </div>
   </body>
 </html>
