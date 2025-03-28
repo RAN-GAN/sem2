@@ -972,6 +972,53 @@ Output:
 2 4 25
 4 5 35
 
+
+import java.util.*;
+
+class KruskalMST {
+    static class Edge implements Comparable<Edge> {
+        int src, dest, weight;
+        Edge(int s, int d, int w) { src = s; dest = d; weight = w; }
+        public int compareTo(Edge e) { return weight - e.weight; }
+    }
+
+    static int find(int[] parent, int i) {
+        return (parent[i] == i) ? i : (parent[i] = find(parent, parent[i]));
+    }
+
+    static void union(int[] parent, int[] rank, int x, int y) {
+        int rootX = find(parent, x), rootY = find(parent, y);
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY]) parent[rootY] = rootX;
+            else parent[rootX] = rootY;
+            if (rank[rootX] == rank[rootY]) rank[rootY]++;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if (n < 0) { System.out.println("Invalid input"); return; }
+        int e = sc.nextInt();
+
+        List<Edge> edges = new ArrayList<>();
+        for (int i = 0; i < e; i++)
+            edges.add(new Edge(sc.nextInt(), sc.nextInt(), sc.nextInt()));
+
+        Collections.sort(edges);
+        int[] parent = new int[n + 1], rank = new int[n + 1];
+        for (int i = 0; i <= n; i++) parent[i] = i;
+
+        for (Edge edge : edges) {
+            if (find(parent, edge.src) != find(parent, edge.dest)) {
+                System.out.println(edge.src + " " + edge.dest + " " + edge.weight);
+                union(parent, rank, edge.src, edge.dest);
+            }
+        }
+        sc.close();
+    }
+}
+
 END
 Implementation of Shortest path Algorithms
 
@@ -1282,3 +1329,58 @@ Input:
 1 6
 Output:
 23
+
+Answer
+
+import java.util.*;
+
+class MaxFlow {
+    static int bfs(int[][] cap, int[][] flow, int[] parent, int s, int t, int n) {
+        Arrays.fill(parent, -1);
+        Queue<Integer> q = new LinkedList<>();
+        q.add(s);
+        parent[s] = s;
+
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            for (int v = 1; v <= n; v++) {
+                if (parent[v] == -1 && cap[u][v] > flow[u][v]) {
+                    parent[v] = u;
+                    if (v == t) return 1;
+                    q.add(v);
+                }
+            }
+        }
+        return 0;
+    }
+
+    static int maxFlow(int[][] cap, int s, int t, int n) {
+        int[][] flow = new int[n + 1][n + 1];
+        int[] parent = new int[n + 1];
+        int maxFlow = 0;
+
+        while (bfs(cap, flow, parent, s, t, n) == 1) {
+            int f = Integer.MAX_VALUE;
+            for (int v = t; v != s; v = parent[v])
+                f = Math.min(f, cap[parent[v]][v] - flow[parent[v]][v]);
+            for (int v = t; v != s; v = parent[v]) {
+                flow[parent[v]][v] += f;
+                flow[v][parent[v]] -= f;
+            }
+            maxFlow += f;
+        }
+        return maxFlow;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), m = sc.nextInt();
+        if (n < 1 || m < 0) { System.out.println("Invalid input"); return; }
+
+        int[][] cap = new int[n + 1][n + 1];
+        for (int i = 0; i < m; i++) cap[sc.nextInt()][sc.nextInt()] += sc.nextInt();
+
+        System.out.println(maxFlow(cap, sc.nextInt(), sc.nextInt(), n));
+        sc.close();
+    }
+}
