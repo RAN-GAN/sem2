@@ -55,6 +55,38 @@ Output:
 Output:
 1
 
+
+Answer
+
+import java.util.Scanner;
+
+public class Main {
+    public static int linearSearch(int arr[], int n, int x) {
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == x) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        int x = scanner.nextInt();
+        System.out.println(linearSearch(arr, n, x));
+
+        scanner.close();
+    }
+}
+
 END
 Implementation of Binary Search
 
@@ -110,6 +142,70 @@ Invalid input
 13
 Output:
 2
+
+Answer 
+
+import java.util.Scanner;
+
+public class Main {
+    public static int binarySearch(int arr[], int left, int right, int target) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == target) {
+                return mid; 
+            }
+            if (arr[mid] < target) {
+                left = mid + 1; 
+            } else {
+                right = mid - 1; 
+            }
+        }
+        return -1; 
+    }
+
+    public static boolean isSorted(int arr[], int n) {
+        for (int i = 1; i < n; i++) {
+            if (arr[i] < arr[i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            int n = scanner.nextInt();
+            if (n < 1 || n > 100000) {
+                System.out.println("Invalid input");
+                return;
+            }
+
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = scanner.nextInt();
+            }
+
+            if (!isSorted(arr, n)) {
+                System.out.println("Invalid input");
+                return;
+            }
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid input");
+                return;
+            }
+
+            int target = scanner.nextInt();
+            System.out.println(binarySearch(arr, 0, n - 1, target));
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
 
 END
 Implementation of Sorting Algorithms
@@ -167,6 +263,77 @@ Output:
 3
 Output:
 6
+
+Answer 
+
+import java.util.Scanner;
+
+public class Main {
+    public static void quickSort(int arr[], int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+
+    public static int partition(int arr[], int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        return i + 1;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            int n = scanner.nextInt();
+            if (n < 1 || n > 100000) {
+                System.out.println("Invalid input");
+                return;
+            }
+
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                if (!scanner.hasNextInt()) {
+                    System.out.println("Invalid input");
+                    return;
+                }
+                arr[i] = scanner.nextInt();
+            }
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid input");
+                return;
+            }
+
+            int k = scanner.nextInt();
+            if (k < 1 || k > n) {
+                System.out.println("Invalid input");
+                return;
+            }
+
+            quickSort(arr, 0, n - 1);
+            System.out.println(arr[k - 1]);
+
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
 
 END
 Implementation of Greedy Algorithms
@@ -244,6 +411,55 @@ Output:
 4 6 3
 Total resources: 5
 
+Answer 
+
+import java.util.*;
+
+class Main {
+    static void selectEvents(List<int[]> events) {
+        events.sort(Comparator.comparingInt(a -> a[1])); // Sort by end time
+
+        List<int[]> selectedEvents = new ArrayList<>();
+        int totalResources = 0, lastEndTime = -1;
+
+        for (int[] event : events) {
+            int start = event[0], end = event[1], resource = event[2];
+            
+            if (start > end) {
+                System.out.println("Invalid input");
+                return;
+            }
+            
+            if (start >= lastEndTime) { // Select non-overlapping events
+                selectedEvents.add(event);
+                totalResources += resource;
+                lastEndTime = end;
+            }
+        }
+
+        for (int[] event : selectedEvents) {
+            System.out.println(event[0] + " " + event[1] + " " + event[2]);
+        }
+        System.out.println("Total resources: " + totalResources);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<int[]> events = new ArrayList<>();
+        
+        for (int i = 0; i < n; i++) {
+            int start = scanner.nextInt();
+            int end = scanner.nextInt();
+            int resource = scanner.nextInt();
+            events.add(new int[]{start, end, resource});
+        }
+        scanner.close();
+        
+        selectEvents(events);
+    }
+}
+
 END
 Implementation of Pattern Searching Algorithms
 
@@ -315,6 +531,58 @@ Copied sentence
 Output:
 Not found
 
+Answer
+
+import java.util.*;
+class main{
+    public static void main(String[]se)
+    {
+        Scanner sc=new Scanner(System.in);
+        try
+        {
+            String s=sc.nextLine().trim();
+            String p=sc.nextLine().trim();
+            // s=s.toLowerCase();
+            // p=p.toLowerCase();
+            if(!val(s)||!val(p))
+            {
+                 System.out.print("Invalid input");
+                 return;
+            }
+            find(s,p);
+        }
+        catch(Exception e)
+        {
+            System.out.print("Invalid input\n");
+        }
+    }
+    public static boolean val(String s)
+    {
+        return s.matches("[a-zA-Z0-9 ]+");
+    }
+    public static void find(String s,String p)
+    {
+        int n=s.length();
+        int m=p.length();
+        boolean f=false;
+    for(int i=0;i<=n-m;i++)
+    {
+        if(s.substring(i,i+m).equals(p))
+        {
+            System.out.print(i+" ");
+            f=true;
+            
+            
+        }
+    }
+    if(!f)
+    {
+        System.out.print("Not found ");
+    }
+    }
+}
+
+
 END
 Implementation of Backtracking Algorithms
 
@@ -333,6 +601,7 @@ If the input is invalid (e.g., not an integer or outside the defined range N ≥
 Constraints
 1 <= N <= 20
 
+Test cases not available
 END
 Implementation of Dynamic Programming
 
@@ -369,6 +638,71 @@ racecar
 
 madam
 5
+
+
+Answer
+
+import java.util.*;
+class main{
+    static int n;
+    static int bo[];
+    static boolean f=false;
+    public static void main(String[]se){
+        try{
+            Scanner sc=new Scanner(System.in);
+            n=sc.nextInt();
+            if(n>=9)
+            {
+                System.out.print("Invalid input");
+                return;
+            }
+            sc.close();
+            bo=new int[n];
+            Arrays.fill(bo,-1);
+            solve(0);
+            if(n==2||n==3){
+                System.out.print("No solution exists");
+                return;
+            }
+        }
+        catch(Exception e){
+            System.out.print("Invalid input");
+        }
+    }
+    public static void solve(int col){
+        if(col==n){
+            print();
+            f=true;
+            return;
+            
+        }
+        for(int ro=0;ro<n;ro++){
+            if(iss(ro,col)){
+                bo[col]=ro;
+                solve(col+1);
+                bo[col]=-1;
+            }
+        }
+    }
+    public static boolean iss(int ro,int col){
+        for(int i=0;i<col;i++){
+            if(bo[i]==ro||Math.abs(bo[i]-ro)==Math.abs(i-col)){
+                return false;
+            }
+        }
+        return true;
+    }
+    public static void print()
+    {
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                System.out.print((bo[i]==j)?"1 ":"0 ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+}
 
 END
 Implementation of Range Query Algorithms
@@ -471,6 +805,57 @@ Input:
 Output:
 1
 2
+
+Answer
+
+import java.util.*;
+
+public class RangeMinQuery {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int N = sc.nextInt();
+        if (N < 0) {
+            System.out.println("Invalid input");
+            return;
+            
+        }
+        
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextInt();
+            
+        }
+        
+        int Q = sc.nextInt();
+        while (Q-- > 0) {
+            int L = sc.nextInt();
+            int R = sc.nextInt();
+            
+            int minVal = Integer.MAX_VALUE;
+            int count = 0;
+            
+            for (int i = L; i <= R; i++) {
+                if (arr[i] < minVal) {
+                    minVal = arr[i];
+                    count = 1;
+                    
+                } else if (arr[i] == minVal) {
+                    count++;
+                    
+                }
+                
+            }
+            
+            System.out.println(minVal);
+            System.out.println(count);
+            
+        }
+        sc.close();
+        
+    }
+    
+}
 
 END
 Implementation of Minimum Spanning Tree
@@ -587,6 +972,53 @@ Output:
 2 4 25
 4 5 35
 
+
+import java.util.*;
+
+class KruskalMST {
+    static class Edge implements Comparable<Edge> {
+        int src, dest, weight;
+        Edge(int s, int d, int w) { src = s; dest = d; weight = w; }
+        public int compareTo(Edge e) { return weight - e.weight; }
+    }
+
+    static int find(int[] parent, int i) {
+        return (parent[i] == i) ? i : (parent[i] = find(parent, parent[i]));
+    }
+
+    static void union(int[] parent, int[] rank, int x, int y) {
+        int rootX = find(parent, x), rootY = find(parent, y);
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY]) parent[rootY] = rootX;
+            else parent[rootX] = rootY;
+            if (rank[rootX] == rank[rootY]) rank[rootY]++;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if (n < 0) { System.out.println("Invalid input"); return; }
+        int e = sc.nextInt();
+
+        List<Edge> edges = new ArrayList<>();
+        for (int i = 0; i < e; i++)
+            edges.add(new Edge(sc.nextInt(), sc.nextInt(), sc.nextInt()));
+
+        Collections.sort(edges);
+        int[] parent = new int[n + 1], rank = new int[n + 1];
+        for (int i = 0; i <= n; i++) parent[i] = i;
+
+        for (Edge edge : edges) {
+            if (find(parent, edge.src) != find(parent, edge.dest)) {
+                System.out.println(edge.src + " " + edge.dest + " " + edge.weight);
+                union(parent, rank, edge.src, edge.dest);
+            }
+        }
+        sc.close();
+    }
+}
+
 END
 Implementation of Shortest path Algorithms
 
@@ -689,7 +1121,72 @@ Input:
 Output:
 0 1 0 1 
 
+Answer
 
+import java.util.*;
+
+public class Dijkstra {
+    private static final int INF = Integer.MAX_VALUE;
+    
+    public static void dijkstra(int n, int m, int[][] graph, int s) {
+        int[] dist = new int[n];
+        boolean[] visited = new boolean[n];
+        Arrays.fill(dist, INF);
+        dist[s] = 0;
+        
+        for (int itr = 0; itr < n - 1; itr++) {
+            int u = -1;
+            
+            for (int i = 0; i < n; i++) {
+                if (!visited[i] && (u == -1 || dist[i] < dist[u])) {
+                    u = i;
+                    
+                }
+                
+            }
+            if (dist[u] == INF) {
+                break;
+            }
+            visited[u] = true;
+            for (int v = 0; v < n; v++) {
+                if (graph[u][v] != INF && !visited[v] && dist[u] + graph[u][v] < dist[v]) {
+                    dist[v] = dist[u] + graph[u][v];
+                }
+            }
+        }
+        for (int i : dist) {
+            System.out.print((i != INF ? i : -1) + " ");
+            
+        }
+        
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+         if (n < 0) {
+            System.out.println("Invalid input");
+            return;
+            
+        }
+        int m = scanner.nextInt();
+        
+        int[][] graph = new int[n][n];
+        for (int[] row : graph) {
+            Arrays.fill(row, INF);
+            
+        }
+        for (int itr = 0; itr < m; itr++) {
+            int u = scanner.nextInt();
+            int v = scanner.nextInt();
+            int w = scanner.nextInt();
+            graph[u][v] = w;
+            
+        }
+        int s = scanner.nextInt();
+        scanner.close();
+        dijkstra(n, m, graph, s);
+    }
+}
 END
 Implementation of Maximum Flow Minimum cut Algorithm
 
@@ -779,3 +1276,58 @@ Input:
 1 6
 Output:
 23
+
+Answer
+
+import java.util.*;
+
+class MaxFlow {
+    static int bfs(int[][] cap, int[][] flow, int[] parent, int s, int t, int n) {
+        Arrays.fill(parent, -1);
+        Queue<Integer> q = new LinkedList<>();
+        q.add(s);
+        parent[s] = s;
+
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            for (int v = 1; v <= n; v++) {
+                if (parent[v] == -1 && cap[u][v] > flow[u][v]) {
+                    parent[v] = u;
+                    if (v == t) return 1;
+                    q.add(v);
+                }
+            }
+        }
+        return 0;
+    }
+
+    static int maxFlow(int[][] cap, int s, int t, int n) {
+        int[][] flow = new int[n + 1][n + 1];
+        int[] parent = new int[n + 1];
+        int maxFlow = 0;
+
+        while (bfs(cap, flow, parent, s, t, n) == 1) {
+            int f = Integer.MAX_VALUE;
+            for (int v = t; v != s; v = parent[v])
+                f = Math.min(f, cap[parent[v]][v] - flow[parent[v]][v]);
+            for (int v = t; v != s; v = parent[v]) {
+                flow[parent[v]][v] += f;
+                flow[v][parent[v]] -= f;
+            }
+            maxFlow += f;
+        }
+        return maxFlow;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), m = sc.nextInt();
+        if (n < 1 || m < 0) { System.out.println("Invalid input"); return; }
+
+        int[][] cap = new int[n + 1][n + 1];
+        for (int i = 0; i < m; i++) cap[sc.nextInt()][sc.nextInt()] += sc.nextInt();
+
+        System.out.println(maxFlow(cap, sc.nextInt(), sc.nextInt(), n));
+        sc.close();
+    }
+}
