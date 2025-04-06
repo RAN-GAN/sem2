@@ -1,204 +1,166 @@
-ddl
-CREATE TABLE Loans (
-    LoanID INT,
-    BorrowerID INT,
-    Amount DECIMAL(10, 2),
-    InterestRate DECIMAL(5, 2),
-    StartDate DATE
-);
+1. LED with ARM7 (Blinking of led)
+#include <lpc214x.h>
 
-CREATE TABLE Borrowers (
-    BorrowerID INT,
-    Name VARCHAR(100),
-    CreditScore INT,
-    ContactInfo VARCHAR(255)
-);
+#define LED_PIN (1 << 10)  // P0.10
 
-CREATE TABLE Repayments (
-    RepaymentID INT,
-    LoanID INT,
-    Amount DECIMAL(10, 2),
-    RepaymentDate DATE,
-    Status VARCHAR(50)
-);
+void delay(unsigned int count) {
+    for (unsigned int i = 0; i < count; i++);
+}
 
-DROP TABLE Repayments;
+int main(void) {
+    // Configure P0.10 as GPIO and Output
+    PINSEL0 &= ~(3 << 20);  // Clear bits 20 and 21 to select GPIO
+    IODIR0 |= LED_PIN;      // Set P0.10 as output
 
-ALTER TABLE Loans
-ADD COLUMN LoanStatus VARCHAR(50);
+    while (1) {
+        IOSET0 = LED_PIN;  // Turn LED ON
+        delay(500000);     // Delay
 
+        IOCLR0 = LED_PIN;  // Turn LED OFF
+        delay(500000);     // Delay
+    }
+} 
 END
+2. Led Matrix
+#include <lpc214x.h>
 
+#define ROW_PORT IO1PIN   // Row control (connected to P1.16 - P1.23)
+#define COL_PORT IO0PIN   // Column control (connected to P0.0 - P0.7)
 
-dml
-SELECT *
-FROM Transactions
-WHERE Amount > 1000
-  AND TransactionDate >= '2023-05-01';
+void delay(unsigned int time) {
+    unsigned int i, j;
+    for (i = 0; i < time; i++)
+        for (j = 0; j < 1000; j++);
+}
 
-UPDATE Accounts
-SET Balance = Balance + 1000
-WHERE AccountID = 103;
+void display_pattern(unsigned char pattern[8]) {
+    unsigned char row;
+    for (row = 0; row < 8; row++) {
+        ROW_PORT = (1 << (row + 16));  // Set row HIGH (P1.16 - P1.23)
+        COL_PORT = ~pattern[row];      // Set column LOW to turn ON LEDs
+        delay(10);                     // Delay for persistence of vision
+        COL_PORT = 0xFF;               // Turn OFF all columns
+    }
+}
 
+int main() {
+    // Pattern for the number "2" on an 8Ũ8 common cathode LED matrix
+unsigned char pattern[8] = {
+    0b01111110, // Row 0:  ****** 
+    0b11000011, // Row 1: **    **
+    0b00000011, // Row 2:       **
+    0b00000110, // Row 3:      ** 
+    0b00001100, // Row 4:     **  
+    0b00011000, // Row 5:    **   
+    0b00110000, // Row 6:   **    
+    0b11111111  // Row 7: ********
+};
+    // Configure GPIO Pins
+    PINSEL0 = 0x00000000;  // Set P0.0 to P0.7 as GPIO
+    PINSEL1 = 0x00000000;  // Set P1.16 to P1.23 as GPIO
+    IO0DIR = 0xFF;         // Set P0.0 to P0.7 as output (columns)
+    IO1DIR |= (0xFF << 16); // Set P1.16 to P1.23 as output (rows)
+
+    // Infinite loop to continuously display the pattern
+    while (1) {
+        display_pattern(pattern);
+    }
+
+    return 0;
+}
 END
+3. LED (display a string)
+#include<lpc214x.h>
+#define bit(x) (1<<x)
+#define delay for(i=1;i<1000;i++);
+unsigned int i;
+void lcd_int();
+void dat(unsigned char);
+void cmd(unsigned char);
+void string(unsigned char*);
+void main()
+{
+	IO0DIR|=0XFFF;
+	lcd_int();
+	cmd(0x8a);
+	string("23EUCI010");
+	while(1)
+	{
+		cmd(0x18);
+		delay;
+	}
+}void lcd_int()
+{
+	cmd(0x30);
+	cmd(0x0c);
+	cmd(0x06);
+	cmd(0x01);
+	cmd(0x80);
+}
+void cmd(unsigned char a)
+{
+	IO0PIN&=0x00;
+	IO0PIN|=(a<<0);
+	IO0CLR|=bit(8);
+	IO0CLR|=bit(9);
+	IO0SET|=bit(10);
+	delay;
+	IO0CLR|=bit(10);
+}
+void dat(unsigned char b)
+{
+	IO0PIN&=0x00;
+	IO0PIN|=(b<<0);
+	IO0SET|=bit(8);
+	IO0CLR|=bit(9);
+	IO0SET|=bit(10);
+	delay;
+	IO0CLR|=bit(10);
+}
+void string(unsigned char *p)
+{
+	while(*p!='\0')
+	{
+		dat(*p++);
+	}
+}
+4. 7 segment display
+#include <lpc214x.h>
 
+void delay(int k) {
+    for (int i = 0; i < k; i++) {
+        for (int j = 0; j < 1000; j++) {
+            // Empty loop to create delay
+        }
+    }
+}
 
+void displayDigit(int digit) {
+    unsigned char segmentCodes[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};
+    
+    if (digit >= 0 && digit <= 9) {
+        IO0SET = segmentCodes[digit]; // Set the corresponding segment code
+    }
+}
 
- agg
-SELECT 
-    GAME_ID, 
-    COUNT(PLAYER_ID) AS number_of_players
-FROM 
-    PLAYER_ACTIVITY
-GROUP BY 
-    GAME_ID;
+void clearDisplay(int digit) {
+    unsigned char segmentCodes[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};
+    
+    if (digit >= 0 && digit <= 9) {
+        IO0CLR = segmentCodes[digit]; // Clear the corresponding segment code
+    }
+}
 
-SELECT 
-    GAME_ID, 
-    MIN(ACTIVITY_TIMESTAMP) AS earliest_activity
-FROM 
-    PLAYER_ACTIVITY
-GROUP BY 
-    GAME_ID;
-
-SELECT 
-    GAME_ID, 
-    MAX(UPDATE_TIMESTAMP) AS latest_update
-FROM 
-    GAME_UPDATES
-GROUP BY 
-    GAME_ID;
-
-SELECT 
-    GAME_ID, 
-    COUNT(ACTIVITY_ID) AS total_activities
-FROM 
-    PLAYER_ACTIVITY
-GROUP BY 
-    GAME_ID
-HAVING 
-    total_activities > 1;
-
-END
-
-
-
-sub
-SELECT CUSTOMER_ID
-FROM ORDERS
-WHERE ORDER_DATE >= '2023-01-16'
-  AND TOTAL_AMOUNT > (SELECT AVG(TOTAL_AMOUNT) FROM ORDERS);
-
-SELECT PRODUCT_NAME
-FROM PRODUCTS
-WHERE STOCK_QUANTITY = 0
-  AND PRODUCT_ID IN (SELECT PRODUCT_ID FROM ORDER_DETAILS);
-
-SELECT CATEGORY
-FROM PRODUCTS
-GROUP BY CATEGORY
-HAVING AVG(PRICE) = (SELECT MAX(AVG_PRICE) 
-                     FROM (SELECT CATEGORY, AVG(PRICE) AS AVG_PRICE 
-                           FROM PRODUCTS 
-                           GROUP BY CATEGORY) AS CATEGORY_AVG);
-
-SELECT CUSTOMER_ID
-FROM ORDERS
-WHERE ORDER_ID IN (SELECT ORDER_ID 
-                   FROM ORDER_DETAILS 
-                   WHERE PRODUCT_ID IN (SELECT PRODUCT_ID 
-                                        FROM PRODUCTS 
-                                        WHERE CATEGORY = 'Electronics'));
-
-SELECT PRODUCT_NAME
-FROM PRODUCTS
-WHERE PRICE > (SELECT AVG(PRICE) 
-               FROM PRODUCTS AS P2 
-               WHERE P2.CATEGORY = PRODUCTS.CATEGORY);
-
-END
-join
-SELECT STUDENT_NAME
-FROM STUDENTS
-WHERE STUDENT_ID IN (
-    SELECT STUDENT_ID
-    FROM ENROLLMENTS
-    WHERE SCORE > 90
-);
-
-SELECT STUDENT_NAME
-FROM STUDENTS
-WHERE STUDENT_ID IN (
-    SELECT STUDENT_ID
-    FROM ENROLLMENTS
-    WHERE COURSE_ID = (
-        SELECT COURSE_ID
-        FROM COURSES
-        WHERE COURSE_NAME = 'Computer Science'
-    )
-);
-
-SELECT COURSE_NAME
-FROM COURSES
-WHERE COURSE_ID IN (
-    SELECT COURSE_ID
-    FROM ENROLLMENTS
-    GROUP BY COURSE_ID
-    HAVING AVG(SCORE) > 85
-);
-
-SELECT INSTRUCTOR_NAME
-FROM COURSES
-WHERE COURSE_ID IN (
-    SELECT COURSE_ID
-    FROM ENROLLMENTS
-    GROUP BY COURSE_ID
-    HAVING COUNT(STUDENT_ID) < 3
-);
-
-SELECT STUDENT_NAME
-FROM STUDENTS
-WHERE STUDENT_ID IN (
-    SELECT STUDENT_ID
-    FROM ENROLLMENTS
-    GROUP BY STUDENT_ID
-    ORDER BY COUNT(COURSE_ID) DESC
-);
-
-END
-views
-CREATE VIEW sorder
-AS SELECT salesman_id, ord_no, customer_id
-FROM orders
-WHERE ord_date IN('2012-08-17', '2012-10-10');
-
-END
-cursor
-DELIMITER $$
-
-create trigger trigger_dept_insert
-before insert on departments for each row 
-
-begin
-
-insert into department_log_history(department_name,action) 
-values(new.name,'Insert_New_Department');
-
-end$$
-
-DELIMITER ;
-
-END
-dql
-SELECT e.emp_id, e.name, e.age, d.department_name, e.salary, e.joining_date
-FROM Employees e
-JOIN Department d ON e.department_id = d.department_id
-WHERE d.department_name = 'HR'
-ORDER BY e.name ASC;
-
-SELECT e.emp_id, e.name, e.age, d.department_name, e.salary, e.joining_date
-FROM Employees e
-JOIN Department d ON e.department_id = d.department_id
-WHERE d.department_name = 'IT'
-ORDER BY e.salary DESC
-LIMIT 1;
+int main() {
+    IO0DIR |= 0xFF; // Set lower 8 bits of IO0DIR as output (for 7-segment display)
+    
+    while (1) {
+        for (int i = 0; i <= 9; i++) {
+            displayDigit(i); // Display the current digit
+            delay(1000); // Delay to allow the display to be visible
+            clearDisplay(i); // Clear the digit
+        }
+    }
+    
+    return 0;
+}
