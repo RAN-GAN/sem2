@@ -21,49 +21,44 @@ int main(void) {
     }
 } 
 END
-2. Led Matrix
+2. 7 segment display : 
 #include <lpc214x.h>
 
-#define ROW_PORT IO1PIN   // Row control (connected to P1.16 - P1.23)
-#define COL_PORT IO0PIN   // Column control (connected to P0.0 - P0.7)
-
-void delay(unsigned int time) {
-    unsigned int i, j;
-    for (i = 0; i < time; i++)
-        for (j = 0; j < 1000; j++);
+void delay(int k) {
+    for (int i = 0; i < k; i++) {
+        for (int j = 0; j < 1000; j++) {
+            // Empty loop to create delay
+        }
+    }
 }
 
-void display_pattern(unsigned char pattern[8]) {
-    unsigned char row;
-    for (row = 0; row < 8; row++) {
-        ROW_PORT = (1 << (row + 16));  // Set row HIGH (P1.16 - P1.23)
-        COL_PORT = ~pattern[row];      // Set column LOW to turn ON LEDs
-        delay(10);                     // Delay for persistence of vision
-        COL_PORT = 0xFF;               // Turn OFF all columns
+void displayDigit(int digit) {
+    unsigned char segmentCodes[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D,
+                                      0x07, 0x7F, 0x6F};
+
+    if (digit >= 0 && digit <= 9) {
+        IOOSET = segmentCodes[digit]; // Set the corresponding segment code
+    }
+}
+
+void clearDisplay(int digit) {
+    unsigned char segmentCodes[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D,
+                                      0x07, 0x7F, 0x6F};
+
+    if (digit >= 0 && digit <= 9) {
+        IOOCLR = segmentCodes[digit]; // Clear the corresponding segment code
     }
 }
 
 int main() {
-    // Pattern for the number "2" on an 8Ũ8 common cathode LED matrix
-unsigned char pattern[8] = {
-    0b01111110, // Row 0:  ****** 
-    0b11000011, // Row 1: **    **
-    0b00000011, // Row 2:       **
-    0b00000110, // Row 3:      ** 
-    0b00001100, // Row 4:     **  
-    0b00011000, // Row 5:    **   
-    0b00110000, // Row 6:   **    
-    0b11111111  // Row 7: ********
-};
-    // Configure GPIO Pins
-    PINSEL0 = 0x00000000;  // Set P0.0 to P0.7 as GPIO
-    PINSEL1 = 0x00000000;  // Set P1.16 to P1.23 as GPIO
-    IO0DIR = 0xFF;         // Set P0.0 to P0.7 as output (columns)
-    IO1DIR |= (0xFF << 16); // Set P1.16 to P1.23 as output (rows)
+    IOODIR |= 0xFF; // Set lower 8 bits of IOODIR as output (for 7-segment display)
 
-    // Infinite loop to continuously display the pattern
     while (1) {
-        display_pattern(pattern);
+        for (int i = 0; i <= 9; i++) {
+            displayDigit(i);     // Display the current digit
+            delay(1000);         // Delay to allow the display to be visible
+            clearDisplay(i);     // Clear the digit
+        }
     }
 
     return 0;
@@ -83,12 +78,12 @@ void main()
 	IO0DIR|=0XFFF;
 	lcd_int();
 	cmd(0x8a);
-	string("23EUCI010");
+	string("<Your Name and Roll number>");
 	while(1)
 	{
 		cmd(0x18);
 		delay;
-	}
+	}s
 }void lcd_int()
 {
 	cmd(0x30);
