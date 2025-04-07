@@ -83,8 +83,9 @@ void main()
 	{
 		cmd(0x18);
 		delay;
-	}s
-}void lcd_int()
+	}
+}
+void lcd_int()
 {
 	cmd(0x30);
 	cmd(0x0c);
