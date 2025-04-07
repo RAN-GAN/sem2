@@ -67,24 +67,7 @@ END
 3. LED (display a string)
 #include<lpc214x.h>
 #define bit(x) (1<<x)
-#define delay for(i=1;i<1000;i++);
-unsigned int i;
-void lcd_int();
-void dat(unsigned char);
-void cmd(unsigned char);
-void string(unsigned char*);
-void main()
-{
-	IO0DIR|=0XFFF;
-	lcd_int();
-	cmd(0x8a);
-	string("<Your Name and Roll number>");
-	while(1)
-	{
-		cmd(0x18);
-		delay;
-	}
-}
+
 void lcd_int()
 {
 	cmd(0x30);
@@ -118,5 +101,17 @@ void string(unsigned char *p)
 	while(*p!='\0')
 	{
 		dat(*p++);
+	}
+}
+void main()
+{
+	IO0DIR|=0XFFF;
+	lcd_int();
+	cmd(0x8a);
+	string("<Your Name and Roll number>");
+	while(1)
+	{
+		cmd(0x18);
+		delay;
 	}
 }
