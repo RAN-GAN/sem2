@@ -1,608 +1,2339 @@
-Implementation of Linear search
+5 May 2025
 
+MCQ
+
+sum();
+99
+final
+Program will compile but not run
+-3
+It occurs when two methods have the same name but different parameter lists.
+Static methods
+2
+Abstract class
+Overriding
+ArithmeticException
+final
+Finally block’s return
+java.util
+StringBuffer is thread-safe.
+
+
+Coding
+
+1.
 import java.util.Scanner;
 
-public class Main {
-    public static int linearSearch(int arr[], int n, int x) {
-        for (int i = 0; i < n; i++) {
-            if (arr[i] == x) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        int n = scanner.nextInt();
-        int[] arr = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            arr[i] = scanner.nextInt();
-        }
-
-        int x = scanner.nextInt();
-        System.out.println(linearSearch(arr, n, x));
-
-        scanner.close();
-    }
-}
-
-
-END
-Implementation of Binary Search
-
-import java.util.Scanner;
-
-public class Main {
-    public static int binarySearch(int arr[], int left, int right, int target) {
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] == target) {
-                return mid; 
-            }
-            if (arr[mid] < target) {
-                left = mid + 1; 
-            } else {
-                right = mid - 1; 
-            }
-        }
-        return -1; 
-    }
-
-    public static boolean isSorted(int arr[], int n) {
-        for (int i = 1; i < n; i++) {
-            if (arr[i] < arr[i - 1]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        try {
-            int n = scanner.nextInt();
-            if (n < 1 || n > 100000) {
-                System.out.println("Invalid input");
-                return;
-            }
-
-            int[] arr = new int[n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = scanner.nextInt();
-            }
-
-            if (!isSorted(arr, n)) {
-                System.out.println("Invalid input");
-                return;
-            }
-
-            if (!scanner.hasNextInt()) {
-                System.out.println("Invalid input");
-                return;
-            }
-
-            int target = scanner.nextInt();
-            System.out.println(binarySearch(arr, 0, n - 1, target));
-        } catch (Exception e) {
-            System.out.println("Invalid input");
-        } finally {
-            scanner.close();
-        }
-    }
-}
-
-END
-Implementation of Sorting Algorithms
-
-import java.util.Scanner;
-
-public class Main {
-    public static void quickSort(int arr[], int low, int high) {
-        if (low < high) {
-            int pi = partition(arr, low, high);
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
-        }
-    }
-
-    public static int partition(int arr[], int low, int high) {
-        int pivot = arr[high];
-        int i = low - 1;
-        for (int j = low; j < high; j++) {
-            if (arr[j] <= pivot) {
-                i++;
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
-        return i + 1;
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        try {
-            int n = scanner.nextInt();
-            if (n < 1 || n > 100000) {
-                System.out.println("Invalid input");
-                return;
-            }
-
-            int[] arr = new int[n];
-            for (int i = 0; i < n; i++) {
-                if (!scanner.hasNextInt()) {
-                    System.out.println("Invalid input");
-                    return;
-                }
-                arr[i] = scanner.nextInt();
-            }
-
-            if (!scanner.hasNextInt()) {
-                System.out.println("Invalid input");
-                return;
-            }
-
-            int k = scanner.nextInt();
-            if (k < 1 || k > n) {
-                System.out.println("Invalid input");
-                return;
-            }
-
-            quickSort(arr, 0, n - 1);
-            System.out.println(arr[k - 1]);
-
-        } catch (Exception e) {
-            System.out.println("Invalid input");
-        } finally {
-            scanner.close();
-        }
-    }
-}
-
-END
-Implementation of Greedy Algorithms
-
-
-import java.util.*;
-
-class Main {
-    static void selectEvents(List<int[]> events) {
-        events.sort(Comparator.comparingInt(a -> a[1])); // Sort by end time
-
-        List<int[]> selectedEvents = new ArrayList<>();
-        int totalResources = 0, lastEndTime = -1;
-
-        for (int[] event : events) {
-            int start = event[0], end = event[1], resource = event[2];
-            
-            if (start > end) {
-                System.out.println("Invalid input");
-                return;
-            }
-            
-            if (start >= lastEndTime) { // Select non-overlapping events
-                selectedEvents.add(event);
-                totalResources += resource;
-                lastEndTime = end;
-            }
-        }
-
-        for (int[] event : selectedEvents) {
-            System.out.println(event[0] + " " + event[1] + " " + event[2]);
-        }
-        System.out.println("Total resources: " + totalResources);
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        List<int[]> events = new ArrayList<>();
-        
-        for (int i = 0; i < n; i++) {
-            int start = scanner.nextInt();
-            int end = scanner.nextInt();
-            int resource = scanner.nextInt();
-            events.add(new int[]{start, end, resource});
-        }
-        scanner.close();
-        
-        selectEvents(events);
-    }
-}
-END
-Implementation of Pattern Searching Algorithms
-
-import java.util.*;
-class main{
-    public static void main(String[]se)
-    {
-        Scanner sc=new Scanner(System.in);
-        try
-        {
-            String s=sc.nextLine().trim();
-            String p=sc.nextLine().trim();
-            // s=s.toLowerCase();
-            // p=p.toLowerCase();
-            if(!val(s)||!val(p))
-            {
-                 System.out.print("Invalid input");
-                 return;
-            }
-            find(s,p);
-        }
-        catch(Exception e)
-        {
-            System.out.print("Invalid input\n");
-        }
-    }
-    public static boolean val(String s)
-    {
-        return s.matches("[a-zA-Z0-9 ]+");
-    }
-    public static void find(String s,String p)
-    {
-        int n=s.length();
-        int m=p.length();
-        boolean f=false;
-    for(int i=0;i<=n-m;i++)
-    {
-        if(s.substring(i,i+m).equals(p))
-        {
-            System.out.print(i+" ");
-            f=true;
-            
-            
-        }
-    }
-    if(!f)
-    {
-        System.out.print("Not found ");
-    }
-    }
-}
-END
-Implementation of Backtracking Algorithms
-
-// editor4
-import java.util.*;
-class main{
-    static int n;
-    static int bo[];
-    static boolean f=false;
-    public static void main(String[]se){
-        try{
-            Scanner sc=new Scanner(System.in);
-            n=sc.nextInt();
-            if(n>=9)
-            {
-                System.out.print("Invalid input");
-                return;
-            }
-            sc.close();
-            bo=new int[n];
-            Arrays.fill(bo,-1);
-            solve(0);
-            if(n==2||n==3){
-                System.out.print("No solution exists");
-                return;
-            }
-        }
-        catch(Exception e){
-            System.out.print("Invalid input");
-        }
-    }
-    public static void solve(int col){
-        if(col==n){
-            print();
-            f=true;
-            return;
-            
-        }
-        for(int ro=0;ro<n;ro++){
-            if(iss(ro,col)){
-                bo[col]=ro;
-                solve(col+1);
-                bo[col]=-1;
-            }
-        }
-    }
-    public static boolean iss(int ro,int col){
-        for(int i=0;i<col;i++){
-            if(bo[i]==ro||Math.abs(bo[i]-ro)==Math.abs(i-col)){
-                return false;
-            }
-        }
-        return true;
-    }
-    public static void print()
-    {
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                System.out.print((bo[i]==j)?"1 ":"0 ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-}
-END
-Implementation of Dynamic Programming
-
-import java.util.*;
-
-public class LongestSymmetricPattern {
-    
-    
-    public static int longestSymmetricLength(String s) {
-        int maxLength = 1, n = s.length();
-        
-        for (int i = 0; i < n; i++) {
-            int len1 = expandAroundCenter(s, i, i);
-            int len2 = expandAroundCenter(s, i, i + 1);
-            maxLength = Math.max(maxLength, Math.max(len1, len2));
-            
-        }
-        return maxLength;
-        
-    }
-    
-    public static int expandAroundCenter(String s, int left, int right) {
-        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-            left--;
-            right++;
-            
-        }
-        return right - left - 1;
-        
-    }
-    
+public class main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
-        if (!sc.hasNext()) {
+        String S = sc.nextLine();
+
+        if (S == null || S.length() == 0 || S.length() > 50 || !S.matches("[a-zA-Z]+")) {
             System.out.println("Invalid input");
             return;
-            
-        }
-        
-        String artifact = sc.next();
-        if (!artifact.matches("[a-z]+")) {
-            System.out.println("Invalid input");
-            return;
-            
         }
 
-        System.out.println(longestSymmetricLength(artifact));
-        
+        int n = S.length();
+        for (int i = 0; i < n; i++) {
+            StringBuilder line = new StringBuilder();
+            for (int j = 0; j < n; j++) {
+                if (j == i || j == n - i - 1) {
+                    line.append(S.charAt(i));
+                } else {
+                    line.append(' ');
+                }
+            }
+            System.out.println(line.toString());
+        }
     }
-    
 }
+
+
+2.
+import java.util.Scanner;
+
+public class main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N;
+
+        try {
+            N = sc.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        if (N <= 0 || N > 10) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        for (int i = N; i >= 1; i--) {
+            printSpaces(N - i);
+            printNumbers(i, 2 * i - 1);
+        }
+
+        for (int i = 2; i <= N; i++) {
+            printSpaces(N - i);
+            printNumbers(i, 2 * i - 1);
+        }
+    }
+
+    static void printSpaces(int count) {
+        for (int i = 0; i < count; i++) {
+            System.out.print("  ");
+        }
+    }
+
+    static void printNumbers(int num, int times) {
+        for (int i = 0; i < times; i++) {
+            System.out.print(num);
+            if (i < times - 1) {
+                System.out.print(" ");
+            }
+        }
+        System.out.println(" ");
+    }
+}
+
+3.
+
+import java.util.*;
+
+public class main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        if (n < 0 || n > 100) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int[] arr = new int[n];
+        Set<Integer> nums = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+            nums.add(arr[i]);
+        }
+
+        int diff = sc.nextInt();
+        if (diff < 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        Set<String> uniquePairs = new HashSet<>();
+        for (int num : arr) {
+            if (nums.contains(num + diff)) {
+                int min = Math.min(num, num + diff);
+                int max = Math.max(num, num + diff);
+                uniquePairs.add(min + "," + max);
+            }
+            if (nums.contains(num - diff)) {
+                int min = Math.min(num, num - diff);
+                int max = Math.max(num, num - diff);
+                uniquePairs.add(min + "," + max);
+            }
+        }
+
+        System.out.println(uniquePairs.size());
+    }
+}
+
+4.
+
+import java.util.*;
+
+public class AlternateSorting {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> nums = new ArrayList<>();
+
+        while (scanner.hasNextInt()) {
+            nums.add(scanner.nextInt());
+        }
+
+        String result = alternateSort(nums);
+        System.out.println(result);
+    }
+
+    public static String alternateSort(List<Integer> nums) {
+        for (int num : nums) {
+            if (num < 0) return "Invalid input";
+        }
+
+        Collections.sort(nums);
+
+        List<Integer> result = new ArrayList<>();
+        int i = 0, j = nums.size() - 1;
+        while (i <= j) {
+            if (i != j) {
+                result.add(nums.get(j));
+                result.add(nums.get(i));
+            } else {
+                result.add(nums.get(i));
+            }
+            i++;
+            j--;
+        }
+
+        return String.join(" ", result.stream().map(String::valueOf).toArray(String[]::new));
+    }
+}
+
+5.
+
+import java.util.*;
+
+public class MaxEqualPieces {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+
+        if (!s.matches("[a-zA-Z]+")) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        Map<Character, Integer> freqMap = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
+        }
+
+        List<Integer> freqs = new ArrayList<>(freqMap.values());
+
+        int gcd = freqs.get(0);
+        for (int i = 1; i < freqs.size(); i++) {
+            gcd = findGCD(gcd, freqs.get(i));
+        }
+
+        System.out.println(gcd);
+    }
+
+    private static int findGCD(int a, int b) {
+        if (b == 0) return a;
+        return findGCD(b, a % b);
+    }
+}
+
+6.
+import java.util.Scanner;
+
+public class ExcelColumnTitle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
+
+        if (!input.matches("\\d+")) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        long n = Long.parseLong(input);
+        if (n <= 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        System.out.println(convertToTitle(n));
+    }
+
+    public static String convertToTitle(long n) {
+        StringBuilder result = new StringBuilder();
+
+        while (n > 0) {
+            n--;
+            char c = (char) ('A' + (n % 26));
+            result.insert(0, c);
+            n /= 26;
+        }
+
+        return result.toString();
+    }
+}
+
+
+SQL
+
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY,
+    BookTitle VARCHAR(255),
+    Author VARCHAR(255),
+    AvailableCopies INT
+);
+
+INSERT INTO Books (BookID, BookTitle, Author, AvailableCopies)
+VALUES
+(1, 'Attack on Titan Vol 1', 'Hajime Isayama', 3),
+(2, 'Fullmetal Alchemist Vol 1', 'Hiromu Arakawa', 7),
+(3, 'Death Note Vol 1', 'Tsugumi Ohba', 5),
+(4, 'Haikyuu Vol 1', 'Haruichi Furudate', 8);
+
+
+UPDATE Books
+SET AvailableCopies = AvailableCopies + 2
+WHERE BookID = 1;
+
+SELECT BookID, BookTitle, Author, AvailableCopies
+FROM Books
+WHERE AvailableCopies > 5;
+
+
+
 END
-Implementation of Range Query Algorithms
+7 May 2025
+
+MCQ
+
+1. int arr[10];
+2. 20
+3. do-while
+4. Stack Overflow Error
+5. a.equals(b)
+6. 3
+7. Recursion
+8. 1
+9. ==
+10. 2
+11. int *arr = new int[5];
+12. true
+13. char
+14. for loop
+15. Odd
+
+Coding
 
 // editor1
 import java.util.*;
 
-public class RangeMinQuery {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        try
+        {
+            int n = s.nextInt();
+            if(n<=0)
+            {
+                System.out.println("Invalid Input");
+            }
+            char a = 'A';
+            for(int i=0;i<n;i++)
+            {
+                System.out.println(a);
+            }
+            for(int i=0;i<n;i++)
+            {
+                System.out.print((char)(a++)+" ");
+            }
+        }
+        catch(Exception e)
         
-        int N = sc.nextInt();
-        if (N < 0) {
+        {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+2.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int rows = scanner.nextInt();
+
+        if (rows < 0) {
+            System.out.println("Invalid Input");
+        } else {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < rows; j++) {
+                    if (j == rows - i - 1) {
+                        System.out.print("#");
+                    } else {
+                        System.out.print("*");
+                    }
+             }
+            System.out.println();
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+3.
+
+import java.util.*;
+
+public class Main {
+    public static void rotLeft(int[] arr, int d) {
+        int n = arr.length;
+
+        for (int i = 0; i < d; i++) {
+            int first = arr[0];
+            for (int j = 0; j < n - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            arr[n - 1] = first;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        if (n < 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int d = scanner.nextInt();
+        if (d < 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int[] list = new int[n];
+        for (int i = 0; i < n; i++) {
+            list[i] = scanner.nextInt();
+        }
+
+        rotLeft(list, d);
+
+        for (int num : list) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+4.
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        try
+        {
+            int n = s.nextInt();
+            if(n<1)
+            {
+                System.out.println("Invalid input");
+                return;
+            }
+            int arr[]= new int[n];
+            Set<Integer> set = new HashSet<>();
+            for(int i=0;i<n;i++)
+            {
+                arr[i] = s.nextInt();
+            }
+            
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                {
+                    if(i!=j)
+                    {
+                        if(arr[i]==arr[j] && arr[i]!=-1)
+                        {
+                            set.add(arr[i]);
+                        }
+                    }
+                }
+            }
+            
+            List<Integer> al  = new ArrayList<>(set);
+            if(al.size()==0)
+            {
+                 System.out.println("-1");
+            }
+            Collections.sort(al);
+            
+            for(int i =0;i<al.size();i++){
+                System.out.print(al.get(i)+" ");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("-1");
+        }
+    }
+}
+
+5.
+
+import java.util.*;
+
+
+public class Main
+{
+    public static void main(String rags[])
+    {
+        Scanner s = new Scanner(System.in);
+        String str = s.next();
+        
+        int diff = 0;
+        
+        for(int i=0;i<str.length();i++)
+        {
+            if(str.charAt(i)=='*')
+            {
+                diff++;
+            }
+            else if(str.charAt(i)=='#')
+            {
+                diff--;
+            }
+        }
+        System.out.println(diff);
+    }
+}
+
+6.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static int power(int base, int exponent) {
+        if (exponent == 0) {
+            return 1;
+        }
+        return base * power(base, exponent - 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int base = scanner.nextInt();
+        int exponent = scanner.nextInt();
+
+        if (base < 1 || base > 100 || exponent < 0 || exponent > 10) {
+            System.out.println("Invalid input");
+        } else {
+            System.out.println(power(base, exponent));
+        }
+
+        scanner.close();
+    }
+}
+
+
+SQL
+
+CREATE TABLE Customers (CustomerID INT,CustomerName VARCHAR(50),Email VARCHAR(50));
+
+CREATE TABLE Orders (OrderID INT,CustomerID INT,TotalAmount DECIMAL(10, 2));
+
+INSERT INTO Customers (CustomerID, CustomerName, Email) VALUES
+(1, 'Alice Johnson', 'alice@example.com'),
+(2, 'Bob Smith', 'bob@example.com'),
+(3, 'Carol Lee', 'carol@example.com'),
+(4, 'David Kim', 'david@example.com');
+
+INSERT INTO Orders (OrderID, CustomerID, TotalAmount) VALUES
+(101, 1, 250.00),
+(102, 2, 500.00),
+(103, 3, 500.00),
+(104, 4, 300.00);
+
+SELECT 
+    c.CustomerID,
+    c.CustomerName,
+    c.Email,
+    o.TotalAmount
+FROM Customers c
+JOIN (
+    SELECT CustomerID, TotalAmount
+    FROM Orders
+    WHERE TotalAmount = (SELECT MAX(TotalAmount) FROM Orders)
+) o ON c.CustomerID = o.CustomerID;
+
+END
+9 May 2025
+
+MCQ
+
+1. static
+2. It can work with String, int, byte, short, char, and enum types.
+3. 5
+4. Overloading requires methods to differ in the number or type of parameters.
+5. Refers to the current object instance
+6. Compilation error occurs.
+7. 16
+8. Java supports only call by value.
+9. Using new keyword creates a reference and allocates memory for the object.
+10. To access a character at a specific index.
+11. int[] arr = {1,2,3,4,5};
+12. When the loop must execute at least once before checking the condition.
+13. Multiplication is done before addition and subtraction
+14. this
+15. A class defines the blueprint for objects.
+
+
+Coding
+
+import java.util.Scanner;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        if (n < 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+        int c = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+                
+            }
+            
+            for (int j = 1; j <= i; j++) {
+                System.out.print(c + " ");
+                c += 2;
+            }
+            System.out.println();
+        }
+    }
+}
+
+2.
+
+import java.util.Scanner;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int rows = scanner.nextInt();
+        
+        scanner.close();
+        
+        if (rows < 0) {
             System.out.println("Invalid input");
             return;
             
         }
         
-        int[] arr = new int[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = sc.nextInt();
-            
-        }
+        printRhombusPattern(rows);
         
-        int Q = sc.nextInt();
-        while (Q-- > 0) {
-            int L = sc.nextInt();
-            int R = sc.nextInt();
-            
-            int minVal = Integer.MAX_VALUE;
-            int count = 0;
-            
-            for (int i = L; i <= R; i++) {
-                if (arr[i] < minVal) {
-                    minVal = arr[i];
-                    count = 1;
-                    
-                } else if (arr[i] == minVal) {
-                    count++;
-                    
-                }
+    }
+    
+    public static void printRhombusPattern(int rows) {
+        int numSpaces = rows - 1;
+        
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= numSpaces; j++) {
+                System.out.print(" ");
                 
             }
             
-            System.out.println(minVal);
-            System.out.println(count);
+            for (int j = 1; j <= i; j++) {
+                char ch = (char) (j + 64);
+                System.out.print(ch + " ");
+                
+            }
+            
+            System.out.println();
+            numSpaces--;
             
         }
-        sc.close();
+        
+        numSpaces = 1;
+        for (int i = rows - 1; i >= 1; i--) {
+            for (int j = 1; j <= numSpaces; j++) {
+                System.out.print(" ");
+                
+            }
+            
+            for (int j = 1; j <= i; j++) {
+                char ch = (char) (j + 64);
+                System.out.print(ch + " ");
+                
+            }
+            
+            System.out.println();
+            numSpaces++;
+            
+        }
         
     }
     
 }
-END
-Implementation of Minimum Spanning Tree
+
+3.
 
 import java.util.*;
 
-class KruskalMST {
-    static class Edge implements Comparable<Edge> {
-        int src, dest, weight;
-        Edge(int s, int d, int w) { src = s; dest = d; weight = w; }
-        public int compareTo(Edge e) { return weight - e.weight; }
-    }
-
-    static int find(int[] parent, int i) {
-        return (parent[i] == i) ? i : (parent[i] = find(parent, parent[i]));
-    }
-
-    static void union(int[] parent, int[] rank, int x, int y) {
-        int rootX = find(parent, x), rootY = find(parent, y);
-        if (rootX != rootY) {
-            if (rank[rootX] > rank[rootY]) parent[rootY] = rootX;
-            else parent[rootX] = rootY;
-            if (rank[rootX] == rank[rootY]) rank[rootY]++;
+public class Main {
+    public static int[] findFirstAndLast(int[] arr, int x) {
+        int left = -1, right = -1, n = arr.length;
+        
+        int low = 0, high = n - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] >= x) {
+                if (arr[mid] == x) left = mid;
+                high = mid - 1;
+                
+            } else {
+                low = mid + 1;
+                
+            }
+            
         }
+        
+        low = 0;
+        high = n - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] <= x) {
+                if (arr[mid] == x) right = mid;
+                low = mid + 1;
+                
+            } else {
+                high = mid - 1;
+                
+            }
+            
+        }
+        
+        return (left == -1) ? new int[]{-1} : new int[]{left, right};
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int x = sc.nextInt();
+        
+        if (n < 0) {
+            System.out.println("Invalid input");
+            return;
+            
+        }
+        
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+            
+        }
+        
+        int[] result = findFirstAndLast(arr, x);
+        if (result.length == 1) {
+            System.out.println("-1");
+            
+        } else {
+            System.out.println(result[0] + " " + result[1]);
+            
+        }
+        
+    }
+}
+
+4.
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        if (n <= 0) {
+            System.out.println("Invalid input");
+            return;
+            
+        }
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+            
+        }
+        
+        int smallest = arr[0];
+        for (int i = 1; i < n; i++) {
+            if (arr[i] < smallest) {
+                smallest = arr[i];
+                
+            }
+            
+        }
+        System.out.println(smallest);
+        
+    }
+    
+}
+
+5.
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        int count = 0;
+        for (char c : input.toCharArray()) {
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+                count++;
+                
+            }
+            
+        }
+        if(count==0){
+            System.out.print("-1");
+            
+        }else{
+            System.out.println(count);
+            
+        }
+        
+    }
+    
+}
+
+6.
+
+import java.util.Scanner;
+
+public class Fibonacci {
+        public static int fibonacci(int n) {
+        if (n == 1) {
+            return 0;
+            
+        }
+        if (n == 2) {
+            return 1;
+            
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+                if (!input.matches("\\d+")) {
+            System.out.println("Invalid input");
+            return;
+            
+        }
+        
+        int n = Integer.parseInt(input);
+        
+        if (n < 0) {
+            System.out.println("Invalid input");
+            
+        } else {
+            System.out.println(fibonacci(n));
+            
+        }
+        
+    }
+    
+}
+
+
+SQL
+
+CREATE TABLE DeliveryRecords (
+OrderID INT,
+CustomerName VARCHAR(100),
+OrderedOn DATE,
+DeliveredOn DATE
+);
+
+INSERT INTO DeliveryRecords (OrderID, CustomerName, OrderedOn, DeliveredOn)
+VALUES
+(1, 'Alice', '2024-06-01', '2024-06-04'),
+(2, 'Bob', '2024-06-02', '2024-06-06'),
+(3, 'Charlie', '2024-06-05', '2024-06-08'),
+(4, 'Diana', '2024-06-03', '2024-06-05'),
+(5, 'Eve', '2024-06-07', '2024-06-10');
+
+SELECT
+AVG(DATEDIFF(DeliveredOn, OrderedOn)) AS AverageDeliveryDays
+FROM
+DeliveryRecords;
+
+END
+12 May 2025
+
+MCQ
+
+1. abc
+2. llo
+3. -&gt;
+4. 4
+5. 67
+6. Only first element is destroyed
+7. "berL"
+8. Undefined behavior
+9. 31
+10. 50
+11. *, /, % have higher precedence than +, -
+12. void show(int a)
+13. IndexOutOfBoundsException
+14. int arr[] = {1,2,3,4,5};
+15. Java automatically handles memory via garbage collection.
+
+Coding
+
+1.
+
+import java.util.Scanner;
+
+public class AlternatingPattern {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+
+        scanner.close();
+
+        if (n <= 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int i = 0;
+        do {
+            int j = 0;
+            do {
+                if ((i + j) % 2 == 0) {
+                    System.out.print("1 ");
+                } else {
+                    System.out.print("0 ");
+                }
+                j++;
+            } while (j < n);
+            System.out.println();
+            i++;
+        } while (i < n);
+    }
+}
+
+2.
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        if (n < 1 || n > 10) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        for (int i = n; i >= 1; i--) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 1; j <= (2 * i - 1); j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+3.
+
+import java.util.*;
+
+public class FirstMissingPositive {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int n = scanner.nextInt();
+        
+        if (n < 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+        
+        int[] nums = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            nums[i] = scanner.nextInt();
+        }
+        
+        int missingPositive = findFirstMissingPositive(nums);
+        System.out.println("" + missingPositive);
+        
+        scanner.close();
+    }
+
+    public static int findFirstMissingPositive(int[] nums) {
+        int n = nums.length;
+        
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= 0 || nums[i] > n) {
+                nums[i] = n + 1;  
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            int absVal = Math.abs(nums[i]);
+            if (absVal > n) continue;
+            int index = absVal - 1;
+            
+            if (nums[index] > 0) {
+                nums[index] = -nums[index];
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) {
+                return i + 1;
+            }
+        }
+
+        return n + 1;
+    }
+}
+
+4.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+
+        if (n <= 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int[] array = new int[n];
+        for (int i = 0; i < n; i++) {
+            int value = scanner.nextInt();
+            if (value < 0) {
+                System.out.println("Invalid input");
+                return;
+            }
+            array[i] = value;
+        }
+
+        findDuplicates(array);
+
+        scanner.close();
+    }
+
+    private static void findDuplicates(int[] array) {
+        boolean hasDuplicates = false;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] == array[j]) {
+                    System.out.println(array[i]);
+                    hasDuplicates = true;
+                    break;
+                }
+            }
+        }
+        if (!hasDuplicates) {
+            System.out.println("No duplicates found");
+        }
+    }
+}
+
+5.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+
+        if (!isValidInput(input)) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int segmentCount = countSegments(input);
+        System.out.println("" + segmentCount);
+    }
+
+    public static boolean isValidInput(String input) {
+        return input != null && !input.isEmpty();
+    }
+
+    public static int countSegments(String input) {
+        int count = 0;
+        boolean inSegment = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c != ' ') {
+                if (!inSegment) {
+                    count++; 
+                    inSegment = true;
+                }
+            } else {
+                inSegment = false; 
+            }
+        }
+
+        return count;
+    }
+}
+
+6.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static int findMax(int[] sales, int n) {
+        if (n == 1) {
+            return sales[0]; // Base case: Only one value left
+        }
+        return Math.max(sales[n - 1], findMax(sales, n - 1));
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String inputN = scanner.next().trim();
+
+        if (!inputN.matches("\\d+")) { 
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int n = Integer.parseInt(inputN);
+
+        if (n < 0) { 
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int[] sales = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            if (!scanner.hasNextInt()) { 
+                System.out.println("Invalid input");
+                return;
+            }
+            sales[i] = scanner.nextInt();
+        }
+
+        System.out.println(findMax(sales, n));
+
+        scanner.close();
+    }
+}
+
+SQL
+
+1.
+
+CREATE TABLE MaintenanceLogs (
+    LogID INT PRIMARY KEY,
+    ApartmentNo VARCHAR(10),
+    MaintenanceDate DATE,
+    IssueResolved VARCHAR(100)
+);
+
+INSERT INTO MaintenanceLogs (LogID, ApartmentNo, MaintenanceDate, IssueResolved)
+VALUES
+(1, 'A101', '2025-03-15', 'Leaky faucet'),
+(2, 'B202', '2025-03-18', 'Broken light fixture'),
+(3, 'A101', '2025-03-20', 'Clogged drain');
+
+UPDATE MaintenanceLogs
+SET IssueResolved = 'Replaced faucet'
+WHERE LogID = 1;
+
+SELECT * FROM MaintenanceLogs
+WHERE ApartmentNo = 'A101';
+
+END
+14 May 2025
+
+MCQ
+
+1. 4
+2. 15
+3. 8
+4. Java
+5. 35
+6. int
+7. toLowerCase()
+8. length()
+9. Math.round()
+10. public void methodName() {}
+11. public Constructor() {}
+12. parseInt()
+13. 10
+14. 1 1 1 2 1 3 2 1 2 2 2 3 3 1 3 2 3 3
+15. All of the above
+
+Coding
+
+1.
+
+// editor1
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        try
+        {
+            int n = s.nextInt();
+            if(n<=0)
+            {
+                System.out.println("Invalid Input");
+            }
+            char a = 'A';
+            for(int i=0;i<n;i++)
+            {
+                System.out.println(a);
+            }
+            for(int i=0;i<n;i++)
+            {
+                System.out.print((char)(a++)+" ");
+            }
+        }
+        catch(Exception e)
+        
+        {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+2.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int rows = scanner.nextInt();
+
+        if (rows < 0) {
+            System.out.println("Invalid Input");
+        } else {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < rows; j++) {
+                    if (j == rows - i - 1) {
+                        System.out.print("#");
+                    } else {
+                        System.out.print("*");
+                    }
+             }
+            System.out.println();
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+3.
+
+import java.util.*;
+
+public class Main {
+    public static void rotLeft(int[] arr, int d) {
+        int n = arr.length;
+
+        for (int i = 0; i < d; i++) {
+            int first = arr[0];
+            for (int j = 0; j < n - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            arr[n - 1] = first;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        if (n < 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int d = scanner.nextInt();
+        if (d < 0) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int[] list = new int[n];
+        for (int i = 0; i < n; i++) {
+            list[i] = scanner.nextInt();
+        }
+
+        rotLeft(list, d);
+
+        for (int num : list) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+4.
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        try
+        {
+            int n = s.nextInt();
+            if(n<1)
+            {
+                System.out.println("Invalid input");
+                return;
+            }
+            int arr[]= new int[n];
+            Set<Integer> set = new HashSet<>();
+            for(int i=0;i<n;i++)
+            {
+                arr[i] = s.nextInt();
+            }
+            
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                {
+                    if(i!=j)
+                    {
+                        if(arr[i]==arr[j] && arr[i]!=-1)
+                        {
+                            set.add(arr[i]);
+                        }
+                    }
+                }
+            }
+            
+            List<Integer> al  = new ArrayList<>(set);
+            if(al.size()==0)
+            {
+                 System.out.println("-1");
+            }
+            Collections.sort(al);
+            
+            for(int i =0;i<al.size();i++){
+                System.out.print(al.get(i)+" ");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("-1");
+        }
+    }
+}
+
+5.
+
+import java.util.*;
+
+
+public class Main
+{
+    public static void main(String rags[])
+    {
+        Scanner s = new Scanner(System.in);
+        String str = s.next();
+        
+        int diff = 0;
+        
+        for(int i=0;i<str.length();i++)
+        {
+            if(str.charAt(i)=='*')
+            {
+                diff++;
+            }
+            else if(str.charAt(i)=='#')
+            {
+                diff--;
+            }
+        }
+        System.out.println(diff);
+    }
+}
+
+6.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static int power(int base, int exponent) {
+        if (exponent == 0) {
+            return 1;
+        }
+        return base * power(base, exponent - 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int base = scanner.nextInt();
+        int exponent = scanner.nextInt();
+
+        if (base < 1 || base > 100 || exponent < 0 || exponent > 10) {
+            System.out.println("Invalid input");
+        } else {
+            System.out.println(power(base, exponent));
+        }
+
+        scanner.close();
+    }
+}
+
+SQL
+
+1.
+
+CREATE TABLE EmployeeDetails (
+    EmployeeID INT,
+    EmployeeName VARCHAR(100),
+    BirthDate DATE,
+    CurrentDate DATE);
+
+INSERT INTO EmployeeDetails (EmployeeID, EmployeeName, BirthDate, CurrentDate)
+VALUES
+(1, 'Aditi Sharma', '1992-05-12', '2025-04-17'),
+(2, 'Rahul Mehra', '1988-11-03', '2025-04-17'),
+(3, 'Sneha Kapoor', '1995-08-22', '2025-04-17'),
+(4, 'Arjun Reddy', '1990-01-15', '2025-04-17'),
+(5, 'Priya Singh', '2000-07-30', '2025-04-17');
+
+SELECT 
+    EmployeeID,
+    EmployeeName,
+    BirthDate,
+    CurrentDate,
+    TIMESTAMPDIFF(YEAR, BirthDate, CurrentDate) AS Age
+FROM 
+    EmployeeDetails;
+
+
+END
+16 May 2025
+
+MCQ
+
+1. Generics provide compile-time type safety
+2. switch (x) { case 1: break; }
+3. It ensures a variable's value is always up to date in the cache
+4. toString()
+5. (a, b) -&gt; a + b;
+6. break
+7. [5, 10, 15, 20]
+8. All of the above
+9. int arr[] = new int[];
+10. String.add()
+11. All of the above
+12. It can handle multiple exceptions
+13. interface InterfaceName {}
+14. All of the above
+15. 5
+
+
+Coding
+
+1.
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        try
+        {
+            int n = s.nextInt();
+            if(n<=0||n%2==0)
+            {
+                System.out.println("Invalid input");
+                return;
+            }
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++)
+                {
+                    if(i==(n/2) || j==(n/2))
+                    {
+                        System.out.print("*");
+                    }
+                    else
+                    {
+                        System.out.print(" ");
+                    }
+                }
+                System.out.println();
+            }
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+2.
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        try
+        {
+            int n = s.nextInt();
+            if(n<=0||n%2==0)
+            {
+                System.out.println("Invalid Input");
+                return;
+            }
+            
+            int start = 0;
+            int end  = n-1;
+            
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                {
+                    if(i==0||i==n-1||j==0||j==n-1||j==start||j==end)
+                    {
+                        System.out.print("* ");
+                    }
+                    else
+                    {
+                        System.out.print("  ");
+                    }
+                }
+                start++;
+                end--;
+                System.out.println();
+            }
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("Invalid Input");
+        }
+    }
+}
+
+3.
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner (System.in);
+        try
+        {
+            int n = s.nextInt();
+            int m = s.nextInt();
+            if(m<=0||n<=0)
+            {
+            System.out.println("Invalid input");
+            return;
+            }
+            int arr[][] = new int[n][m];
+            
+            int min = 999999999;
+            
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<m;j++)
+                {
+                    int a = s.nextInt();
+                    
+                    if(a<min)
+                    {
+                        min = a;
+                    }
+                }
+            }
+            System.out.println(min);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+4.
+
+import java.util.*;
+
+public class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        
+        try {
+            int n = sc.nextInt();
+            if (n <= 0) {
+                System.out.println("Invalid input");
+                return;
+            }
+
+            int arr[][] = new int[n][n];
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    arr[i][j] = sc.nextInt();
+                }
+            }
+
+            int s = 0, e = 0; 
+            boolean up = true;
+
+            for (int i = 0; i < n * n; i++) {
+                System.out.print(arr[s][e] + " ");
+
+                if (up) {
+                    if (e == n - 1) {
+                        s++;
+                        up = false;
+                    } else if (s == 0) {
+                        e++;
+                        up = false;
+                    } else {
+                        s--;
+                        e++;
+                    }
+                } else {
+                    if (s == n - 1) {
+                        e++;
+                        up = true;
+                    } else if (e == 0) {
+                        s++;
+                        up = true;
+                    } else {
+                        s++;
+                        e--;
+                    }
+                }
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+5.
+
+import java.util.Scanner;
+
+public class MaxBalloons {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+
+        if (!isValidInput(input)) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int maxBalloons = countMaxBalloons(input);
+        System.out.println(maxBalloons);
+    }
+
+    public static boolean isValidInput(String input) {
+        if (input == null || input.isEmpty()) {
+            return false;
+        }
+
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static int countMaxBalloons(String input) {
+        int[] charCount = new int[26];
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c >= 'a' && c <= 'z') {
+                charCount[c - 'a']++;
+            }
+        }
+
+        int b = charCount['b' - 'a'];
+        int a = charCount['a' - 'a'];
+        int l = charCount['l' - 'a'] / 2;
+        int o = charCount['o' - 'a'] / 2;
+        int n = charCount['n' - 'a'];
+
+        return Math.min(Math.min(Math.min(b, a), Math.min(l, o)), n);
+    }
+}
+
+6.
+
+import java.util.Scanner;
+
+public class GCD {
+
+    public static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String inputA = scanner.next();
+        String inputB = scanner.next();
+
+        if (!inputA.matches("\\d+") || !inputB.matches("\\d+")) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int a = Integer.parseInt(inputA);
+        int b = Integer.parseInt(inputB);
+
+        if (a <= 0 || b <= 0) {
+            System.out.println("Invalid input");
+        } else {
+            System.out.println(gcd(a, b));
+        }
+
+        scanner.close();
+    }
+}
+
+SQL
+
+1.
+
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    ContactInfo VARCHAR(100)
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    OrderAmount DECIMAL(10, 2),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+INSERT INTO Customers (CustomerID, CustomerName, ContactInfo) VALUES
+(1, 'John Doe', 'john@example.com'),
+(2, 'Jane Smith', 'jane@example.com'),
+(3, 'Robert Brown', 'robert@example.com'),
+(4, 'Emily White', 'emily@example.com'),
+(5, 'Alice Green', 'alice@example.com'); -- No orders
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, OrderAmount) VALUES
+(101, 1, '2024-11-01', 150.00),
+(102, 2, '2024-11-05', 200.00),
+(103, 1, '2024-11-07', 100.00),
+(104, 4, '2024-11-10', 250.00);
+SELECT 
+    C.CustomerID,
+    C.CustomerName,
+    C.ContactInfo,
+    O.OrderID,
+    O.OrderDate,
+    O.OrderAmount
+FROM 
+    Customers C
+INNER JOIN 
+    Orders O ON C.CustomerID = O.CustomerID;
+
+END
+19 May 2025
+
+MCQ
+
+1. private
+2. The class cannot be inherited
+3. finally
+4. &&
+5. init()
+6. final
+7. finalize()
+8. Interfaces
+9. Both A and C
+10. private
+11. for(int i=0; i&lt;5; i++)
+12. b
+13. 1
+14. It will cause stack overflow
+15. Both start from 0.
+
+Coding
+
+1.
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        try
+        {
+            int n= s.nextInt();
+            if(n<=0)
+            {
+                System.out.println("Invalid input");
+            }
+            for(int i=n-1;i>=0;i--)
+            {
+                for(int j=0;j<=i;j++)
+                {
+                    System.out.print("* ");
+                }
+                System.out.println();
+            }
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+2.
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        try
+        {
+            int n= s.nextInt();
+            if(n<=0)
+            {
+                System.out.println("Invalid input");
+            }
+            for(int i=n-1;i>=0;i--)
+            {
+                for(int j=0;j<=i;j++)
+                {
+                    System.out.print("* ");
+                }
+                System.out.println();
+            }
+            for(int i=1;i<n;i++)
+            {
+                for(int j=0;j<=i;j++)
+                {
+                    System.out.print("* ");
+                }
+                System.out.println();
+            }        
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+3.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.nextLine(); 
+        if (n <= 0) {
+            System.out.println("Invalid input");
+            scanner.close();
+            return;
+        }
+        String[] strings = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            strings[i] = scanner.nextLine();
+            if (!strings[i].matches("[a-zA-Z]+")) {
+                System.out.println("Invalid input");
+                scanner.close();
+                return;
+            }
+        }
+        String prefix = scp(strings);
+        System.out.println(prefix.isEmpty() ? "No common prefix" : prefix);
+    }
+    private static String scp(String[] strs) {
+        if (strs == null || strs.length == 0) return "";
+
+        String prefix = strs[0];
+
+        for (int i = 1; i < strs.length; i++) {
+            while (strs[i].indexOf(prefix) != 0) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.isEmpty()) return "";
+            }
+        }
+        return prefix;
+    }
+}
+
+4.
+
+import java.util.Scanner;
+
+public class OneStringSwap {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String s1 = scanner.nextLine();
+        String s2 = scanner.nextLine();
+
+        if (s1 == null || s2 == null || s1.isEmpty() || s2.isEmpty() || s1.length() != s2.length())
+        {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        boolean cs = check(s1, s2);
+        if (cs) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+
+    public static boolean check(String s1, String s2) {
+        if (s1.equals(s2)) {
+            return true;
+        }
+
+        int firstIndex = -1, secondIndex = -1;
+
+        for (int i = 0; i < s1.length(); i++) {
+            if (s1.charAt(i) != s2.charAt(i)) {
+                if (firstIndex == -1) {
+                    firstIndex = i;
+                } else if (secondIndex == -1) {
+                    secondIndex = i;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return secondIndex != -1 && s1.charAt(firstIndex) == s2.charAt(secondIndex) && s1.charAt(secondIndex) == s2.charAt(firstIndex);
+    }
+}
+
+5.
+
+import java.util.*;
+
+public class Main {
+    public static void main(String args[]) {
+        Scanner s = new Scanner(System.in);
+
+        try {
+            int n = s.nextInt();
+
+            if (n <= 0) {
+                System.out.println("Invalid input");
+                return;
+            }
+
+            TreeSet<Integer> set = new TreeSet<>(Collections.reverseOrder());
+
+            for (int i = 0; i < n; i++) {
+                set.add(s.nextInt());
+            }
+
+            if (set.size() < 3) {
+                System.out.println(set.last()); 
+            } else {
+                Iterator<Integer> it = set.iterator();
+                for (int i = 0; i < 2; i++) it.next();
+                System.out.println(it.next()); 
+            }
+
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+6.
+
+import java.util.Scanner;
+
+public class SumOfDigits {
+
+    public static int sod(int n) 
+    {
+        if (n == 0) 
+        {
+            return 0;
+        }
+        
+        return (n % 10) + sod(n / 10);
+        
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        String input = scanner.next().trim();
+
+        if (!input.matches("\\d+"))
+        { 
+            System.out.println("Invalid input");
+            return;
+        }
+
+        int n = Integer.parseInt(input);
+
+        System.out.println(sod(n));
+
+        scanner.close();
+    }
+}
+
+SQL
+
+1.
+
+CREATE TABLE Comics (
+    ComicID INT PRIMARY KEY,
+    Title VARCHAR(100) UNIQUE,
+    Price DECIMAL(10, 2) CHECK (Price > 0)
+);
+ INSERT INTO Comics (ComicID, Title, Price) VALUES
+(1, 'Spider-Man #1', 5.99),
+(2, 'Batman #100', 3.50),
+(3, 'X-Men #45', 7.25);
+
+SELECT * FROM Comics;
+
+END
+21 May 2025
+
+MCQ
+
+1. =
+2. class
+3. 10
+4. 5
+5. Possible memory leak
+6. Scanner
+7. Prints output with newline
+8. 0
+9. include
+10. Mutable strings
+11. ?
+12. call sum;
+13. boolean _isValid = true;
+14. int x = sc.nextInt();
+15. Hi
+
+Coding
+
+1.
+
+import java.util.*;
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        if (n < 1 || n > 10) {
+            System.out.printf("Invalid Input\n");
+            return ; 
+        }        
+        for (int i = 1; i <= n; i++) {
+           
+            for (int j = 1; j <= n - i; j++) {
+                System.out.printf(" ");
+            }
+            for (int j = 1; j <= i; j++) {
+                System.out.printf("*");
+            }
+            System.out.printf("\n");
+        }
+        for (int i = n - 1; i >= 1; i--) {
+          
+            for (int j = 1; j <= n - i; j++) {
+                System.out.printf(" ");
+            }
+           
+            for (int j = 1; j <= i; j++) {
+                System.out.printf("*");
+            }
+            System.out.printf("\n");
+        }        
+        
+    }
+}
+
+2.
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        if(n<=0||n>=5)
+        {
+            System.out.println("Invalid Input");
+        }
+        
+        if(n==2 ||n==4)
+        {
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                {
+                    if(i==0||j==0||i==n-1||j==n-1)
+                    {
+                        System.out.print("* ");    
+                    }
+                    else
+                    {
+                        System.out.print("  ");    
+                    }
+                    
+                }
+                System.out.println();
+            }  
+        }
+        if(n==3)
+        {
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<=i;j++)
+                {
+                    System.out.print("* ");
+                }
+                System.out.println();
+            }            
+        }
+
+    }
+}
+
+3.
+
+import java.util.*;
+
+public class Main {
+
+    public static void rotate(int[] nums) {
+        int temp = nums[nums.length-1];
+        for(int i=nums.length-1;i>=1;i--)
+        {
+            nums[i]=nums[i-1];
+        }
+        nums[0]=temp;
+        
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        if (n < 0) { System.out.println("Invalid input"); return; }
-        int e = sc.nextInt();
 
-        List<Edge> edges = new ArrayList<>();
-        for (int i = 0; i < e; i++)
-            edges.add(new Edge(sc.nextInt(), sc.nextInt(), sc.nextInt()));
-
-        Collections.sort(edges);
-        int[] parent = new int[n + 1], rank = new int[n + 1];
-        for (int i = 0; i <= n; i++) parent[i] = i;
-
-        for (Edge edge : edges) {
-            if (find(parent, edge.src) != find(parent, edge.dest)) {
-                System.out.println(edge.src + " " + edge.dest + " " + edge.weight);
-                union(parent, rank, edge.src, edge.dest);
-            }
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
         }
-        sc.close();
+
+        int k = sc.nextInt();
+        if (k < 0 || k > n) {
+            System.out.println("Invalid input");
+            return;
+        }
+        
+        for(int i=0;i<k;i++)
+        {
+            rotate(nums);
+        }
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
     }
 }
-END
-Implementation of Shortest path Algorithms
 
-// editor1
+4.
+
 import java.util.*;
 
-public class Dijkstra {
-    private static final int INF = Integer.MAX_VALUE;
-    
-    public static void dijkstra(int n, int m, int[][] graph, int s) {
-        int[] dist = new int[n];
-        boolean[] visited = new boolean[n];
-        Arrays.fill(dist, INF);
-        dist[s] = 0;
-        
-        for (int itr = 0; itr < n - 1; itr++) {
-            int u = -1;
-            
-            for (int i = 0; i < n; i++) {
-                if (!visited[i] && (u == -1 || dist[i] < dist[u])) {
-                    u = i;
-                    
-                }
-                
-            }
-            if (dist[u] == INF) {
-                break;
-            }
-            visited[u] = true;
-            for (int v = 0; v < n; v++) {
-                if (graph[u][v] != INF && !visited[v] && dist[u] + graph[u][v] < dist[v]) {
-                    dist[v] = dist[u] + graph[u][v];
-                }
-            }
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+       
+        int n = sc.nextInt();
+        if (n <= 0) {
+            System.out.println("Invalid input");
+            return;
         }
-        for (int i : dist) {
-            System.out.print((i != INF ? i : -1) + " ");
-            
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
         }
-        
+        Arrays.sort(arr);
+        System.out.println(arr[arr.length-1]);
     }
+}
+
+5.
+
+import java.util.*;
+
+public class Main
+{
+    public static  void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        String s = sc.next();
+        int num =0;
+        if(s.length()>7)
+        {
+            System.out.println("Invalid input");
+            return;
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)<65||s.charAt(i)>90)
+            {
+                System.out.println("Invalid input");
+                return;
+            }
+            
+            num =num*26 +(s.charAt(i)-'A'+1);
+        }
+        System.out.println(num);
+    }
+}
+
+6.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static int counter(int[] arr, int target, int n) {
+        if (n == 0) {
+            return 0;
+        }
+        int count = (arr[n - 1] == target) ? 1 : 0;
+        return count + counter(arr, target, n - 1);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-         if (n < 0) {
+        if (n < 1 || n > 100) {
             System.out.println("Invalid input");
             return;
-            
         }
-        int m = scanner.nextInt();
-        
-        int[][] graph = new int[n][n];
-        for (int[] row : graph) {
-            Arrays.fill(row, INF);
-            
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
         }
-        for (int itr = 0; itr < m; itr++) {
-            int u = scanner.nextInt();
-            int v = scanner.nextInt();
-            int w = scanner.nextInt();
-            graph[u][v] = w;
-            
-        }
-        int s = scanner.nextInt();
-        scanner.close();
-        dijkstra(n, m, graph, s);
+        int target = scanner.nextInt();
+        System.out.println(counter(arr, target, n));
+
     }
 }
+
+SQL
+
+1.
+
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(100)
+);
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(100),
+    DepartmentID INT,  
+    HireDate DATE
+);
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES
+(1, 'Human Resources'),
+(2, 'Engineering'),
+(3, 'Sales');
+
+INSERT INTO Employees (EmployeeID, EmployeeName, DepartmentID, HireDate) VALUES
+(101, 'Alice Johnson', 1, '2021-05-15'),
+(102, 'Bob Smith', 2, '2020-03-22'),
+(103, 'Carol Davis', 3, '2019-11-10'),
+(104, 'Daniel Lee', NULL, '2022-08-01'),   
+(105, 'Eva Adams', NULL, '2023-01-10');  
+SELECT 
+    E.EmployeeID,
+    E.EmployeeName,
+    E.HireDate,
+    D.DepartmentName
+FROM 
+    Employees E
+INNER JOIN 
+    Departments D ON E.DepartmentID = D.DepartmentID;
+
+
 END
-Implementation of Maximum Flow Minimum cut Algorithm
-
-import java.util.*;
-
-class MaxFlow {
-    static int bfs(int[][] cap, int[][] flow, int[] parent, int s, int t, int n) {
-        Arrays.fill(parent, -1);
-        Queue<Integer> q = new LinkedList<>();
-        q.add(s);
-        parent[s] = s;
-
-        while (!q.isEmpty()) {
-            int u = q.poll();
-            for (int v = 1; v <= n; v++) {
-                if (parent[v] == -1 && cap[u][v] > flow[u][v]) {
-                    parent[v] = u;
-                    if (v == t) return 1;
-                    q.add(v);
-                }
-            }
-        }
-        return 0;
-    }
-
-    static int maxFlow(int[][] cap, int s, int t, int n) {
-        int[][] flow = new int[n + 1][n + 1];
-        int[] parent = new int[n + 1];
-        int maxFlow = 0;
-
-        while (bfs(cap, flow, parent, s, t, n) == 1) {
-            int f = Integer.MAX_VALUE;
-            for (int v = t; v != s; v = parent[v])
-                f = Math.min(f, cap[parent[v]][v] - flow[parent[v]][v]);
-            for (int v = t; v != s; v = parent[v]) {
-                flow[parent[v]][v] += f;
-                flow[v][parent[v]] -= f;
-            }
-            maxFlow += f;
-        }
-        return maxFlow;
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(), m = sc.nextInt();
-        if (n < 1 || m < 0) { System.out.println("Invalid input"); return; }
-
-        int[][] cap = new int[n + 1][n + 1];
-        for (int i = 0; i < m; i++) cap[sc.nextInt()][sc.nextInt()] += sc.nextInt();
-
-        System.out.println(maxFlow(cap, sc.nextInt(), sc.nextInt(), n));
-        sc.close();
-    }
-}
